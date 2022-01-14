@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_fragment1_to_scrollingFragment2"
             app:destination="@id/scrollingFragment2" />
+        <action
+            android:id="@+id/action_fragment1_to_scrollingFragment12"
+            app:destination="@id/scrollingFragment1" />
     </fragment>
     <fragment
         android:id="@+id/scrollingFragment2"
@@ -22,10 +25,32 @@
         <action
             android:id="@+id/action_scrollingFragment2_to_fragment1"
             app:destination="@id/fragment1" />
+        <action
+            android:id="@+id/action_scrollingFragment2_to_scrollingFragment1"
+            app:destination="@id/scrollingFragment1" />
     </fragment>
     <fragment
         android:id="@+id/scrollingFragment1"
         android:name="com.example.foodpantry.ScrollingFragment1"
         android:label="fragment_scrolling1"
-        tools:layout="@layout/fragment_scrolling1" />
+        tools:layout="@layout/fragment_scrolling1" >
+        <action
+            android:id="@+id/action_scrollingFragment1_to_fragment1"
+            app:destination="@id/fragment1" />
+        <action
+            android:id="@+id/action_scrollingFragment1_to_scrollingFragment2"
+            app:destination="@id/scrollingFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigationBarFragment3"
+        android:name="com.example.foodpantry.NavigationBarFragment"
+        android:label="fragment_navigation_bar"
+        tools:layout="@layout/fragment_navigation_bar" >
+        <action
+            android:id="@+id/action_navigationBarFragment3_to_fragment1"
+            app:destination="@id/fragment1" />
+        <action
+            android:id="@+id/action_navigationBarFragment3_to_scrollingFragment2"
+            app:destination="@id/scrollingFragment2" />
+    </fragment>
 </navigation>

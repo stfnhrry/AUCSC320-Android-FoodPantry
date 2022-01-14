@@ -7,6 +7,16 @@
     android:background="@color/light_grey"
     tools:context=".MainActivity">
 
+    <androidx.fragment.app.FragmentContainerView
+    android:id="@+id/navigationBarFragment"
+        android:name="com.example.foodpantry.NavigationBarFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout="@layout/fragment_navigation_bar" />
+
+
     <Button
         android:id="@+id/pantryButton"
         android:layout_width="215dp"
@@ -18,6 +28,7 @@
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/fragmentContainerView"
         app:layout_constraintTop_toBottomOf="@+id/currentPageText" />
 
@@ -32,6 +43,7 @@
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/fragmentContainerView"
         app:layout_constraintTop_toBottomOf="@+id/pantryButton" />
 
@@ -46,6 +58,7 @@
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/fragmentContainerView"
         app:layout_constraintTop_toBottomOf="@+id/removeItemButton" />
 
@@ -60,6 +73,7 @@
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/fragmentContainerView"
         app:layout_constraintTop_toBottomOf="@+id/addItemButton" />
 
@@ -74,6 +88,7 @@
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/fragmentContainerView"
         app:layout_constraintTop_toBottomOf="@+id/inStockButton" />
 
@@ -88,6 +103,7 @@
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/fragmentContainerView"
         app:layout_constraintTop_toBottomOf="@+id/outOfStockButton" />
 
@@ -102,6 +118,7 @@
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/fragmentContainerView"
         app:layout_constraintTop_toBottomOf="@+id/expiringSoonButton" />
 
@@ -116,6 +133,7 @@
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/fragmentContainerView"
         app:layout_constraintTop_toBottomOf="@+id/expiredButton" />
 
@@ -128,6 +146,7 @@
         android:fontFamily="sans-serif-condensed-light"
         android:text="Pantry"
         android:textSize="60sp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -137,6 +156,7 @@
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currentPageText"
         app:srcCompat="@drawable/ic_baseline_home_24" />
@@ -147,6 +167,7 @@
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:srcCompat="@drawable/ic_baseline_add_circle_24" />
@@ -157,6 +178,7 @@
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:srcCompat="@drawable/ic_baseline_remove_circle_24" />
@@ -167,6 +189,7 @@
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:srcCompat="@drawable/ic_baseline_warning_24" />
@@ -177,6 +200,7 @@
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
         app:srcCompat="@drawable/ic_baseline_inventory_24" />
@@ -187,6 +211,7 @@
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
         app:srcCompat="@drawable/ic_baseline_error_24" />
@@ -197,6 +222,7 @@
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6"
         app:srcCompat="@drawable/ic_baseline_delete_24" />
@@ -207,6 +233,7 @@
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView7"
         app:srcCompat="@drawable/ic_baseline_shopping_cart_24" />
