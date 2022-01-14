@@ -13,9 +13,6 @@ import android.view.ViewGroup;
  */
 public class PantryFragment extends Fragment {
 
-  public PantryFragment() {
-  }
-
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
