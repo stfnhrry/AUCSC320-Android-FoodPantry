@@ -17,14 +17,10 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    pantryFragment = findViewById(R.id.pantryButton1);
-    addItem = findViewById(R.id.addItemButton1);
-    removeItem= findViewById(R.id.removeItemButton1);
-    lowInStock = findViewById(R.id.lowInStockButton1);
-    outOfStock = findViewById(R.id.outOfStockButton1);
-    expiringSoon = findViewById(R.id.expiringSoonButton1);
-    expired = findViewById(R.id.expiredButton1);
-    shoppingList = findViewById(R.id.shoppingListButton1);
+    pantryFragment = findViewById(R.id.pantryButton);
+    addItem = findViewById(R.id.addItemButton);
+    removeItem= findViewById(R.id.removeItemButton);
+    lowInStock = findViewById(R.id.lowInStockButton);
 
     pantryFragment.setOnClickListener(
             new View.OnClickListener() {
@@ -46,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     FragmentManager fragmentManager = getSupportFragmentManager();
     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-    fragmentTransaction.replace(R.id.fragmentContainerView, fragment);
+    fragmentTransaction.replace(R.id.FrameLayout, fragment);
     fragmentTransaction.commit();
   }
 
