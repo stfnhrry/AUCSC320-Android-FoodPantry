@@ -1,30 +1,37 @@
 package com.example.foodpantry;
 
+import java.util.Date;
+
 public class Item {
     public String itemName;
 
-    public String expDate;
+    public Date expDate;
 
-    public String amount;
+    public int amount;
 
-    public Item(String itemName, String expDate, String amount){
+    public Item(String itemName, Date expDate, int amount){
         this.itemName = itemName;
         this.expDate = expDate;
         this.amount = amount;
+    }
+    public Item(){
+        this.itemName = itemName;
+        this.amount = amount;
+        this.expDate = expDate;
     }
     public void setItem(String itemName){
         this.itemName = itemName;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
-    public void setExpDate(String expDate) {
+    public void setExpDate(Date expDate) {
         this.expDate = expDate;
     }
 
-    public String getAmount() {
+    public int getAmount() {
         return amount;
     }
 
@@ -32,7 +39,7 @@ public class Item {
         return itemName;
     }
 
-    public String getExpDate() {
+    public Date getExpDate() {
         return expDate;
     }
 }
