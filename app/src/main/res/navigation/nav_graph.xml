@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/fragment1"
-        android:name="com.example.foodpantry.Fragment1"
+        android:name="com.example.foodpantry.PantryFragment"
         android:label="fragment_1"
-        tools:layout="@layout/fragment_1" >
+        tools:layout="@layout/fragment_pantry" >
         <action
             android:id="@+id/action_fragment1_to_scrollingFragment2"
             app:destination="@id/scrollingFragment2" />
