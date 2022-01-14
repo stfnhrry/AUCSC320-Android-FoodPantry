@@ -23,4 +23,9 @@
             android:id="@+id/action_scrollingFragment2_to_fragment1"
             app:destination="@id/fragment1" />
     </fragment>
+    <fragment
+        android:id="@+id/scrollingFragment1"
+        android:name="com.example.foodpantry.ScrollingFragment1"
+        android:label="fragment_scrolling1"
+        tools:layout="@layout/fragment_scrolling1" />
 </navigation>
