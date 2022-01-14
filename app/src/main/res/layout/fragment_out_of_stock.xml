@@ -1,75 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="980dp"
     android:layout_height="match_parent"
-    tools:context=".LowInStockFragment">
+    android:background="@color/light_grey"
+    tools:context=".OutOfStockFragment" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/baseConstraintForLowInStockFragment"
+        android:id="@+id/baseConstraintForOutOfStockFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/light_grey">
 
         <ScrollView
-            android:id="@+id/scrollingViewForLowInStockFragment"
-            android:layout_width="match_parent"
-            android:layout_height="750dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/very_light_grey"
+            android:id="@+id/scrollingViewForOutOfStockFragment"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchBar">
+            app:layout_constraintTop_toBottomOf="@+id/searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="750dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/very_light_grey">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/scrollIViewForLowInStockFragmentConstraint"
+                android:id="@+id/scrollIViewForOutOfStockFragmentConstraint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/lowInStockItemCard0"
+                    android:id="@+id/OutOfStockItemCard0"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_width="450dp"
                     android:layout_height="150dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
                     android:innerRadius="0dp"
-                    android:shape="ring"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="5dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:shape="ring">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:id="@+id/iconForLowInStockItem0"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginStart="16dp"
+                            android:id="@+id/iconForOutOfStockItem0"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_baseline_cookie_24" />
+                            app:srcCompat="@drawable/ic_baseline_cookie_24"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginStart="16dp" />
 
                         <TextView
-                            android:id="@+id/titleForLowInStockItem0"
+                            android:id="@+id/titleForOutOfStockItem0"
+                            app:layout_constraintStart_toEndOf="@+id/iconForOutOfStockItem0"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="40dp"
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="Cookies"
-                            android:textSize="34sp"
-                            app:layout_constraintStart_toEndOf="@+id/iconForLowInStockItem0"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textSize="34sp" />
 
                         <TextView
-                            android:id="@+id/expiryDateForLowInStockItem0"
+                            android:id="@+id/expiryDateForOutOfStockItem0"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/iconForOutOfStockItem0"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
@@ -77,12 +80,12 @@
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="Expires in 45 days"
                             android:textColor="#2196F3"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/iconForLowInStockItem0" />
+                            android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/sizeForLowInStockItem0"
+                            android:id="@+id/sizeForOutOfStockItem0"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="48dp"
@@ -90,12 +93,12 @@
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="5 kg"
                             android:textColor="#A8A8A8"
-                            android:textSize="24sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textSize="24sp" />
 
                         <TextView
-                            android:id="@+id/categoryNameForLowInStockItem0"
+                            android:id="@+id/categoryNameForOutOfStockItem0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -103,24 +106,24 @@
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="SNACKS"
                             android:textColor="#C6C6C6"
-                            android:textSize="16sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/amountLeftInPantryForLowInStockItem0"
+                            android:id="@+id/amountLeftInPantryForOutOfStockItem0"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
                             android:layout_marginBottom="18dp"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:text="4 Left In Pantry"
-                            android:textColor="@color/orange_warning"
+                            android:text="0 Left In Pantry"
+                            android:textColor="@color/red_alert"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent" />
 
                         <ImageButton
-                            android:id="@+id/editButtonForLowInStockItem0"
+                            android:id="@+id/editButtonForOutOfStockItem0"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:adjustViewBounds="true"
@@ -128,12 +131,12 @@
                             android:padding="10dp"
                             android:scaleType="fitCenter"
                             android:src="@drawable/ic_baseline_edit_24"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="SpeakableTextPresentCheck" />
 
                         <ImageButton
-                            android:id="@+id/addToShoppingCartButtonForLowInStockItem0"
+                            android:id="@+id/addToShoppingCartButtonForOutOfStockItem0"
+                            app:layout_constraintEnd_toStartOf="@+id/editButtonForOutOfStockItem0"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:adjustViewBounds="true"
@@ -141,8 +144,6 @@
                             android:paddingStart="20dp"
                             android:scaleType="fitCenter"
                             android:src="@drawable/ic_baseline_add_shopping_cart_24"
-                            app:layout_constraintEnd_toStartOf="@+id/editButtonForLowInStockItem0"
-                            app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="SpeakableTextPresentCheck" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -150,47 +151,49 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/lowInStockItemCard1"
+                    android:id="@+id/OutOfStockItemCard1"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:layout_width="450dp"
                     android:layout_height="150dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
                     android:innerRadius="0dp"
-                    android:shape="ring"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:shape="ring">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:id="@+id/iconForLowInStockItem1"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginStart="16dp"
+                            android:id="@+id/iconForOutOfStockItem1"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_baseline_cookie_24" />
+                            app:srcCompat="@drawable/ic_baseline_cookie_24"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginStart="16dp" />
 
                         <TextView
-                            android:id="@+id/titleForLowInStockItem1"
+                            android:id="@+id/titleForOutOfStockItem1"
+                            app:layout_constraintStart_toEndOf="@+id/iconForOutOfStockItem1"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="40dp"
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="Cookies"
-                            android:textSize="34sp"
-                            app:layout_constraintStart_toEndOf="@+id/iconForLowInStockItem1"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textSize="34sp" />
 
                         <TextView
-                            android:id="@+id/expiryDateForLowInStockItem1"
+                            android:id="@+id/expiryDateForOutOfStockItem1"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/iconForOutOfStockItem1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
@@ -198,12 +201,12 @@
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="Expires in 45 days"
                             android:textColor="#2196F3"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/iconForLowInStockItem1" />
+                            android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/sizeForLowInStockItem1"
+                            android:id="@+id/sizeForOutOfStockItem1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="48dp"
@@ -211,12 +214,12 @@
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="5 kg"
                             android:textColor="#A8A8A8"
-                            android:textSize="24sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textSize="24sp" />
 
                         <TextView
-                            android:id="@+id/categoryNameForLowInStockItem1"
+                            android:id="@+id/categoryNameForOutOfStockItem1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -224,24 +227,24 @@
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="SNACKS"
                             android:textColor="#C6C6C6"
-                            android:textSize="16sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/amountLeftInPantryForLowInStockItem1"
+                            android:id="@+id/amountLeftInPantryForOutOfStockItem1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
                             android:layout_marginBottom="18dp"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:text="5 Left In Pantry"
-                            android:textColor="@color/orange_warning"
+                            android:text="0 Left In Pantry"
+                            android:textColor="@color/red_alert"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent" />
 
                         <ImageButton
-                            android:id="@+id/editButtonForLowInStockItem1"
+                            android:id="@+id/editButtonForOutOfStockItem1"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:adjustViewBounds="true"
@@ -249,12 +252,12 @@
                             android:padding="10dp"
                             android:scaleType="fitCenter"
                             android:src="@drawable/ic_baseline_edit_24"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="SpeakableTextPresentCheck" />
 
                         <ImageButton
-                            android:id="@+id/addToShoppingCartButtonForLowInStockItem1"
+                            android:id="@+id/addToShoppingCartButtonForOutOfStockItem1"
+                            app:layout_constraintEnd_toStartOf="@+id/editButtonForOutOfStockItem1"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:adjustViewBounds="true"
@@ -262,8 +265,6 @@
                             android:paddingStart="20dp"
                             android:scaleType="fitCenter"
                             android:src="@drawable/ic_baseline_add_shopping_cart_24"
-                            app:layout_constraintEnd_toStartOf="@+id/editButtonForLowInStockItem1"
-                            app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="SpeakableTextPresentCheck" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -271,47 +272,49 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/lowInStockItemCard2"
+                    android:id="@+id/OutOfStockItemCard2"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/OutOfStockItemCard0"
                     android:layout_width="450dp"
                     android:layout_height="150dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
                     android:innerRadius="0dp"
-                    android:shape="ring"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="5dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/lowInStockItemCard0">
+                    android:shape="ring">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:id="@+id/iconForLowInStockItem2"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginStart="16dp"
+                            android:id="@+id/iconForOutOfStockItem2"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_baseline_cookie_24" />
+                            app:srcCompat="@drawable/ic_baseline_cookie_24"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginStart="16dp" />
 
                         <TextView
-                            android:id="@+id/titleForLowInStockItem2"
+                            android:id="@+id/titleForOutOfStockItem2"
+                            app:layout_constraintStart_toEndOf="@+id/iconForOutOfStockItem2"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="40dp"
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="Cookies"
-                            android:textSize="34sp"
-                            app:layout_constraintStart_toEndOf="@+id/iconForLowInStockItem2"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textSize="34sp" />
 
                         <TextView
-                            android:id="@+id/expiryDateForLowInStockItem2"
+                            android:id="@+id/expiryDateForOutOfStockItem2"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/iconForOutOfStockItem2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
@@ -319,12 +322,12 @@
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="Expires in 45 days"
                             android:textColor="#2196F3"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/iconForLowInStockItem2" />
+                            android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/sizeForLowInStockItem2"
+                            android:id="@+id/sizeForOutOfStockItem2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="48dp"
@@ -332,12 +335,12 @@
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="5 kg"
                             android:textColor="#A8A8A8"
-                            android:textSize="24sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textSize="24sp" />
 
                         <TextView
-                            android:id="@+id/categoryNameForLowInStockItem2"
+                            android:id="@+id/categoryNameForOutOfStockItem2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -345,24 +348,24 @@
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="SNACKS"
                             android:textColor="#C6C6C6"
-                            android:textSize="16sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/amountLeftInPantryForLowInStockItem2"
+                            android:id="@+id/amountLeftInPantryForOutOfStockItem2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
                             android:layout_marginBottom="18dp"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:text="1 Left In Pantry"
-                            android:textColor="@color/orange_warning"
+                            android:text="0 Left In Pantry"
+                            android:textColor="@color/red_alert"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent" />
 
                         <ImageButton
-                            android:id="@+id/editButtonForLowInStockItem2"
+                            android:id="@+id/editButtonForOutOfStockItem2"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:adjustViewBounds="true"
@@ -370,12 +373,12 @@
                             android:padding="10dp"
                             android:scaleType="fitCenter"
                             android:src="@drawable/ic_baseline_edit_24"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="SpeakableTextPresentCheck" />
 
                         <ImageButton
-                            android:id="@+id/addToShoppingCartButtonForLowInStockItem2"
+                            android:id="@+id/addToShoppingCartButtonForOutOfStockItem2"
+                            app:layout_constraintEnd_toStartOf="@+id/editButtonForOutOfStockItem2"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:adjustViewBounds="true"
@@ -383,8 +386,6 @@
                             android:paddingStart="20dp"
                             android:scaleType="fitCenter"
                             android:src="@drawable/ic_baseline_add_shopping_cart_24"
-                            app:layout_constraintEnd_toStartOf="@+id/editButtonForLowInStockItem2"
-                            app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="SpeakableTextPresentCheck" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -392,47 +393,49 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/lowInStockItemCard3"
+                    android:id="@+id/OutOfStockItemCard3"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/OutOfStockItemCard1"
                     android:layout_width="450dp"
                     android:layout_height="150dp"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="24dp"
                     android:innerRadius="0dp"
-                    android:shape="ring"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/lowInStockItemCard1">
+                    android:shape="ring">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:id="@+id/iconForLowInStockItem3"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginStart="16dp"
+                            android:id="@+id/iconForOutOfStockItem3"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_baseline_cookie_24" />
+                            app:srcCompat="@drawable/ic_baseline_cookie_24"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginStart="16dp" />
 
                         <TextView
-                            android:id="@+id/titleForLowInStockItem3"
+                            android:id="@+id/titleForOutOfStockItem3"
+                            app:layout_constraintStart_toEndOf="@+id/iconForOutOfStockItem3"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="40dp"
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="Cookies"
-                            android:textSize="34sp"
-                            app:layout_constraintStart_toEndOf="@+id/iconForLowInStockItem3"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textSize="34sp" />
 
                         <TextView
-                            android:id="@+id/expiryDateForLowInStockItem3"
+                            android:id="@+id/expiryDateForOutOfStockItem3"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/iconForOutOfStockItem3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
@@ -440,12 +443,12 @@
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="Expires in 45 days"
                             android:textColor="#2196F3"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/iconForLowInStockItem3" />
+                            android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/sizeForLowInStockItem3"
+                            android:id="@+id/sizeForOutOfStockItem3"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="48dp"
@@ -453,12 +456,12 @@
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="5 kg"
                             android:textColor="#A8A8A8"
-                            android:textSize="24sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textSize="24sp" />
 
                         <TextView
-                            android:id="@+id/categoryNameForLowInStockItem3"
+                            android:id="@+id/categoryNameForOutOfStockItem3"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -466,24 +469,24 @@
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="SNACKS"
                             android:textColor="#C6C6C6"
-                            android:textSize="16sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textSize="16sp" />
 
                         <TextView
-                            android:id="@+id/amountLeftInPantryForLowInStockItem3"
+                            android:id="@+id/amountLeftInPantryForOutOfStockItem3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
                             android:layout_marginBottom="18dp"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:text="3 Left In Pantry"
-                            android:textColor="@color/orange_warning"
+                            android:text="0 Left In Pantry"
+                            android:textColor="@color/red_alert"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent" />
 
                         <ImageButton
-                            android:id="@+id/editButtonForLowInStockItem3"
+                            android:id="@+id/editButtonForOutOfStockItem3"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:adjustViewBounds="true"
@@ -491,12 +494,12 @@
                             android:padding="10dp"
                             android:scaleType="fitCenter"
                             android:src="@drawable/ic_baseline_edit_24"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="SpeakableTextPresentCheck" />
 
                         <ImageButton
-                            android:id="@+id/addToShoppingCartButtonForLowInStockItem3"
+                            android:id="@+id/addToShoppingCartButtonForOutOfStockItem3"
+                            app:layout_constraintEnd_toStartOf="@+id/editButtonForOutOfStockItem3"
+                            app:layout_constraintTop_toTopOf="parent"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:adjustViewBounds="true"
@@ -504,8 +507,6 @@
                             android:paddingStart="20dp"
                             android:scaleType="fitCenter"
                             android:src="@drawable/ic_baseline_add_shopping_cart_24"
-                            app:layout_constraintEnd_toStartOf="@+id/editButtonForLowInStockItem3"
-                            app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="SpeakableTextPresentCheck" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -517,25 +518,27 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/searchBar"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:background="@color/light_grey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@color/light_grey">
 
             <ImageView
                 android:id="@+id/imageView99"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
-                android:src="@drawable/ic_baseline_search_24"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:src="@drawable/ic_baseline_search_24" />
 
             <EditText
-                android:id="@+id/searchEditTextForLowInStockFragment"
+                android:id="@+id/searchEditTextForOutOfStockFragment"
+                app:layout_constraintStart_toEndOf="@+id/imageView99"
+                app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="400dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
@@ -544,31 +547,29 @@
                 android:hint="Use the search bar to find a specific pantry item"
                 android:inputType="text"
                 android:maxLines="1"
-                android:textAlignment="center"
-                app:layout_constraintStart_toEndOf="@+id/imageView99"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textAlignment="center" />
 
             <ImageButton
-                android:id="@+id/imageButton11"
+                android:id="@+id/imageButton111"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:alpha=".7"
                 android:background="@drawable/ic_baseline_add_circle_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
-                android:id="@+id/imageButton22"
+                android:id="@+id/imageButton222"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton111"
+                app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="8dp"
                 android:alpha=".7"
                 android:background="@drawable/ic_baseline_remove_circle_24"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton11"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
