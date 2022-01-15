@@ -1,5 +1,12 @@
 package com.example.foodpantry;
 
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.google.android.material.navigation.NavigationView;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -8,10 +15,9 @@ import java.util.List;
 import java.util.Map;
 
 public class AddItem {
-    public Item newItem;
-    public Date date;
-    Map<Integer, Item> pantry = new HashMap<Integer, Item>();
 
+    Map<Integer, Item> pantry = new HashMap<Integer, Item>();
+    Button editButton;
     public int itemKey = 0;
 
     /**
@@ -21,8 +27,9 @@ public class AddItem {
      * the class instances into the hashmap.
      */
 
-    public void createNewItem(){
+    public void createNewItem(Button button){
         Item newItem = new Item();
+
 
         //Take textview inputs and stores that info into newItem
         //Set name
@@ -34,6 +41,21 @@ public class AddItem {
 
 
     }
+
+    public void edit(View view){
+        view = (TextView) view.findViewById(R.id.titleForItem0);
+        String test = view.toString();
+        System.out.println(test +" ahashasdashadsh");
+
+        // edit the amount
+        //map.get(itemkey).setAmount()
+        //edit the expDate
+        //map.get(itemkey).setExpDate()
+        //edit the itemName
+        //map.get(itemKey).setitemName()
+    }
+
+    //Save state -- Save preferences
 
 
 
