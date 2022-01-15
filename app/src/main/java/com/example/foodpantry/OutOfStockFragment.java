@@ -8,19 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- *
- */
 public class OutOfStockFragment extends Fragment {
 
-  public OutOfStockFragment() {
-    // Required empty public constructor
-  }
+View view;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_out_of_stock, container, false);
+    view = inflater.inflate(R.layout.fragment_out_of_stock, container, false);
+    return view;
   }
 }

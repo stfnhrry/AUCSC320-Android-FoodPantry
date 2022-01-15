@@ -12,12 +12,12 @@ import android.view.ViewGroup;
  *
  */
 public class PantryFragment extends Fragment {
-
+  View view;
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     // Inflate the layout for this fragment
-    View pantryFragment =  inflater.inflate(R.layout.fragment_pantry, container, false);
-    return pantryFragment;
+    view =  inflater.inflate(R.layout.fragment_pantry, container, false);
+    return view;
   }
 } // class

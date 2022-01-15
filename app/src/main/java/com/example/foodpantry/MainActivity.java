@@ -22,21 +22,34 @@ public class MainActivity extends AppCompatActivity {
     addItem = findViewById(R.id.addItemButton);
     removeItem= findViewById(R.id.removeItemButton);
     lowInStock = findViewById(R.id.lowInStockButton);
+    outOfStock = findViewById(R.id.outOfStockButton);
+    expiringSoon = findViewById(R.id.expiringSoonButton);
+    expired = findViewById(R.id.expiredButton);
+    shoppingList = findViewById(R.id.shoppingListButton);
 
-    pantryFragment.setOnClickListener(
-            new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-                replaceFragment(new PantryFragment());
-              }
-            });
-    lowInStock.setOnClickListener(
-            new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-                replaceFragment(new LowInStockFragment());
-              }
-            });
+
+    pantryFragment.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        replaceFragment(new PantryFragment());
+      }
+    });
+
+    lowInStock.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        replaceFragment(new LowInStockFragment());
+      }
+    });
+
+    outOfStock.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        replaceFragment(new OutOfStockFragment());
+      }
+    });
+
+
   }
 
   private void replaceFragment(Fragment fragment) {
@@ -46,8 +59,6 @@ public class MainActivity extends AppCompatActivity {
     fragmentTransaction.replace(R.id.FrameLayout, fragment);
     fragmentTransaction.commit();
   }
-    // When the user opens the app, the keyboard doesn't appear automatically
-    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-  } // onCreate
+
 
 } // class
