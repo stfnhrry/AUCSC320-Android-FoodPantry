@@ -27,20 +27,6 @@
             app:layout_constraintTop_toBottomOf="@+id/currentPageText1" />
 
         <Button
-            android:id="@+id/addItemButton1"
-            android:layout_width="215dp"
-            android:layout_height="58dp"
-            android:layout_marginTop="24dp"
-            android:background="@android:color/transparent"
-            android:fontFamily="sans-serif-condensed-light"
-            android:text="Add Item"
-            android:textAlignment="viewStart"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pantryButton1" />
-
-        <Button
             android:id="@+id/lowInStockButton1"
             android:layout_width="215dp"
             android:layout_height="58dp"
@@ -52,21 +38,7 @@
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/removeItemButton1" />
-
-        <Button
-            android:id="@+id/removeItemButton1"
-            android:layout_width="215dp"
-            android:layout_height="58dp"
-            android:layout_marginTop="24dp"
-            android:background="@android:color/transparent"
-            android:fontFamily="sans-serif-condensed-light"
-            android:text="Remove Item"
-            android:textAlignment="viewStart"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addItemButton1" />
+            app:layout_constraintTop_toBottomOf="@+id/pantryButton1" />
 
         <Button
             android:id="@+id/outOfStockButton1"
@@ -150,28 +122,6 @@
             app:srcCompat="@drawable/ic_baseline_home_24" />
 
         <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:alpha=".7"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
-            app:srcCompat="@drawable/ic_baseline_add_circle_24" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:alpha=".7"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:srcCompat="@drawable/ic_baseline_remove_circle_24" />
-
-        <ImageView
             android:id="@+id/imageView4"
             android:layout_width="58dp"
             android:layout_height="58dp"
@@ -179,7 +129,7 @@
             android:layout_marginTop="24dp"
             android:alpha=".7"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
             app:srcCompat="@drawable/ic_baseline_warning_24" />
 
         <ImageView

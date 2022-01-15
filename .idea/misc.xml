@@ -4,14 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_1.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_1.xml" value="0.2648603693721129" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.25703125" />
+        <entry key="app/src/main/res/layout/fragment_expired.xml" value="0.267578125" />
+        <entry key="app/src/main/res/layout/fragment_expiring_soon.xml" value="0.25703125" />
         <entry key="app/src/main/res/layout/fragment_item_list.xml" value="0.267578125" />
+        <entry key="app/src/main/res/layout/fragment_low_in_stock.xml" value="0.267578125" />
         <entry key="app/src/main/res/layout/fragment_navigation_bar.xml" value="0.267578125" />
         <entry key="app/src/main/res/layout/fragment_one.xml" value="0.16484375" />
-        <entry key="app/src/main/res/layout/fragment_pantry.xml" value="0.14830043859649122" />
+        <entry key="app/src/main/res/layout/fragment_out_of_stock.xml" value="0.25703125" />
+        <entry key="app/src/main/res/layout/fragment_pantry.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_scrolling1.xml" value="0.2087431693989071" />
         <entry key="app/src/main/res/layout/fragment_scrolling2.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_shopping_list.xml" value="0.267578125" />
         <entry key="app/src/main/res/layout/fragment_two.xml" value="0.16484375" />
       </map>
     </option>
