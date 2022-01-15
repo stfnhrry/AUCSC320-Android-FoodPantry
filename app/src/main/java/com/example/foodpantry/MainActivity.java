@@ -49,7 +49,26 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
+    expiringSoon.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        replaceFragment(new ExpiringSoonFragment());
+      }
+    });
 
+    expired.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        replaceFragment(new ExpiredFragment());
+      }
+    });
+
+    shoppingList.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        replaceFragment(new ShoppingListFragment());
+      }
+    });
   }
 
   private void replaceFragment(Fragment fragment) {
@@ -59,6 +78,5 @@ public class MainActivity extends AppCompatActivity {
     fragmentTransaction.replace(R.id.FrameLayout, fragment);
     fragmentTransaction.commit();
   }
-
 
 } // class
