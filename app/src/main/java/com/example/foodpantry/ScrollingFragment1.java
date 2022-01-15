@@ -11,14 +11,14 @@ import androidx.annotation.Nullable;
 
 public class ScrollingFragment1 extends Fragment {
 
-  public ScrollingFragment1() {
-  }
+  View view;
 
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater,
                            @Nullable ViewGroup container,
                            @Nullable Bundle savedInstanceState) {
-    return inflater.inflate(R.layout.fragment_scrolling1, container, false);
+    view = inflater.inflate(R.layout.fragment_scrolling1, container, false);
+    return view;
   }
 }
