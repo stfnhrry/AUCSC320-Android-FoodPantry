@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/itemCard0"
+                    android:id="@+id/anItemCard"
                     android:layout_width="450dp"
                     android:layout_height="150dp"
                     android:layout_marginStart="24dp"
@@ -280,7 +280,7 @@
                     app:cardCornerRadius="15dp"
                     app:cardElevation="5dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/itemCard0">
+                    app:layout_constraintTop_toBottomOf="@+id/anItemCard">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
