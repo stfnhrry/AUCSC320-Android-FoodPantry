@@ -25,13 +25,13 @@ public class NavigationBarFragment extends Fragment {
                            Bundle savedInstanceState) {
     View navigationBarView = inflater.inflate(R.layout.fragment_navigation_bar, container, false);
     // Inflate the layout for this fragment
-    Button addItemButton = (Button) navigationBarView.findViewById(R.id.addItemButton1);
-    addItemButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Navigation.findNavController(navigationBarView).navigate(R.id.action_fragment1_to_scrollingFragment2);
-      }
-    });
+    //Button addItemButton = (Button) navigationBarView.findViewById(R.id.addItemButton1);
+    //addItemButton.setOnClickListener(new View.OnClickListener() {
+    //  @Override
+    //  public void onClick(View view) {
+    //    Navigation.findNavController(navigationBarView).navigate(R.id.action_fragment1_to_scrollingFragment2);
+    //  }
+    //});
 
     return navigationBarView;
   } // onCreateView
