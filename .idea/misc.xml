@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/stefa/AndroidStudioProjects/FoodPantry/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/stefa/AndroidStudioProjects/FoodPantry/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/stefa/AndroidStudioProjects/FoodPantry/app/src/main/res/layout/fragment_navigation_bar.xml" value="0.32916666666666666" />
+        <entry key="..\:/Users/stefa/AndroidStudioProjects/FoodPantry/app/src/main/res/layout/fragment_pantry.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_1.xml" value="0.2648603693721129" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.25703125" />
