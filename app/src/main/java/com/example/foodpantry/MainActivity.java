@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.view.WindowManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,5 +46,8 @@ public class MainActivity extends AppCompatActivity {
     fragmentTransaction.replace(R.id.FrameLayout, fragment);
     fragmentTransaction.commit();
   }
+    // When the user opens the app, the keyboard doesn't appear automatically
+    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+  } // onCreate
 
 } // class

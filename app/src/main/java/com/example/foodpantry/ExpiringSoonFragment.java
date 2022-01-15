@@ -11,15 +11,15 @@ import android.view.ViewGroup;
 /**
  *
  */
-public class LowInStockFragment extends Fragment {
+public class ExpiringSoonFragment extends Fragment {
 
-  public LowInStockFragment() {
+  public ExpiringSoonFragment() {
     // Required empty public constructor
   }
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_low_in_stock, container, false);
+    return inflater.inflate(R.layout.fragment_expiring_soon, container, false);
   }
-}
+} // class

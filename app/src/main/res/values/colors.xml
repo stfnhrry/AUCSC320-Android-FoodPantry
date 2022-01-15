@@ -12,4 +12,6 @@
     <color name="light_purple">#F6EAF6</color>
     <color name="very_light_purple">#FCF8FC</color>
     <color name="very_light_grey">#F1F1F1</color>
+    <color name="orange_warning">#FF7900</color>
+    <color name="red_alert">#FF0000</color>
 </resources>
