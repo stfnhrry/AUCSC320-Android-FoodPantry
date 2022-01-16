@@ -42,10 +42,8 @@ public class AddItem {
 
     }
 
-    public void edit(View view){
-        view = (TextView) view.findViewById(R.id.titleForItem0);
-        String test = view.toString();
-        System.out.println(test +" ahashasdashadsh");
+    public void edit(){
+
 
         // edit the amount
         //map.get(itemkey).setAmount()

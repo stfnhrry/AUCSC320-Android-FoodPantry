@@ -6,13 +6,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-  Button pantryFragment, addItem, removeItem, lowInStock, outOfStock, expiringSoon, expired, shoppingList;
+  Button pantryFragment, addItem, removeItem, lowInStock, outOfStock, expiringSoon, expired, shoppingList, editButton;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -71,12 +74,19 @@ public class MainActivity extends AppCompatActivity {
     });
   }
 
+
   private void replaceFragment(Fragment fragment) {
 
     FragmentManager fragmentManager = getSupportFragmentManager();
     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
     fragmentTransaction.replace(R.id.FrameLayout, fragment);
     fragmentTransaction.commit();
+  }
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    // no need for super here, the default fragment has no layout
+    // inflate the layout in this method
+    View rootView = inflater.inflate(R.layout.fragment_pantry, container, false);
+    return rootView;
   }
 
 } // class
