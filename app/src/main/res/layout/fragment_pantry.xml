@@ -990,8 +990,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/searchBar"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:background="@color/grey"
+            app:layout_constraintBottom_toTopOf="@+id/scrollingItemView"
             app:layout_constraintTop_toTopOf="parent">
 
         </androidx.constraintlayout.widget.ConstraintLayout>
