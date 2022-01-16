@@ -2,11 +2,20 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="450dp"
-    android:layout_height="150dp">
+    android:layout_height="150dp"
+    android:layout_margin="20dp"
+    android:background="#f1ff91"
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/itemCard0"
         android:layout_width="450dp"
         android:layout_height="150dp"
+        android:innerRadius="0dp"
+        android:shape="ring"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -21,8 +30,7 @@
                 android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_cookie_24" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/titleForItem0"
@@ -94,7 +102,6 @@
                 android:background="@android:color/transparent"
                 android:padding="10dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_baseline_edit_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -106,10 +113,11 @@
                 android:background="@android:color/transparent"
                 android:paddingStart="20dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_baseline_add_shopping_cart_24"
                 app:layout_constraintEnd_toStartOf="@+id/editButtonForItem0"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
