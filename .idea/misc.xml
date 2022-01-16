@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/stefa/AndroidStudioProjects/FoodPantry/app/src/main/res/drawable/ic_baseline_cookie_24.xml" value="0.45546875" />
         <entry key="..\:/Users/stefa/AndroidStudioProjects/FoodPantry/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/stefa/AndroidStudioProjects/FoodPantry/app/src/main/res/layout/fragment_expired.xml" value="0.1" />
         <entry key="..\:/Users/stefa/AndroidStudioProjects/FoodPantry/app/src/main/res/layout/fragment_expiring_soon.xml" value="0.2" />

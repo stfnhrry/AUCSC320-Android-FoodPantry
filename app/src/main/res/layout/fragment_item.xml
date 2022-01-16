@@ -24,16 +24,17 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/iconForItem0"
+                android:id="@+id/iconForItem"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_cookie_24" />
 
             <TextView
-                android:id="@+id/titleForItem0"
+                android:id="@+id/titleForItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -41,11 +42,11 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Cookies"
                 android:textSize="34sp"
-                app:layout_constraintStart_toEndOf="@+id/iconForItem0"
+                app:layout_constraintStart_toEndOf="@+id/iconForItem"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/expiryDateForItem0"
+                android:id="@+id/expiryDateForItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -55,10 +56,10 @@
                 android:textColor="#2196F3"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/iconForItem0" />
+                app:layout_constraintStart_toEndOf="@+id/iconForItem" />
 
             <TextView
-                android:id="@+id/sizeForItem0"
+                android:id="@+id/sizeForItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
@@ -71,7 +72,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/categoryNameForItem0"
+                android:id="@+id/categoryNameForItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -84,7 +85,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/amountLeftInPantryForItem0"
+                android:id="@+id/amountLeftInPantryForItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -95,25 +96,27 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <ImageButton
-                android:id="@+id/editButtonForItem0"
+                android:id="@+id/editButtonForItem"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:adjustViewBounds="true"
                 android:background="@android:color/transparent"
                 android:padding="10dp"
                 android:scaleType="fitCenter"
+                android:src="@drawable/ic_baseline_edit_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/addToShoppingCartButtonForItem0"
+                android:id="@+id/addToShoppingCartButtonForItem"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:adjustViewBounds="true"
                 android:background="@android:color/transparent"
                 android:paddingStart="20dp"
                 android:scaleType="fitCenter"
-                app:layout_constraintEnd_toStartOf="@+id/editButtonForItem0"
+                android:src="@drawable/ic_baseline_add_shopping_cart_24"
+                app:layout_constraintEnd_toStartOf="@+id/editButtonForItem"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
