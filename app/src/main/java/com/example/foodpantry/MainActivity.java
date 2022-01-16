@@ -25,11 +25,11 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnFr
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    ItemFragment one = ItemFragment.newInstance("Bread", "Pastry", 1, 1);
-    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+    //ItemFragment one = ItemFragment.newInstance("Bread", "Pastry", 1, 1);
+    //FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-    transaction.add(R.id.linearLayout, one);
-    transaction.commit();
+    //transaction.add(R.id.linearLayout, one);
+    //transaction.commit();
 
     pantryFragment = findViewById(R.id.pantryButton);
     addItem = findViewById(R.id.addItemButton);
@@ -124,12 +124,20 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnFr
   }
 
   public void addNewItem(){
-    ItemFragment two = ItemFragment.newInstance("Ice Cream", "Sweets", 1, 1);
+    ItemFragment two = ItemFragment.newInstance("Toast", "Sweets", 1, 1);
+    two.titleText = findViewById(R.id.titleForItem);
+    //two.titleText.setText("Snail");
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
     transaction.add(R.id.linearLayout, two);
     transaction.commit();
     showToast("Hello there");
+
+    //ItemFragment one = ItemFragment.newInstance("Bread", "Pastry", 1, 1);
+    //FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+    //transaction.add(R.id.linearLayout, one);
+    //transaction.commit();
   }
 
 } // class

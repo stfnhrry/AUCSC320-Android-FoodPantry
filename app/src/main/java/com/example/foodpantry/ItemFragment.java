@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -23,10 +24,15 @@ public class ItemFragment extends Fragment {
 
   public ImageView icon;
   public String title;
+  public TextView titleText;
   public String category;
+  public TextView categoryText;
   public int amount;
+  public TextView amountText;
   public Date expiryDate;
+  public TextView dateText;
   public int size;
+  public TextView sizeText;
 
   private OnFragmentInteractionListener mListener;
 
@@ -82,7 +88,21 @@ public class ItemFragment extends Fragment {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     // Inflate the layout for this fragment
+    init();
     return inflater.inflate(R.layout.fragment_item, container, false);
+
+  }
+
+  @Override
+  public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
+    titleText = (TextView) getView().findViewById(R.id.titleForItem);
+    titleText.setText(title);
+    categoryText = (TextView) getView().findViewById(R.id.categoryNameForItem);
+    categoryText.setText(category);
+    amountText = (TextView) getView().findViewById(R.id.amountLeftInPantryForItem);
+    amountText.setText(amount + " Left In Pantry");
+    sizeText = (TextView) getView().findViewById(R.id.sizeForItem);
+    sizeText.setText(size + "kg");
   }
 
   @Override
@@ -100,6 +120,10 @@ public class ItemFragment extends Fragment {
   public void onDetach() {
     super.onDetach();
     mListener = null;
+  }
+
+  public void init(){
+    //titleText.setText("title");
   }
 
   public String getTitle() {
