@@ -9,11 +9,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Layout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 /**
  *
@@ -21,6 +23,9 @@ import android.widget.LinearLayout;
 public class PantryFragment extends Fragment {
 
   private OnFragmentInteractionListener mListener;
+  Fragment childFragment;
+  Toast lastToast;
+  int time = 10;
 
   public PantryFragment() {
   }
@@ -36,11 +41,23 @@ public class PantryFragment extends Fragment {
 
   @Override
   public void onViewCreated(View view, Bundle savedInstanceState) {
-    Fragment childFragment = new ItemFragment();
+
+    ItemFragment iF = ItemFragment.newInstance("Hi", "Hello");
+
+    childFragment = iF;
     FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-    transaction.replace(R.id.child_fragment_container, childFragment).commit();
+    transaction.add(R.id.child_fragment_container, childFragment).commit();
   }
 
+  public void showToast(String text){
+    if(lastToast != null){
+      lastToast.cancel();
+    }
+    Toast toast = Toast.makeText(getContext(), text, Toast.LENGTH_LONG);
+    toast.setGravity(Gravity.BOTTOM, 0, 0);
+    toast.show();
+    lastToast = toast;
+  }
 
   @Override
   public void onAttach(Context context) {
@@ -63,4 +80,15 @@ public class PantryFragment extends Fragment {
     // TODO: Update argument type and name
     void messageFromParentFragment(Uri uri);
   }
+
+  public void onClick(View view){
+    showToast("Added new thing");
+    //ItemFragment iF2 = ItemFragment.newInstance("Hi", "Hello");
+
+    //FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+    //transaction.add(R.id.child_fragment_container, iF2).commit();
+
+    //showToast("Added new thing 2");
+  }
+
 } // class

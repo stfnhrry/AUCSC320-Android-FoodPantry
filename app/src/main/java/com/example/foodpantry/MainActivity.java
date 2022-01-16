@@ -1,6 +1,7 @@
 package com.example.foodpantry;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 import android.view.WindowManager;
 
@@ -40,9 +42,8 @@ public class MainActivity extends AppCompatActivity implements PantryFragment.On
   }
 
   public void makeNew(){
-    Button myButton = new Button(this);
-    myButton.setText("I am new here");
-
+    FragmentContainerView fcView = findViewById(R.id.fragmentContainerView);
+    FrameLayout cfContainer = fcView.findViewById(R.id.child_fragment_container);
   }
 
   @Override
