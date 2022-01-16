@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+tools:showIn="navigation_view">
+
+<group android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_pantry"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Pantry" />
+    <item
+        android:id="@+id/nav_low_in_stock"
+        android:icon="@drawable/ic_baseline_warning_24"
+        android:title="Low In Stock" />
+    <item
+        android:id="@+id/nav_out_of_stock"
+        android:icon="@drawable/ic_baseline_inventory_24"
+        android:title="Out Of Stock" />
+    <item
+        android:id="@+id/nav_expiring_soon"
+        android:icon="@drawable/ic_baseline_error_24"
+        android:title="Expiring Soon" />
+    <item
+        android:id="@+id/nav_expired"
+        android:icon="@drawable/ic_baseline_delete_24"
+        android:title="Expired" />
+    <item
+        android:id="@+id/nav_shopping_list"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        android:title="Shopping List" />
+</group>
+</menu>
