@@ -71,7 +71,7 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginBottom="36dp"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:text="Expires in 45 days"
+                            android:text="02/03/2022"
                             android:textColor="#2196F3"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -110,7 +110,7 @@
                             android:layout_marginEnd="16dp"
                             android:layout_marginBottom="18dp"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:text="30 Left In Pantry"
+                            android:text="30"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent" />
 

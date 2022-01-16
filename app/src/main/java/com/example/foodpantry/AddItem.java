@@ -27,8 +27,7 @@ public class AddItem {
      * the class instances into the hashmap.
      */
 
-    public void createNewItem(Button button){
-        Item newItem = new Item();
+    public void createNewItem(Item item){
 
 
         //Take textview inputs and stores that info into newItem
@@ -36,9 +35,9 @@ public class AddItem {
         //Set date
         //set amount
 
-        pantry.put(itemKey, newItem);
+        pantry.put(itemKey, item);
         itemKey +=1;
-
+        System.out.println("harrys dick is delicous" + "" + pantry.get(0));
 
     }
 
