@@ -1,92 +1,58 @@
 package com.example.foodpantry;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.fragment.NavHostFragment;
 
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.util.Log;
+import android.view.Gravity;
 import android.widget.Button;
+import android.widget.Toast;
 import android.view.WindowManager;
-import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PantryFragment.OnFragmentInteractionListener, ItemFragment.OnFragmentInteractionListener {
 
-  Button pantryFragment, addItem, removeItem, lowInStock, outOfStock, expiringSoon, expired, shoppingList, editButton;
+  Toast lastToast;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    // When the user opens the app, the keyboard doesn't appear automatically
+    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-    pantryFragment = findViewById(R.id.pantryButton);
-    addItem = findViewById(R.id.addItemButton);
-    removeItem= findViewById(R.id.removeItemButton);
-    lowInStock = findViewById(R.id.lowInStockButton);
-    outOfStock = findViewById(R.id.outOfStockButton);
-    expiringSoon = findViewById(R.id.expiringSoonButton);
-    expired = findViewById(R.id.expiredButton);
-    shoppingList = findViewById(R.id.shoppingListButton);
+    //Begin transaction
+    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+    ft.replace(R.id.fragmentContainerView, new PantryFragment());
+    ft.commit();
+  } // onCreate
 
-
-    pantryFragment.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        replaceFragment(new PantryFragment());
-      }
-    });
-
-    lowInStock.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        replaceFragment(new LowInStockFragment());
-      }
-    });
-
-    outOfStock.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        replaceFragment(new OutOfStockFragment());
-      }
-    });
-
-    expiringSoon.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        replaceFragment(new ExpiringSoonFragment());
-      }
-    });
-
-    expired.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        replaceFragment(new ExpiredFragment());
-      }
-    });
-
-    shoppingList.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        replaceFragment(new ShoppingListFragment());
-      }
-    });
+  public void showToast(String text){
+    if(lastToast != null){
+      lastToast.cancel();
+    }
+    Toast toast = Toast.makeText(this, text, Toast.LENGTH_LONG);
+    toast.setGravity(Gravity.BOTTOM, 0, 0);
+    toast.show();
+    lastToast = toast;
   }
 
+  public void makeNew(){
+    Button myButton = new Button(this);
+    myButton.setText("I am new here");
 
-  private void replaceFragment(Fragment fragment) {
-
-    FragmentManager fragmentManager = getSupportFragmentManager();
-    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-    fragmentTransaction.replace(R.id.FrameLayout, fragment);
-    fragmentTransaction.commit();
   }
-  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    // no need for super here, the default fragment has no layout
-    // inflate the layout in this method
-    View rootView = inflater.inflate(R.layout.fragment_pantry, container, false);
-    return rootView;
+
+  @Override
+  public void messageFromParentFragment(Uri uri) {
+    Log.i("TAG", "received communication from parent fragment");
+  }
+
+  @Override
+  public void messageFromChildFragment(Uri uri) {
+    Log.i("TAG", "received communication from child fragment");
   }
 
 } // class
