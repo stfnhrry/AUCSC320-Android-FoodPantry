@@ -7,16 +7,19 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements ItemFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity {
 
   Button pantryFragment, addItem, removeItem, lowInStock, outOfStock, expiringSoon, expired, shoppingList;
 
@@ -24,12 +27,18 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnFr
 
   LinearLayout cardLayout;
 
+  Fragment activeFragment;
+
+  int numItems;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
     cardLayout = findViewById(R.id.linearLayout);
+
+
 
     pantryFragment = findViewById(R.id.pantryButton);
     addItem = findViewById(R.id.addItemButton);
@@ -44,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnFr
     pantryFragment.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        newCard();
+        removeFragment();
       }
     });
 
@@ -103,46 +112,64 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnFr
   }
 
   private void replaceFragment(Fragment fragment) {
-
+    activeFragment = fragment;
     FragmentManager fragmentManager = getSupportFragmentManager();
     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
     fragmentTransaction.replace(R.id.FrameLayout, fragment);
     fragmentTransaction.commit();
   }
 
-  @Override
-  public void messageFromChildFragment(Uri uri){
-    Log.i("TAG", "Received communication from child fragment");
-  }
+  private void removeFragment() {
+    if (activeFragment == null) {
 
-  public void newCard(){
-    ItemFragment two = ItemFragment.newInstance("NewCard", "Testing", 1, 0);
-    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-    transaction.add(R.id.linearLayout, two);
-    transaction.commit();
-    showToast("Hello there");
+    }
+    else{
+      FragmentManager fragmentManager = getSupportFragmentManager();
+      FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+      fragmentTransaction.remove(activeFragment);
+      activeFragment = null;
+      fragmentTransaction.commit();
+    }
   }
 
   public void addNewItem(){
-    //ItemFragment two = ItemFragment.newInstance("Toast", "Sweets", 1, 1);
-    //two.titleText.setText("Snail");
-    //showToast(two.getId() + "  Is the id");
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+    transaction.add(cardLayout.getId(), ItemFragment.newInstance("Toast", "Baked Goods", 1, 1));
+    transaction.commitNow();
 
-    transaction.add(cardLayout.getId(), ItemFragment.newInstance("Toast", "Sweets", 1, 1));
-    transaction.commit();
+    TextView cardText = cardLayout.getChildAt(0).findViewById(R.id.titleForItem);
+//    ImageButton editButton = cardLayout.getChildAt(0).findViewById(R.id.editButtonForItem);
+//    editButton.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View view) {
+//        showToast(cardText.getText() + " is the title for this card, changed now to Oreos");
+//        cardText.setText("Oreos");
+//      }
+//    });
+  }
 
-    //showToast(two.getId() + "  Is the id");
 
-    showToast(cardLayout.getChildCount() + " is the number of children");
 
+  public void next(){
+    if(cardLayout.getChildCount() == 0){
+      showToast("Still no children");
+    }
+    else{
+      showToast("Enough time has passed");
+    }
   }
 
   public void editItem(){
     //item.titleText.setText("Snail");
-    TextView cardText = cardLayout.getChildAt(0).findViewById(R.id.titleForItem);
-    cardText.setText("123");
+    TextView cardText = cardLayout.getChildAt(1).findViewById(R.id.titleForItem);
+    ImageButton editButton = cardLayout.getChildAt(1).findViewById(R.id.editButtonForItem);
+    editButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        showToast(cardText.getText() + " is the title for this card, changed now to Oreos");
+        cardText.setText("Oreos");
+      }
+    });
   }
 
 } // class
