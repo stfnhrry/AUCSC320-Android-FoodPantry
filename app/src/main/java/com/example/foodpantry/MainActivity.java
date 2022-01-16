@@ -12,6 +12,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements ItemFragment.OnFragmentInteractionListener {
@@ -20,16 +22,14 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnFr
 
   Toast lastToast;
 
+  LinearLayout cardLayout;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    //ItemFragment one = ItemFragment.newInstance("Bread", "Pastry", 1, 1);
-    //FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-    //transaction.add(R.id.linearLayout, one);
-    //transaction.commit();
+    cardLayout = findViewById(R.id.linearLayout);
 
     pantryFragment = findViewById(R.id.pantryButton);
     addItem = findViewById(R.id.addItemButton);
@@ -58,7 +58,8 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnFr
     lowInStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        replaceFragment(new LowInStockFragment());
+        //replaceFragment(new LowInStockFragment());
+        editItem();
       }
     });
 
@@ -124,20 +125,24 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnFr
   }
 
   public void addNewItem(){
-    ItemFragment two = ItemFragment.newInstance("Toast", "Sweets", 1, 1);
-    two.titleText = findViewById(R.id.titleForItem);
+    //ItemFragment two = ItemFragment.newInstance("Toast", "Sweets", 1, 1);
     //two.titleText.setText("Snail");
+    //showToast(two.getId() + "  Is the id");
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-    transaction.add(R.id.linearLayout, two);
+    transaction.add(cardLayout.getId(), ItemFragment.newInstance("Toast", "Sweets", 1, 1));
     transaction.commit();
-    showToast("Hello there");
 
-    //ItemFragment one = ItemFragment.newInstance("Bread", "Pastry", 1, 1);
-    //FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+    //showToast(two.getId() + "  Is the id");
 
-    //transaction.add(R.id.linearLayout, one);
-    //transaction.commit();
+    showToast(cardLayout.getChildCount() + " is the number of children");
+
+  }
+
+  public void editItem(){
+    //item.titleText.setText("Snail");
+    TextView cardText = cardLayout.getChildAt(0).findViewById(R.id.titleForItem);
+    cardText.setText("123");
   }
 
 } // class
