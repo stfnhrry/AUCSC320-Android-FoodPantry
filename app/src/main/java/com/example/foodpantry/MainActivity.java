@@ -1,59 +1,82 @@
 package com.example.foodpantry;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentContainerView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.fragment.NavHostFragment;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 import android.view.WindowManager;
 
-public class MainActivity extends AppCompatActivity implements PantryFragment.OnFragmentInteractionListener, ItemFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity {
 
-  Toast lastToast;
-
+  Button pantryFragment, addItem, removeItem, lowInStock, outOfStock, expiringSoon, expired, shoppingList;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    // When the user opens the app, the keyboard doesn't appear automatically
-    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-    //Begin transaction
-    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-    ft.replace(R.id.fragmentContainerView, new PantryFragment());
-    ft.commit();
-  } // onCreate
+    pantryFragment = findViewById(R.id.pantryButton);
+    addItem = findViewById(R.id.addItemButton);
+    removeItem= findViewById(R.id.removeItemButton);
+    lowInStock = findViewById(R.id.lowInStockButton);
+    outOfStock = findViewById(R.id.outOfStockButton);
+    expiringSoon = findViewById(R.id.expiringSoonButton);
+    expired = findViewById(R.id.expiredButton);
+    shoppingList = findViewById(R.id.shoppingListButton);
 
-  public void showToast(String text){
-    if(lastToast != null){
-      lastToast.cancel();
-    }
-    Toast toast = Toast.makeText(this, text, Toast.LENGTH_LONG);
-    toast.setGravity(Gravity.BOTTOM, 0, 0);
-    toast.show();
-    lastToast = toast;
+
+    pantryFragment.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        replaceFragment(new PantryFragment());
+      }
+    });
+
+    lowInStock.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        replaceFragment(new LowInStockFragment());
+      }
+    });
+
+    outOfStock.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        replaceFragment(new OutOfStockFragment());
+      }
+    });
+
+    expiringSoon.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        replaceFragment(new ExpiringSoonFragment());
+      }
+    });
+
+    expired.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        replaceFragment(new ExpiredFragment());
+      }
+    });
+
+    shoppingList.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        replaceFragment(new ShoppingListFragment());
+      }
+    });
   }
 
-  public void makeNew(){
-    FragmentContainerView fcView = findViewById(R.id.fragmentContainerView);
-    FrameLayout cfContainer = fcView.findViewById(R.id.child_fragment_container);
-  }
+  private void replaceFragment(Fragment fragment) {
 
-  @Override
-  public void messageFromParentFragment(Uri uri) {
-    Log.i("TAG", "received communication from parent fragment");
-  }
-
-  @Override
-  public void messageFromChildFragment(Uri uri) {
-    Log.i("TAG", "received communication from child fragment");
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+    fragmentTransaction.replace(R.id.FrameLayout, fragment);
+    fragmentTransaction.commit();
   }
 
 } // class

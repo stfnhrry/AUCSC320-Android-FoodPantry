@@ -6,135 +6,138 @@
     android:layout_height="match_parent"
     android:background="@color/light_grey"
     tools:context=".MainActivity">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <androidx.fragment.app.FragmentContainerView
-    android:id="@+id/navigationBarFragment"
-        android:name="com.example.foodpantry.NavigationBarFragment"
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:id="@+id/FrameLayout"
+        android:layout_width="1000dp"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout="@layout/fragment_navigation_bar" />
-
+        android:layout_marginStart="300dp" />
 
     <Button
         android:id="@+id/pantryButton"
         android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="210dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Pantry"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/fragmentContainerView"
+        android:visibility="visible"
+
         app:layout_constraintTop_toBottomOf="@+id/currentPageText" />
 
     <Button
         android:id="@+id/addItemButton"
         android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="280dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Add Item"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/fragmentContainerView"
+        android:visibility="visible"
+
         app:layout_constraintTop_toBottomOf="@+id/pantryButton" />
 
     <Button
-        android:id="@+id/inStockButton"
+        android:id="@+id/lowInStockButton"
         android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="420dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Low In Stock"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/fragmentContainerView"
+        android:visibility="visible"
+
         app:layout_constraintTop_toBottomOf="@+id/removeItemButton" />
 
     <Button
         android:id="@+id/removeItemButton"
         android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="350dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Remove Item"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/fragmentContainerView"
+        android:visibility="visible"
+
         app:layout_constraintTop_toBottomOf="@+id/addItemButton" />
 
     <Button
         android:id="@+id/outOfStockButton"
         android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="490dp"
+        android:layout_marginStart="80dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Out Of Stock"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/fragmentContainerView"
-        app:layout_constraintTop_toBottomOf="@+id/inStockButton" />
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@+id/lowInStockButton" />
 
     <Button
         android:id="@+id/expiringSoonButton"
         android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="560dp"
+        android:layout_marginStart="80dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Expiring Soon"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/fragmentContainerView"
+        android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/outOfStockButton" />
 
     <Button
         android:id="@+id/expiredButton"
         android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="630dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Expired"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/fragmentContainerView"
+        android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/expiringSoonButton" />
 
     <Button
         android:id="@+id/shoppingListButton"
         android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="700dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Shopping List"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/fragmentContainerView"
+        android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/expiredButton" />
 
     <TextView
@@ -142,11 +145,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="50dp"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Pantry"
         android:textSize="60sp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -155,8 +158,8 @@
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:visibility="invisible"
+        android:layout_marginTop="210dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currentPageText"
         app:srcCompat="@drawable/ic_baseline_home_24" />
@@ -166,8 +169,8 @@
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:visibility="invisible"
+        android:layout_marginTop="280dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:srcCompat="@drawable/ic_baseline_add_circle_24" />
@@ -177,8 +180,8 @@
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:visibility="invisible"
+        android:layout_marginTop="350dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:srcCompat="@drawable/ic_baseline_remove_circle_24" />
@@ -188,8 +191,8 @@
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:visibility="invisible"
+        android:layout_marginTop="420dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:srcCompat="@drawable/ic_baseline_warning_24" />
@@ -199,8 +202,8 @@
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:visibility="invisible"
+        android:layout_marginTop="490dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
         app:srcCompat="@drawable/ic_baseline_inventory_24" />
@@ -210,8 +213,8 @@
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:visibility="invisible"
+        android:layout_marginTop="560dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
         app:srcCompat="@drawable/ic_baseline_error_24" />
@@ -221,8 +224,8 @@
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:visibility="invisible"
+        android:layout_marginTop="630dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6"
         app:srcCompat="@drawable/ic_baseline_delete_24" />
@@ -232,19 +235,11 @@
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:visibility="invisible"
+        android:layout_marginTop="700dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView7"
         app:srcCompat="@drawable/ic_baseline_shopping_cart_24" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="980dp"
-        android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:navGraph="@navigation/nav_graph" />
+</RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
