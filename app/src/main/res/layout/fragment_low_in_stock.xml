@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="980dp"
+    android:layout_height="match_parent"
+    tools:context=".LowInStockFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/baseConstraintForLowInStockFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_grey">
+
+        <ScrollView
+            android:id="@+id/scrollingViewForLowInStockFragment"
+            android:layout_width="match_parent"
+            android:layout_height="750dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/very_light_grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchBar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/scrollIViewForLowInStockFragmentConstraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/lowInStockItemCard0"
+                    android:layout_width="450dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:innerRadius="0dp"
+                    android:shape="ring"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iconForLowInStockItem0"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginStart="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_baseline_cookie_24" />
+
+                        <TextView
+                            android:id="@+id/titleForLowInStockItem0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="40dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="Cookies"
+                            android:textSize="34sp"
+                            app:layout_constraintStart_toEndOf="@+id/iconForLowInStockItem0"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/expiryDateForLowInStockItem0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginBottom="36dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="Expires in 45 days"
+                            android:textColor="#2196F3"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/iconForLowInStockItem0" />
+
+                        <TextView
+                            android:id="@+id/sizeForLowInStockItem0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="48dp"
+                            android:layout_marginEnd="16dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="5 kg"
+                            android:textColor="#A8A8A8"
+                            android:textSize="24sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/categoryNameForLowInStockItem0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="SNACKS"
+                            android:textColor="#C6C6C6"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/amountLeftInPantryForLowInStockItem0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="18dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="4 Left In Pantry"
+                            android:textColor="@color/orange_warning"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+
+                        <ImageButton
+                            android:id="@+id/editButtonForLowInStockItem0"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:adjustViewBounds="true"
+                            android:background="@android:color/transparent"
+                            android:padding="10dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_baseline_edit_24"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/addToShoppingCartButtonForLowInStockItem0"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:adjustViewBounds="true"
+                            android:background="@android:color/transparent"
+                            android:paddingStart="20dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_baseline_add_shopping_cart_24"
+                            app:layout_constraintEnd_toStartOf="@+id/editButtonForLowInStockItem0"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/lowInStockItemCard1"
+                    android:layout_width="450dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:innerRadius="0dp"
+                    android:shape="ring"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iconForLowInStockItem1"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginStart="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_baseline_cookie_24" />
+
+                        <TextView
+                            android:id="@+id/titleForLowInStockItem1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="40dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="Cookies"
+                            android:textSize="34sp"
+                            app:layout_constraintStart_toEndOf="@+id/iconForLowInStockItem1"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/expiryDateForLowInStockItem1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginBottom="36dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="Expires in 45 days"
+                            android:textColor="#2196F3"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/iconForLowInStockItem1" />
+
+                        <TextView
+                            android:id="@+id/sizeForLowInStockItem1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="48dp"
+                            android:layout_marginEnd="16dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="5 kg"
+                            android:textColor="#A8A8A8"
+                            android:textSize="24sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/categoryNameForLowInStockItem1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="SNACKS"
+                            android:textColor="#C6C6C6"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/amountLeftInPantryForLowInStockItem1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="18dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="5 Left In Pantry"
+                            android:textColor="@color/orange_warning"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+
+                        <ImageButton
+                            android:id="@+id/editButtonForLowInStockItem1"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:adjustViewBounds="true"
+                            android:background="@android:color/transparent"
+                            android:padding="10dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_baseline_edit_24"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/addToShoppingCartButtonForLowInStockItem1"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:adjustViewBounds="true"
+                            android:background="@android:color/transparent"
+                            android:paddingStart="20dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_baseline_add_shopping_cart_24"
+                            app:layout_constraintEnd_toStartOf="@+id/editButtonForLowInStockItem1"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/lowInStockItemCard2"
+                    android:layout_width="450dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:innerRadius="0dp"
+                    android:shape="ring"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lowInStockItemCard0">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iconForLowInStockItem2"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginStart="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_baseline_cookie_24" />
+
+                        <TextView
+                            android:id="@+id/titleForLowInStockItem2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="40dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="Cookies"
+                            android:textSize="34sp"
+                            app:layout_constraintStart_toEndOf="@+id/iconForLowInStockItem2"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/expiryDateForLowInStockItem2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginBottom="36dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="Expires in 45 days"
+                            android:textColor="#2196F3"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/iconForLowInStockItem2" />
+
+                        <TextView
+                            android:id="@+id/sizeForLowInStockItem2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="48dp"
+                            android:layout_marginEnd="16dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="5 kg"
+                            android:textColor="#A8A8A8"
+                            android:textSize="24sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/categoryNameForLowInStockItem2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="SNACKS"
+                            android:textColor="#C6C6C6"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/amountLeftInPantryForLowInStockItem2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="18dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="1 Left In Pantry"
+                            android:textColor="@color/orange_warning"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+
+                        <ImageButton
+                            android:id="@+id/editButtonForLowInStockItem2"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:adjustViewBounds="true"
+                            android:background="@android:color/transparent"
+                            android:padding="10dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_baseline_edit_24"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/addToShoppingCartButtonForLowInStockItem2"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:adjustViewBounds="true"
+                            android:background="@android:color/transparent"
+                            android:paddingStart="20dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_baseline_add_shopping_cart_24"
+                            app:layout_constraintEnd_toStartOf="@+id/editButtonForLowInStockItem2"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/lowInStockItemCard3"
+                    android:layout_width="450dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:innerRadius="0dp"
+                    android:shape="ring"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lowInStockItemCard1">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iconForLowInStockItem3"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginStart="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_baseline_cookie_24" />
+
+                        <TextView
+                            android:id="@+id/titleForLowInStockItem3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="40dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="Cookies"
+                            android:textSize="34sp"
+                            app:layout_constraintStart_toEndOf="@+id/iconForLowInStockItem3"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/expiryDateForLowInStockItem3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginBottom="36dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="Expires in 45 days"
+                            android:textColor="#2196F3"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/iconForLowInStockItem3" />
+
+                        <TextView
+                            android:id="@+id/sizeForLowInStockItem3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="48dp"
+                            android:layout_marginEnd="16dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="5 kg"
+                            android:textColor="#A8A8A8"
+                            android:textSize="24sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/categoryNameForLowInStockItem3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="SNACKS"
+                            android:textColor="#C6C6C6"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/amountLeftInPantryForLowInStockItem3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="18dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="3 Left In Pantry"
+                            android:textColor="@color/orange_warning"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+
+                        <ImageButton
+                            android:id="@+id/editButtonForLowInStockItem3"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:adjustViewBounds="true"
+                            android:background="@android:color/transparent"
+                            android:padding="10dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_baseline_edit_24"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <ImageButton
+                            android:id="@+id/addToShoppingCartButtonForLowInStockItem3"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:adjustViewBounds="true"
+                            android:background="@android:color/transparent"
+                            android:paddingStart="20dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_baseline_add_shopping_cart_24"
+                            app:layout_constraintEnd_toStartOf="@+id/editButtonForLowInStockItem3"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@color/light_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView99"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_baseline_search_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/searchEditTextForLowInStockFragment"
+                android:layout_width="400dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                android:ems="12"
+                android:hint="Use the search bar to find a specific pantry item"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textAlignment="center"
+                app:layout_constraintStart_toEndOf="@+id/imageView99"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/imageButton11"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:alpha=".7"
+                android:background="@drawable/ic_baseline_add_circle_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <ImageButton
+                android:id="@+id/imageButton22"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:alpha=".7"
+                android:background="@drawable/ic_baseline_remove_circle_24"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton11"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
