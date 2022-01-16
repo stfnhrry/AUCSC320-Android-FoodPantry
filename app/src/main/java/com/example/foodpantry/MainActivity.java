@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
 
     cardLayout = findViewById(R.id.linearLayout);
-
+    numItems = cardLayout.getChildCount();
 
 
     pantryFragment = findViewById(R.id.pantryButton);
@@ -67,8 +67,7 @@ public class MainActivity extends AppCompatActivity {
     lowInStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //replaceFragment(new LowInStockFragment());
-        editItem();
+        replaceFragment(new LowInStockFragment());
       }
     });
 
@@ -121,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
   private void removeFragment() {
     if (activeFragment == null) {
-
+      return;
     }
     else{
       FragmentManager fragmentManager = getSupportFragmentManager();
@@ -137,26 +136,17 @@ public class MainActivity extends AppCompatActivity {
     transaction.add(cardLayout.getId(), ItemFragment.newInstance("Toast", "Baked Goods", 1, 1));
     transaction.commitNow();
 
-    TextView cardText = cardLayout.getChildAt(0).findViewById(R.id.titleForItem);
-//    ImageButton editButton = cardLayout.getChildAt(0).findViewById(R.id.editButtonForItem);
-//    editButton.setOnClickListener(new View.OnClickListener() {
-//      @Override
-//      public void onClick(View view) {
-//        showToast(cardText.getText() + " is the title for this card, changed now to Oreos");
-//        cardText.setText("Oreos");
-//      }
-//    });
-  }
+    numItems = cardLayout.getChildCount();
 
-
-
-  public void next(){
-    if(cardLayout.getChildCount() == 0){
-      showToast("Still no children");
-    }
-    else{
-      showToast("Enough time has passed");
-    }
+    TextView cardText = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
+    ImageButton editButton = cardLayout.getChildAt(numItems - 1).findViewById(R.id.editButtonForItem);
+    editButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        showToast(cardText.getText() + " is the title for this card, changed now to Oreos");
+        cardText.setText("Oreos");
+      }
+    });
   }
 
   public void editItem(){
