@@ -280,6 +280,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_item);
     categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     categorySpinner.setAdapter(categoryAdapter);
+    // Need to disable the user from clicking anywhere because if the user clicks on the buttons on
+    // the side, then the dialog closes
     add.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
