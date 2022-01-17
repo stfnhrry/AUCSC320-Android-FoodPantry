@@ -9,11 +9,13 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -274,11 +276,15 @@ public class MainActivity extends AppCompatActivity {
     EditText size = addDialog.findViewById(R.id.editSize);
     EditText amount = addDialog.findViewById(R.id.editAmount);
     EditText expDate = addDialog.findViewById(R.id.editDate);
+    Spinner categorySpinner = addDialog.findViewById(R.id.spinner);
+    ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_item);
+    categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    categorySpinner.setAdapter(categoryAdapter);
     add.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(cardLayout.getId(), ItemFragment.newInstance(name.getText().toString(), "Baked Goods", Integer.parseInt(amount.getText().toString()), Integer.parseInt(size.getText().toString()), expDate.getText().toString()));
+        transaction.add(cardLayout.getId(), ItemFragment.newInstance(name.getText().toString(), categorySpinner.getSelectedItem().toString(), Integer.parseInt(amount.getText().toString()), Integer.parseInt(size.getText().toString()), expDate.getText().toString()));
         transaction.commitNow();
       }
     });
