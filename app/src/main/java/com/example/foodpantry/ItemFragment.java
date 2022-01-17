@@ -29,7 +29,7 @@ public class ItemFragment extends Fragment {
   public TextView titleText;
   public String category;
   public TextView categoryText;
-  public int amount;
+  public String amount;
   public TextView amountText;
   public Date expiryDate;
   public TextView dateText;
@@ -77,7 +77,7 @@ public class ItemFragment extends Fragment {
     if (getArguments() != null) {
       title = getArguments().getString(ARG_TITLE);
       category = getArguments().getString(ARG_CATEGORY);
-      amount = getArguments().getInt(ARG_AMOUNT);
+      amount = getArguments().getString(ARG_AMOUNT);
       size = getArguments().getString(ARG_SIZE);
     }
   }
@@ -98,7 +98,7 @@ public class ItemFragment extends Fragment {
     categoryText = (TextView) getView().findViewById(R.id.categoryNameForItem);
     categoryText.setText(category);
     amountText = (TextView) getView().findViewById(R.id.amountLeftInPantryForItem);
-    amountText.setText(amount + " Left In Pantry");
+    amountText.setText(amount);
     sizeText = (TextView) getView().findViewById(R.id.sizeForItem);
     sizeText.setText(size);
   }

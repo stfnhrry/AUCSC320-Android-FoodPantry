@@ -11,11 +11,11 @@ public class Item {
 
     public int weight;
 
-    public Item(String itemName, Date expdate, int amount, int weight){
+    public Item(String itemName){
         this.itemName = itemName;
-        this.amount = amount;
-        this.expDate = expdate;
-        this.weight = weight;
+//        this.amount = amount;
+//        this.expDate = expdate;
+//        this.weight = weight;
     }
     public Item(){
         this.itemName = itemName;

@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class SaveInfo {
 
-    Map<Integer, Item> pantry = new HashMap<Integer, Item>();
+    Map<Integer, View> pantry = new HashMap<Integer, View>();
     public int itemKey = 0;
 
     /**
@@ -26,9 +26,9 @@ public class SaveInfo {
      * the class instances into the hashmap.
      */
 
-    public void createNewItem(Item item){
+    public void createNewItem(View view){
 
-        pantry.put(itemKey, item);
+        pantry.put(itemKey, view);
         itemKey +=1;
 
 

@@ -19,6 +19,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
 
   Button pantryFragment, addItem, removeItem, lowInStock, outOfStock, expiringSoon, expired, shoppingList;
@@ -28,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
   LinearLayout cardLayout;
 
   Fragment activeFragment;
+
+  SaveInfo list;
+
+  Item item = new Item();
 
   int numItems;
 
@@ -53,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     pantryFragment.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        System.out.println("Harry dick is 17 inches" + item.getItemName());
         removeFragment();
       }
     });
@@ -61,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         addNewItem();
+        saveToHashMap();
       }
     });
 
@@ -161,5 +171,28 @@ public class MainActivity extends AppCompatActivity {
       }
     });
   }
+
+  public void saveToHashMap()  {
+
+    View title = cardLayout.getChildAt(numItems-1);
+//    TextView Date = cardLayout.getChildAt(numItems-1).findViewById(R.id.expiryDateForItem);
+//    TextView amount = cardLayout.getChildAt(numItems-1).findViewById(R.id.amountLeftInPantryForItem);
+//    TextView weight = cardLayout.getChildAt(numItems-1).findViewById(R.id.sizeForItem);
+
+
+    list.createNewItem(title);
+
+
+
+
+
+
+
+
+//   Item item = new Item(name);
+//   list.createNewItem(item.getItemName());
+//   list.getHashMap();
+
+ }
 
 } // class
