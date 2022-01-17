@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     expired = findViewById(R.id.expiredButton);
     shoppingList = findViewById(R.id.shoppingListButton);
 
+    // When the user opens the app, the keyboard doesn't appear automatically
+    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
     pantryFragment.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -160,6 +162,26 @@ public class MainActivity extends AppCompatActivity {
         cardText.setText("Oreos");
       }
     });
+  }
+
+  public void showAll(){
+    //do stuff
+  }
+
+  public void showLowInStock(){
+    //do stuff
+  }
+
+  public void showOutOfStock(){
+    //do things
+  }
+
+  public void showExpiringSoon(){
+    //do things
+  }
+
+  public void showExpired(){
+    //do something
   }
 
 } // class
