@@ -96,7 +96,7 @@ public class ItemFragment extends Fragment {
     categoryText = (TextView) getView().findViewById(R.id.categoryNameForItem);
     categoryText.setText(category);
     amountText = (TextView) getView().findViewById(R.id.amountLeftInPantryForItem);
-    amountText.setText(amount + " Left In Pantry");
+    amountText.setText(amount + "");
     sizeText = (TextView) getView().findViewById(R.id.sizeForItem);
     sizeText.setText(size + "kg");
   }

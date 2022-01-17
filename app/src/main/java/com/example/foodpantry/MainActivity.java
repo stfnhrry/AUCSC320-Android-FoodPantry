@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
     pantryFragment.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        removeFragment();
+        //removeFragment();
+        showAll();
       }
     });
 
@@ -69,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
     lowInStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        replaceFragment(new LowInStockFragment());
+        //replaceFragment(new LowInStockFragment());
+        showLowInStock();
       }
     });
 
@@ -165,11 +167,22 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void showAll(){
-    //do stuff
+    for (int i = 0; i < cardLayout.getChildCount(); i++) {
+      cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
+    }
   }
 
   public void showLowInStock(){
-    //do stuff
+    for (int i = 0; i < cardLayout.getChildCount(); i++) {
+      TextView text = cardLayout.getChildAt(i).findViewById(R.id.titleForItem);
+      if(text.getText() == "Oreos"){
+        cardLayout.getChildAt(i).setVisibility(View.INVISIBLE);
+      }
+//      if(Integer.parseInt(cardLayout.getChildAt(i).findViewById(R.id.amountLeftInPantryForItem).toString()) <= 5){
+//        cardLayout.getChildAt(i).setVisibility(View.INVISIBLE);
+//      }
+      //cardLayout.getChildAt(i).setVisibility(View.INVISIBLE);
+    }
   }
 
   public void showOutOfStock(){
@@ -183,5 +196,7 @@ public class MainActivity extends AppCompatActivity {
   public void showExpired(){
     //do something
   }
+
+  //Integer.parseInt(cardLayout.getChildAt(i).findViewById(R.id.amountLeftInPantryForItem).toString()) <= 5 || Integer.parseInt(cardLayout.getChildAt(i).findViewById(R.id.amountLeftInPantryForItem
 
 } // class
