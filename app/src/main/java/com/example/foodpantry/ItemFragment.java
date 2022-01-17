@@ -31,7 +31,7 @@ public class ItemFragment extends Fragment {
   public TextView categoryText;
   public int amount;
   public TextView amountText;
-  public Date expiryDate;
+  public String expiryDate;
   public TextView dateText;
   public int size;
   public TextView sizeText;
@@ -43,7 +43,7 @@ public class ItemFragment extends Fragment {
   private static String ARG_TITLE = "title";
   private static final String ARG_CATEGORY = "category";
   public static String ARG_AMOUNT = "1";
-  public static Date ARG_DATE = new Date();
+  public static String ARG_DATE = "23/04/2022";
   public static String ARG_SIZE = "5";
 
   public ItemFragment() {
@@ -59,13 +59,14 @@ public class ItemFragment extends Fragment {
    * @return A new instance of fragment ItemFragment.
    */
   // TODO: Rename and change types and number of parameters
-  public static ItemFragment newInstance(String title, String category, int number, int weight) {
+  public static ItemFragment newInstance(String title, String category, int number, int weight, String date) {
     ItemFragment fragment = new ItemFragment();
     Bundle args = new Bundle();
     args.putString(ARG_TITLE, title);
     args.putString(ARG_CATEGORY, category);
     args.putInt(ARG_AMOUNT, number);
     args.putInt(ARG_SIZE, weight);
+    args.putString(ARG_DATE, date);
     fragment.setArguments(args);
     return fragment;
   }
@@ -78,6 +79,7 @@ public class ItemFragment extends Fragment {
       category = getArguments().getString(ARG_CATEGORY);
       amount = getArguments().getInt(ARG_AMOUNT);
       size = getArguments().getInt(ARG_SIZE);
+      expiryDate = getArguments().getString(ARG_DATE);
     }
   }
 
@@ -99,6 +101,8 @@ public class ItemFragment extends Fragment {
     amountText.setText(amount + "");
     sizeText = (TextView) getView().findViewById(R.id.sizeForItem);
     sizeText.setText(size + "kg");
+    dateText = (TextView) getView().findViewById(R.id.expiryDateForItem);
+    dateText.setText(size + "kg");
   }
 
   public void showToast(String text){

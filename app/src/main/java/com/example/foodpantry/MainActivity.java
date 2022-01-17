@@ -19,6 +19,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
 
   Button pantryFragment, addItem, removeItem, lowInStock, outOfStock, expiringSoon, expired, shoppingList;
@@ -30,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
   Fragment activeFragment;
 
   int numItems;
+
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -205,23 +211,40 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void showExpiringSoon(){
-    for (int i = 0; i < cardLayout.getChildCount(); i++) {
-      TextView date = cardLayout.getChildAt(i).findViewById(R.id.amountLeftInPantryForItem);
-      int num = Integer.parseInt(date.getText().toString());
-      if(num < 1){
-        cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
-      }
-      else{
-        cardLayout.getChildAt(i).setVisibility(View.INVISIBLE);
-      }
+
+    try{
+      String currentDate = "16/01/2022";
+      String finalDate = "20/03/2022";
+      Date date1;
+      Date date2;
+      SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+      date1 = dateFormat.parse(currentDate);
+      date2 = dateFormat.parse(finalDate);
+      long difference = Math.abs(date2.getTime() - date1.getTime());
+      long differenceDates = difference / (24 * 60 * 60 * 1000);
+      String dayDifference = Long.toString(differenceDates);
+      showToast("The difference between the two dates is " + dayDifference + " days");
+    } catch (Exception exception){
+      showToast("Unable to find time difference");
     }
+
+
+
+//    for (int i = 0; i < cardLayout.getChildCount(); i++) {
+//      TextView date = cardLayout.getChildAt(i).findViewById(R.id.amountLeftInPantryForItem);
+//      int num = Integer.parseInt(date.getText().toString());
+//      if(num < 1){
+//        cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
+//      }
+//      else{
+//        cardLayout.getChildAt(i).setVisibility(View.INVISIBLE);
+//      }
+//    }
     removeFragment();
   }
 
   public void showExpired(){
     //do something
   }
-
-  //Integer.parseInt(cardLayout.getChildAt(i).findViewById(R.id.amountLeftInPantryForItem).toString()) <= 5 || Integer.parseInt(cardLayout.getChildAt(i).findViewById(R.id.amountLeftInPantryForItem
 
 } // class
