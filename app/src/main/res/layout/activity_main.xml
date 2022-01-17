@@ -100,7 +100,7 @@
         android:id="@+id/FrameLayout"
         android:layout_width="1000dp"
         android:layout_height="match_parent"
-        android:layout_marginStart="600dp"
+        android:layout_marginStart="300dp"
         android:orientation="vertical" />
 
     <Button

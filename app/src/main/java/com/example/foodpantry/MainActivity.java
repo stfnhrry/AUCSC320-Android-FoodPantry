@@ -156,23 +156,14 @@ public class MainActivity extends AppCompatActivity {
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        showToast(cardText.getText() + " is the title for this card, changed now to Oreos");
-        cardText.setText("Oreos");
+        editItem(cardText);
       }
     });
   }
 
-  public void editItem(){
-    //item.titleText.setText("Snail");
-    TextView cardText = cardLayout.getChildAt(1).findViewById(R.id.titleForItem);
-    ImageButton editButton = cardLayout.getChildAt(1).findViewById(R.id.editButtonForItem);
-    editButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        showToast(cardText.getText() + " is the title for this card, changed now to Oreos");
-        cardText.setText("Oreos");
-      }
-    });
+  public void editItem(TextView view){
+    //showToast(view.getText() + " is the title for this card, changed now to Oreos");
+    view.setText("Potato Chips");
   }
 
   public void showAll(){
