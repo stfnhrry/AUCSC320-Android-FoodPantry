@@ -142,9 +142,9 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  public void addNewItem(){
+  public void addNewItem(String name, String category, int amount, int weight, String expDate){
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-    transaction.add(cardLayout.getId(), ItemFragment.newInstance("Toast", "Baked Goods", 1, 100, "23/01/2022"));
+    transaction.add(cardLayout.getId(), ItemFragment.newInstance(name, category, amount, weight, expDate));
     transaction.commitNow();
 
     numItems = cardLayout.getChildCount();
@@ -162,9 +162,9 @@ public class MainActivity extends AppCompatActivity {
     });
   }
 
-  public void editItem(TextView view){
+  public void editItem(View view, EditText name, EditText amount, EditText expDate){
     //showToast(view.getText() + " is the title for this card, changed now to Oreos");
-    view.setText("Potato Chips");
+    //view.setText("Potato Chips");
   }
 
   public void showAll(){
@@ -269,22 +269,32 @@ public class MainActivity extends AppCompatActivity {
   public void showAddItemDialog(){
     Dialog addDialog = new Dialog(this);
     addDialog.setContentView(R.layout.add_item_dialog);
-    Button add = addDialog.findViewById(R.id.confirmButton);
-    EditText name = addDialog.findViewById(R.id.editName);
-    EditText amount = addDialog.findViewById(R.id.editAmount);
-    EditText expDate = addDialog.findViewById(R.id.editDate);
+    Button add = addDialog.findViewById(R.id.confirmEditButton);
+    EditText name = addDialog.findViewById(R.id.editNameEdit);
+    EditText amount = addDialog.findViewById(R.id.editAmountEdit);
+    EditText expDate = addDialog.findViewById(R.id.editDateEdit);
     add.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(cardLayout.getId(), ItemFragment.newInstance(name.getText().toString(), "Baked Goods", Integer.parseInt(amount.getText().toString()), 10, expDate.getText().toString()));
-        transaction.commitNow();
+        addNewItem(name.getText().toString(), "Baked Goods", Integer.parseInt(amount.getText().toString()), 10, expDate.getText().toString());
       }
     });
     addDialog.show();
   }
 
   public void showEditItemDialog(View view){
-    //code here
+    Dialog editDialog = new Dialog(this);
+    editDialog.setContentView(R.layout.edit_item_dialog);
+    Button edit = editDialog.findViewById(R.id.confirmEditButton);
+    EditText name = editDialog.findViewById(R.id.editNameEdit);
+    EditText amount = editDialog.findViewById(R.id.editAmountEdit);
+    EditText expDate = editDialog.findViewById(R.id.editDateEdit);
+    edit.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        editItem(view, name, amount, expDate);
+      }
+    });
+    editDialog.show();
   }
 } // class
