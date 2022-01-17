@@ -271,13 +271,14 @@ public class MainActivity extends AppCompatActivity {
     addDialog.setContentView(R.layout.add_item_dialog);
     Button add = addDialog.findViewById(R.id.confirmButton);
     EditText name = addDialog.findViewById(R.id.editName);
+    EditText size = addDialog.findViewById(R.id.editSize);
     EditText amount = addDialog.findViewById(R.id.editAmount);
     EditText expDate = addDialog.findViewById(R.id.editDate);
     add.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(cardLayout.getId(), ItemFragment.newInstance(name.getText().toString(), "Baked Goods", Integer.parseInt(amount.getText().toString()), 10, expDate.getText().toString()));
+        transaction.add(cardLayout.getId(), ItemFragment.newInstance(name.getText().toString(), "Baked Goods", Integer.parseInt(amount.getText().toString()), Integer.parseInt(size.getText().toString()), expDate.getText().toString()));
         transaction.commitNow();
       }
     });
