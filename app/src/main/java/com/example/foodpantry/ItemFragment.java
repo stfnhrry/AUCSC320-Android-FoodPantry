@@ -100,7 +100,7 @@ public class ItemFragment extends Fragment {
     amountText = (TextView) getView().findViewById(R.id.amountLeftInPantryForItem);
     amountText.setText(amount + "");
     sizeText = (TextView) getView().findViewById(R.id.sizeForItem);
-    sizeText.setText(size + "kg");
+    sizeText.setText(size + "");
     dateText = (TextView) getView().findViewById(R.id.expiryDateForItem);
     dateText.setText(expiryDate + "");
   }
