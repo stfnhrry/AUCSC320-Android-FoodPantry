@@ -14,10 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AddItem {
+public class SaveInfo {
 
     Map<Integer, Item> pantry = new HashMap<Integer, Item>();
-    Button editButton;
     public int itemKey = 0;
 
     /**
@@ -29,30 +28,17 @@ public class AddItem {
 
     public void createNewItem(Item item){
 
-
-        //Take textview inputs and stores that info into newItem
-        //Set name
-        //Set date
-        //set amount
-
         pantry.put(itemKey, item);
         itemKey +=1;
-        System.out.println("harrys dick is delicous" + "" + pantry.get(0));
+
 
     }
 
-    public void edit(){
-
-
-        // edit the amount
-        //map.get(itemkey).setAmount()
-        //edit the expDate
-        //map.get(itemkey).setExpDate()
-        //edit the itemName
-        //map.get(itemKey).setitemName()
+    public void getHashMap(){
+        System.out.println(pantry.get(0));
     }
 
-    //Save state -- Save preferences
+
 
 
 

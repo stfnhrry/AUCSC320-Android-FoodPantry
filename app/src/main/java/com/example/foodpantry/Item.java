@@ -9,15 +9,19 @@ public class Item {
 
     public int amount;
 
-    public Item(String itemName, Date expDate, int amount){
+    public int weight;
+
+    public Item(String itemName, Date expdate, int amount, int weight){
         this.itemName = itemName;
-        this.expDate = expDate;
         this.amount = amount;
+        this.expDate = expdate;
+        this.weight = weight;
     }
     public Item(){
         this.itemName = itemName;
         this.amount = amount;
         this.expDate = expDate;
+        this.weight = weight;
     }
     public void setItem(String itemName){
         this.itemName = itemName;
@@ -28,8 +32,10 @@ public class Item {
     }
 
     public void setExpDate(Date expDate) {
-        this.expDate = expDate;
+       this.expDate = expDate;
     }
+
+    public void setWeight(int weight){this.weight = weight; }
 
     public int getAmount() {
         return amount;
@@ -40,6 +46,10 @@ public class Item {
     }
 
     public Date getExpDate() {
-        return expDate;
+       return expDate;
+    }
+
+    public int getWeight() {
+        return weight;
     }
 }

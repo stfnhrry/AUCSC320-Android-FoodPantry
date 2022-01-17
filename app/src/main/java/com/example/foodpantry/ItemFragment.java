@@ -21,7 +21,7 @@ import java.util.Date;
  * create an instance of this fragment.
  */
 public class ItemFragment extends Fragment {
-
+  static SaveInfo list;
   public ImageView icon;
   public String title;
   public TextView titleText;
@@ -31,7 +31,7 @@ public class ItemFragment extends Fragment {
   public TextView amountText;
   public Date expiryDate;
   public TextView dateText;
-  public int size;
+  public String size;
   public TextView sizeText;
 
   private OnFragmentInteractionListener mListener;
@@ -64,6 +64,7 @@ public class ItemFragment extends Fragment {
   // TODO: Rename and change types and number of parameters
   public static ItemFragment newInstance(String title, String category, int number, int weight) {
     ItemFragment fragment = new ItemFragment();
+
     Bundle args = new Bundle();
     args.putString(ARG_TITLE, title);
     args.putString(ARG_CATEGORY, category);
@@ -80,13 +81,14 @@ public class ItemFragment extends Fragment {
       title = getArguments().getString(ARG_TITLE);
       category = getArguments().getString(ARG_CATEGORY);
       amount = getArguments().getInt(ARG_AMOUNT);
-      size = getArguments().getInt(ARG_SIZE);
+      size = getArguments().getString(ARG_SIZE);
     }
   }
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
+
     // Inflate the layout for this fragment
     init();
     return inflater.inflate(R.layout.fragment_item, container, false);
@@ -102,7 +104,7 @@ public class ItemFragment extends Fragment {
     amountText = (TextView) getView().findViewById(R.id.amountLeftInPantryForItem);
     amountText.setText(amount + " Left In Pantry");
     sizeText = (TextView) getView().findViewById(R.id.sizeForItem);
-    sizeText.setText(size + "kg");
+    sizeText.setText(size);
   }
 
   @Override
