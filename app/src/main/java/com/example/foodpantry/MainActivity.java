@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         addNewItem();
+        //showAddItemDialog();
       }
     });
 
@@ -142,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
   public void addNewItem(){
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-    transaction.add(cardLayout.getId(), ItemFragment.newInstance("Toast", "Baked Goods", 1, 1, "23/01/2022"));
+    transaction.add(cardLayout.getId(), ItemFragment.newInstance("Toast", "Baked Goods", 1, 100, "23/01/2022"));
     transaction.commitNow();
 
     numItems = cardLayout.getChildCount();
@@ -267,6 +269,9 @@ public class MainActivity extends AppCompatActivity {
   public void showAddItemDialog(){
     Dialog addDialog = new Dialog(this);
     addDialog.setContentView(R.layout.add_item_dialog);
+    Button add = addDialog.findViewById(R.id.confirmButton);
+    EditText name = addDialog.findViewById(R.id.editName);
+    addDialog.show();
   }
 
   public void showEditItemDialog(View view){
