@@ -102,7 +102,7 @@ public class ItemFragment extends Fragment {
     sizeText = (TextView) getView().findViewById(R.id.sizeForItem);
     sizeText.setText(size + "kg");
     dateText = (TextView) getView().findViewById(R.id.expiryDateForItem);
-    dateText.setText(size + "kg");
+    dateText.setText(expiryDate + "");
   }
 
   public void showToast(String text){
