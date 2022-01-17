@@ -5,11 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.net.Uri;
+import android.app.Dialog;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
@@ -131,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
     fragmentTransaction.commit();
   }
 
-  private void removeFragment() {
+  private void removeAllFragmentsFromScreen() {
     if (activeFragment == null) {
       return;
     }
@@ -151,12 +147,15 @@ public class MainActivity extends AppCompatActivity {
 
     numItems = cardLayout.getChildCount();
 
+    View card = cardLayout.getChildAt(numItems - 1);
     TextView cardText = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
     ImageButton editButton = cardLayout.getChildAt(numItems - 1).findViewById(R.id.editButtonForItem);
+
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        editItem(cardText);
+        //editItem(cardText);
+        showEditItemDialog(card);
       }
     });
   }
@@ -170,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
     }
-    removeFragment();
+    removeAllFragmentsFromScreen();
   }
 
   public void showLowInStock(){
@@ -184,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
         cardLayout.getChildAt(i).setVisibility(View.INVISIBLE);
       }
     }
-    removeFragment();
+    removeAllFragmentsFromScreen();
   }
 
   public void showOutOfStock(){
@@ -198,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
         cardLayout.getChildAt(i).setVisibility(View.INVISIBLE);
       }
     }
-    removeFragment();
+    removeAllFragmentsFromScreen();
   }
 
   public void showExpiringSoon(){
@@ -230,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
       }
     }//for
 
-    removeFragment();
+    removeAllFragmentsFromScreen();
   }
 
   public void showExpired(){
@@ -262,7 +261,15 @@ public class MainActivity extends AppCompatActivity {
       }
     }//for
 
-    removeFragment();
+    removeAllFragmentsFromScreen();
   }
 
+  public void showAddItemDialog(){
+    Dialog addDialog = new Dialog(this);
+    addDialog.setContentView(R.layout.add_item_dialog);
+  }
+
+  public void showEditItemDialog(View view){
+    //code here
+  }
 } // class
