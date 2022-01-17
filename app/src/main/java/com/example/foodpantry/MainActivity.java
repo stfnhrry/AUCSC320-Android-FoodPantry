@@ -78,21 +78,24 @@ public class MainActivity extends AppCompatActivity {
     outOfStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        replaceFragment(new OutOfStockFragment());
+        //replaceFragment(new OutOfStockFragment());
+        showOutOfStock();
       }
     });
 
     expiringSoon.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        replaceFragment(new ExpiringSoonFragment());
+        //replaceFragment(new ExpiringSoonFragment());
+        showExpiringSoon();
       }
     });
 
     expired.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        replaceFragment(new ExpiredFragment());
+        //replaceFragment(new ExpiredFragment());
+        showExpired();
       }
     });
 
@@ -170,27 +173,49 @@ public class MainActivity extends AppCompatActivity {
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
     }
+    removeFragment();
   }
 
   public void showLowInStock(){
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
-      TextView text = cardLayout.getChildAt(i).findViewById(R.id.titleForItem);
-      if(text.getText() == "Oreos"){
+      TextView text = cardLayout.getChildAt(i).findViewById(R.id.amountLeftInPantryForItem);
+      int num = Integer.parseInt(text.getText().toString());
+      if(num < 6 || num > 0){
+        cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
+      }
+      else{
         cardLayout.getChildAt(i).setVisibility(View.INVISIBLE);
       }
-//      if(Integer.parseInt(cardLayout.getChildAt(i).findViewById(R.id.amountLeftInPantryForItem).toString()) <= 5){
-//        cardLayout.getChildAt(i).setVisibility(View.INVISIBLE);
-//      }
-      //cardLayout.getChildAt(i).setVisibility(View.INVISIBLE);
     }
+    removeFragment();
   }
 
   public void showOutOfStock(){
-    //do things
+    for (int i = 0; i < cardLayout.getChildCount(); i++) {
+      TextView text = cardLayout.getChildAt(i).findViewById(R.id.amountLeftInPantryForItem);
+      int num = Integer.parseInt(text.getText().toString());
+      if(num < 1){
+        cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
+      }
+      else{
+        cardLayout.getChildAt(i).setVisibility(View.INVISIBLE);
+      }
+    }
+    removeFragment();
   }
 
   public void showExpiringSoon(){
-    //do things
+    for (int i = 0; i < cardLayout.getChildCount(); i++) {
+      TextView date = cardLayout.getChildAt(i).findViewById(R.id.amountLeftInPantryForItem);
+      int num = Integer.parseInt(date.getText().toString());
+      if(num < 1){
+        cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
+      }
+      else{
+        cardLayout.getChildAt(i).setVisibility(View.INVISIBLE);
+      }
+    }
+    removeFragment();
   }
 
   public void showExpired(){
