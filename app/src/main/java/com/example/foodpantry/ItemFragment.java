@@ -7,11 +7,13 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Date;
 
@@ -34,7 +36,7 @@ public class ItemFragment extends Fragment {
   public String size;
   public TextView sizeText;
 
-  private OnFragmentInteractionListener mListener;
+  Toast lastToast;
 
   // TODO: Rename parameter arguments, choose names that match
   // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,11 +45,6 @@ public class ItemFragment extends Fragment {
   public static String ARG_AMOUNT = "1";
   public static Date ARG_DATE = new Date();
   public static String ARG_SIZE = "5";
-
-
-  // TODO: Rename and change types of parameters
-  private String mParam1;
-  private String mParam2;
 
   public ItemFragment() {
     // Required empty public constructor
@@ -90,7 +87,6 @@ public class ItemFragment extends Fragment {
                            Bundle savedInstanceState) {
 
     // Inflate the layout for this fragment
-    init();
     return inflater.inflate(R.layout.fragment_item, container, false);
 
   }
@@ -107,37 +103,13 @@ public class ItemFragment extends Fragment {
     sizeText.setText(size);
   }
 
-  @Override
-  public void onAttach(Context context) {
-    super.onAttach(context);
-    if (context instanceof OnFragmentInteractionListener) {
-      mListener = (OnFragmentInteractionListener) context;
-    } else {
-      throw new RuntimeException(context.toString()
-              + " must implement OnFragmentInteractionListener");
+  public void showToast(String text){
+    if(lastToast != null){
+      lastToast.cancel();
     }
-  }
-
-  @Override
-  public void onDetach() {
-    super.onDetach();
-    mListener = null;
-  }
-
-  public void init(){
-    //titleText.setText("title");
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public String getCategory() {
-    return category;
-  }
-
-  public interface OnFragmentInteractionListener {
-    // TODO: Update argument type and name
-    void messageFromChildFragment(Uri uri);
+    Toast toast = Toast.makeText(getContext(), text, Toast.LENGTH_LONG);
+    toast.setGravity(Gravity.BOTTOM, 0, 0);
+    toast.show();
+    lastToast = toast;
   }
 }
