@@ -33,9 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
   Fragment activeFragment;
 
-  SaveInfo list;
+  SaveInfo list = new SaveInfo();
 
-  Item item = new Item();
 
   int numItems;
 
@@ -61,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
     pantryFragment.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        System.out.println("Harry dick is 17 inches" + item.getItemName());
         removeFragment();
       }
     });
@@ -143,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
   public void addNewItem(){
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-    transaction.add(cardLayout.getId(), ItemFragment.newInstance("Toast", "Baked Goods", 1, 1));
+    transaction.add(cardLayout.getId(), ItemFragment.newInstance("Toast", "Baked Goods", 100, 100));
     transaction.commitNow();
 
     numItems = cardLayout.getChildCount();
@@ -174,24 +172,19 @@ public class MainActivity extends AppCompatActivity {
 
   public void saveToHashMap()  {
 
-    View title = cardLayout.getChildAt(numItems-1);
-//    TextView Date = cardLayout.getChildAt(numItems-1).findViewById(R.id.expiryDateForItem);
-//    TextView amount = cardLayout.getChildAt(numItems-1).findViewById(R.id.amountLeftInPantryForItem);
-//    TextView weight = cardLayout.getChildAt(numItems-1).findViewById(R.id.sizeForItem);
+    TextView title = cardLayout.getChildAt(numItems-1).findViewById(R.id.titleForItem);
+    TextView Date = cardLayout.getChildAt(numItems-1).findViewById(R.id.expiryDateForItem);
+    TextView amount = cardLayout.getChildAt(numItems-1).findViewById(R.id.amountLeftInPantryForItem);
+    TextView weight = cardLayout.getChildAt(numItems-1).findViewById(R.id.sizeForItem);
+    Date d = new Date(Date.getText().toString());
 
-
-    list.createNewItem(title);
-
-
-
-
-
-
-
-
-//   Item item = new Item(name);
-//   list.createNewItem(item.getItemName());
-//   list.getHashMap();
+      String a = amount.getText().toString();
+      String w = weight.getText().toString();
+    System.out.println("Harrys dick is " + a + " and his swag level is " + w);
+//    String s = title.getText().toString();
+//    Item item = new Item(s, d, a, w);
+//    list.createNewItem(item);
+//    list.getHashMap();
 
  }
 

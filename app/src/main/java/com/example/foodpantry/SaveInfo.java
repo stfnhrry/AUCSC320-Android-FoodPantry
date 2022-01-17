@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -15,8 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SaveInfo {
-
-    Map<Integer, View> pantry = new HashMap<Integer, View>();
+    public Map<Integer, Item> pantry = new HashMap<Integer, Item>();
     public int itemKey = 0;
 
     /**
@@ -26,16 +26,24 @@ public class SaveInfo {
      * the class instances into the hashmap.
      */
 
-    public void createNewItem(View view){
+    public void createNewItem(Item item){
 
-        pantry.put(itemKey, view);
+        pantry.put(0, item);
         itemKey +=1;
 
 
     }
 
     public void getHashMap(){
-        System.out.println(pantry.get(0));
+        int numkeys = pantry.size();
+        for (int i = 0; i < numkeys; i++){
+            System.out.println(pantry.get(i).getItemName());
+            System.out.println(pantry.get(i).getExpDate());
+            System.out.println(pantry.get(i).getWeight());
+            System.out.println(pantry.get(i).getAmount());
+
+        }
+
     }
 
 

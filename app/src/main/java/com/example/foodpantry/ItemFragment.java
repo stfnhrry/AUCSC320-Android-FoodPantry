@@ -43,7 +43,7 @@ public class ItemFragment extends Fragment {
   private static String ARG_TITLE = "title";
   private static final String ARG_CATEGORY = "category";
   public static String ARG_AMOUNT = "1";
-  public static Date ARG_DATE = new Date();
+  public static String ARG_DATE = "02/04/2022";
   public static String ARG_SIZE = "5";
 
   public ItemFragment() {
