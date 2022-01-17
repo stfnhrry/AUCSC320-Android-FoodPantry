@@ -28,7 +28,7 @@ public class SaveInfo {
 
     public void createNewItem(Item item){
 
-        pantry.put(0, item);
+        pantry.put(itemKey, item);
         itemKey +=1;
 
 

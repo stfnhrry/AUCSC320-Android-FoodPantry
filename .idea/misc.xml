@@ -8,7 +8,6 @@
         <entry key="..\:/Users/stefa/AndroidStudioProjects/FoodPantry/app/src/main/res/layout/add_item_dialog.xml" value="0.536" />
         <entry key="..\:/Users/stefa/AndroidStudioProjects/FoodPantry/app/src/main/res/layout/app_bar_main.xml" value="0.417578125" />
         <entry key="..\:/Users/stefa/AndroidStudioProjects/FoodPantry/app/src/main/res/layout/content_main.xml" value="0.417578125" />
-        <entry key="..\:/Users/stefa/AndroidStudioProjects/FoodPantry/app/src/main/res/layout/edit_item_dialog.xml" value="0.536" />
         <entry key="..\:/Users/stefa/AndroidStudioProjects/FoodPantry/app/src/main/res/layout/fragment_expired.xml" value="0.1" />
         <entry key="..\:/Users/stefa/AndroidStudioProjects/FoodPantry/app/src/main/res/layout/fragment_expiring_soon.xml" value="0.2" />
         <entry key="..\:/Users/stefa/AndroidStudioProjects/FoodPantry/app/src/main/res/layout/fragment_item.xml" value="0.33" />
@@ -26,6 +25,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_1.xml" value="0.2648603693721129" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.25703125" />
+        <entry key="app/src/main/res/layout/fragment_item.xml" value="0.1234375" />
         <entry key="app/src/main/res/layout/fragment_item_list.xml" value="0.267578125" />
         <entry key="app/src/main/res/layout/fragment_navigation_bar.xml" value="0.267578125" />
         <entry key="app/src/main/res/layout/fragment_one.xml" value="0.16484375" />
