@@ -163,8 +163,13 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void editItem(View view, EditText name, EditText amount, EditText expDate){
-    //showToast(view.getText() + " is the title for this card, changed now to Oreos");
-    //view.setText("Potato Chips");
+    TextView currentName = view.findViewById(R.id.titleForItem);
+    TextView currentAmount = view.findViewById(R.id.amountLeftInPantryForItem);
+    TextView currentExpDate = view.findViewById(R.id.expiryDateForItem);
+
+    currentName.setText(name.getText());
+    currentAmount.setText(amount.getText());
+    currentExpDate.setText(expDate.getText());
   }
 
   public void showAll(){
@@ -282,17 +287,25 @@ public class MainActivity extends AppCompatActivity {
     addDialog.show();
   }
 
-  public void showEditItemDialog(View view){
+  public void showEditItemDialog(View card){
     Dialog editDialog = new Dialog(this);
     editDialog.setContentView(R.layout.edit_item_dialog);
     Button edit = editDialog.findViewById(R.id.confirmEditButton);
     EditText name = editDialog.findViewById(R.id.editNameEdit);
     EditText amount = editDialog.findViewById(R.id.editAmountEdit);
     EditText expDate = editDialog.findViewById(R.id.editDateEdit);
+    TextView currentName = card.findViewById(R.id.titleForItem);
+    TextView currentAmount = card.findViewById(R.id.amountLeftInPantryForItem);
+    TextView currentExpDate = card.findViewById(R.id.expiryDateForItem);
+
+    name.setText(currentName.getText());
+    amount.setText(currentAmount.getText());
+    expDate.setText(currentExpDate.getText());
+
     edit.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        editItem(view, name, amount, expDate);
+        editItem(card, name, amount, expDate);
       }
     });
     editDialog.show();
