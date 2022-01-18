@@ -46,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
   SaveInfo hashMap = new SaveInfo();
 
-  ArrayList<String> hi = new ArrayList<>();
+  ArrayList<String> itemNames = new ArrayList<>();
+  ArrayList<Integer> sizes = new ArrayList<>();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -429,9 +430,10 @@ public class MainActivity extends AppCompatActivity {
     TextView size = card.findViewById(R.id.sizeForItem);
 
     String name = itemName.getText().toString();
-    String sze = size.getText().toString();
+    int sze = Integer.parseInt(size.getText().toString());
 
-    hi.add(name);
+    itemNames.add(name);
+    sizes.add(sze);
 
   }
   public void saveToHashMap(){
@@ -460,7 +462,8 @@ public class MainActivity extends AppCompatActivity {
 
   public void toShoppingList(){
     Intent switchActivityIntent = new Intent(this, ShoppingListActivity.class);
-    switchActivityIntent.putStringArrayListExtra("test", hi);
+    switchActivityIntent.putStringArrayListExtra("names", itemNames);
+    switchActivityIntent.putIntegerArrayListExtra("sizes", sizes);
     startActivity(switchActivityIntent);
 
   }

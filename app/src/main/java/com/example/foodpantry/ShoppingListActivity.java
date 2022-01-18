@@ -14,20 +14,24 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class ShoppingListActivity extends AppCompatActivity {
-  Toast lastToast;
+
   Button clear;
 
   ArrayList<String> foodNames;
+  ArrayList<Integer> weight;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_shopping_list);
-    foodNames = (ArrayList<String>) getIntent().getStringArrayListExtra("test");
+    //get arraylist from main activity
+    foodNames = (ArrayList<String>) getIntent().getStringArrayListExtra("names");
+    weight = (ArrayList<Integer>) getIntent().getIntegerArrayListExtra("sizes");
+
     LinearLayout linearLayout = (LinearLayout) findViewById(R.id.THISONEJAMES);
     for(int i= 0;i < foodNames.size(); i++){
       TextView t = new TextView(this);
       t.setTextSize(35);
-      t.setText(foodNames.get(i));
+      t.setText(foodNames.get(i) + "  -" + weight.get(i) + "kg per" + " " + foodNames.get(i));
       linearLayout.addView(t);
     }
     clear = (Button) findViewById(R.id.ClearAll);
@@ -41,24 +45,17 @@ public class ShoppingListActivity extends AppCompatActivity {
 
   } // onCreate
 
+  /**
+   * Back to overview page
+   * @param aView
+   */
   public void backToPantry(View aView) {
     Button backButton = (Button) findViewById(R.id.backToMainActivityButton);
     Intent toPantry = new Intent (this, MainActivity.class);
     startActivity(toPantry);
   } // backToPantry
 
-  public void showToast(String text){
-    if(lastToast != null){
-      lastToast.cancel();
-    }
-    Toast toast = Toast.makeText(this, text, Toast.LENGTH_LONG);
-    toast.setGravity(Gravity.BOTTOM, 0, 0);
-    toast.show();
-    lastToast = toast;
-  }
 
-  public void clear(){
 
-  }
 
 } // class
