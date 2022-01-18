@@ -5,10 +5,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.view.WindowManager;
@@ -62,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
     pantryFragment.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //removeFragment();
         showAll();
       }
     });
@@ -70,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
     addItem.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //addNewItem();
         showAddItemDialog();
       }
     });
@@ -78,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
     lowInStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //replaceFragment(new LowInStockFragment());
         showLowInStock();
       }
     });
@@ -86,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
     outOfStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //replaceFragment(new OutOfStockFragment());
         showOutOfStock();
       }
     });
@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
     expiringSoon.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //replaceFragment(new ExpiringSoonFragment());
         showExpiringSoon();
       }
     });
@@ -102,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
     expired.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //replaceFragment(new ExpiredFragment());
         showExpired();
       }
     });
@@ -153,21 +151,12 @@ public class MainActivity extends AppCompatActivity {
 
     numItems = cardLayout.getChildCount();
 
-    Date c = Calendar.getInstance().getTime();
-    System.out.println("Current time => " + c);
-
-    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-    String formattedDate = df.format(c);
-    showToast(formattedDate + "is the current date");
-
     View card = cardLayout.getChildAt(numItems - 1);
-    TextView cardText = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
-    ImageButton editButton = cardLayout.getChildAt(numItems - 1).findViewById(R.id.editButtonForItem);
+    ImageButton editButton = card.findViewById(R.id.editButtonForItem);
 
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //editItem(cardText);
         showEditItemDialog(card);
       }
     });
@@ -310,23 +299,19 @@ public class MainActivity extends AppCompatActivity {
     Button closeButton = addDialog.findViewById(R.id.cancelButton);
     EditText name = addDialog.findViewById(R.id.editName);
     name.setText("Bread");
-//    String nameString = name.getText().toString();
     EditText amount = addDialog.findViewById(R.id.editAmount);
     amount.setText("2");
-//    int amountInteger = Integer.parseInt(amount.getText().toString());
     EditText size = addDialog.findViewById(R.id.editSize);
     size.setText("3");
-//    int sizeInteger = Integer.parseInt(size.getText().toString());
     EditText expDate = addDialog.findViewById(R.id.editDate);
     expDate.setText("21/02/2022");
-//    String expDateString = expDate.getText().toString();
     Spinner categorySpinner = addDialog.findViewById(R.id.spinner);
     ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_item);
     categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     categorySpinner.setAdapter(categoryAdapter);
-//    showToast(categorySpinner.getSelectedItem().toString() + " is what the category returns");
     // Need to disable the user from clicking anywhere because if the user clicks on the buttons on
     // the side, then the dialog closes
+
     addButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -345,6 +330,13 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         addDialog.dismiss();
+      }
+    });
+
+    addDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+      @Override
+      public void onDismiss(DialogInterface dialogInterface) {
+        hideKeyboard();
       }
     });
     addDialog.show();
@@ -397,4 +389,10 @@ public class MainActivity extends AppCompatActivity {
     });
     editDialog.show();
   }
+
+  public void hideKeyboard() {
+    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+  }
+
 } // class
