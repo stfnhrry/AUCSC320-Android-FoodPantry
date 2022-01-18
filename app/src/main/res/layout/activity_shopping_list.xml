@@ -43,6 +43,41 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+                    <LinearLayout
+                        android:id="@+id/shoppingListLinearLayout"
+                        android:layout_width="511dp"
+                        android:layout_height="892dp"
+                        android:layout_marginTop="32dp"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/shoppingListTitle">
+
+                        <TextView
+                            android:id="@+id/pantryItem01"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="1) 5 Cookies - 5 kg per Cookie"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/pantryItem02"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="2) 14 Cakes - 17 kg per Cake"
+                            android:textSize="28sp" />
+
+                        <TextView
+                            android:id="@+id/pantryItem03"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="3) 23 Slices of Pizza - 2 kg per Pizza"
+                            android:textSize="28sp" />
+                    </LinearLayout>
+
                     <TextView
                         android:id="@+id/dateForShoppingList"
                         android:layout_width="wrap_content"
@@ -54,49 +89,6 @@
                         android:textSize="28sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/pantryItem1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="350dp"
-                        android:layout_marginTop="48dp"
-                        android:layout_marginEnd="350dp"
-                        android:fontFamily="sans-serif-condensed-medium"
-                        android:text="1) 5 Cookies - 5 kg per Cookie"
-                        android:textSize="28sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/shoppingListTitle" />
-
-                    <TextView
-                        android:id="@+id/pantryItem2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="350dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="350dp"
-                        android:fontFamily="sans-serif-condensed-medium"
-                        android:text="2) 14 Cakes - 17 kg per Cake"
-                        android:textSize="28sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/pantryItem1" />
-
-                    <TextView
-                        android:id="@+id/pantryItem"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="350dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="350dp"
-                        android:fontFamily="sans-serif-condensed-medium"
-                        android:text="3) 23 Slices of Pizza - 2 kg per Pizza"
-                        android:textSize="28sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.454"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/pantryItem2" />
 
                     <TextView
                         android:id="@+id/shoppingListTitle"
