@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
   int numItems;
 
-
+  Boolean shoppingListVisible;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
         cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
       }
       else{
-        cardLayout.getChildAt(i).setVisibility(View.INVISIBLE);
+        cardLayout.getChildAt(i).setVisibility(View.GONE);
       }
     }
     removeAllFragmentsFromScreen();
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
         cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
       }
       else{
-        cardLayout.getChildAt(i).setVisibility(View.INVISIBLE);
+        cardLayout.getChildAt(i).setVisibility(View.GONE);
       }
     }
     removeAllFragmentsFromScreen();
@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
           cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
         }
         else{
-          cardLayout.getChildAt(i).setVisibility(View.INVISIBLE);
+          cardLayout.getChildAt(i).setVisibility(View.GONE);
         }
 
       } catch (Exception exception){
@@ -260,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
           cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
         }
         else{
-          cardLayout.getChildAt(i).setVisibility(View.INVISIBLE);
+          cardLayout.getChildAt(i).setVisibility(View.GONE);
         }
 
       } catch (Exception exception){
