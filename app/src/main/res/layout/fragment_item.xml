@@ -120,7 +120,7 @@
                 android:background="@android:color/transparent"
                 android:paddingStart="20dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_baseline_cookie_24"
+                android:src="@drawable/ic_baseline_add_shopping_cart_24"
                 app:layout_constraintEnd_toStartOf="@+id/editButtonForItem"
                 app:layout_constraintTop_toTopOf="parent" />
 

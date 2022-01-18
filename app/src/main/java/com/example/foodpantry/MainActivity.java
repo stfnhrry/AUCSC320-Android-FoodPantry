@@ -6,18 +6,21 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -33,37 +36,27 @@ public class MainActivity extends AppCompatActivity {
 
   int numItems;
 
-  SaveInfo hashMap = new SaveInfo();
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
     cardLayout = findViewById(R.id.linearLayout);
     numItems = cardLayout.getChildCount();
-
-
     pantryFragment = findViewById(R.id.pantryButton);
     addItem = findViewById(R.id.addItemButton);
-    removeItem= findViewById(R.id.removeItemButton);
+    removeItem = findViewById(R.id.removeItemButton);
     lowInStock = findViewById(R.id.lowInStockButton);
     outOfStock = findViewById(R.id.outOfStockButton);
     expiringSoon = findViewById(R.id.expiringSoonButton);
     expired = findViewById(R.id.expiredButton);
     shoppingList = findViewById(R.id.shoppingListButton);
-
-    // When the user opens the app, the keyboard doesn't appear automatically
-    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-
     pantryFragment.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //removeFragment();
         showAll();
+        // pantryFragment.setBackgroundColor(Color.TRANSPARENT);
       }
     });
-
     addItem.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -71,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         showAddItemDialog();
       }
     });
-
     lowInStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -79,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         showLowInStock();
       }
     });
-
     outOfStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -87,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
         showOutOfStock();
       }
     });
-
     expiringSoon.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -95,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
         showExpiringSoon();
       }
     });
-
     expired.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -107,12 +96,13 @@ public class MainActivity extends AppCompatActivity {
     shoppingList.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        replaceFragment(new ShoppingListFragment());
+        Intent toShoppingActivity = new Intent(getApplicationContext(), ShoppingListActivity.class);
+        startActivity(toShoppingActivity);
       }
     });
-  }
+  } // onCreate
 
-  public void showToast(String text){
+  public void showToast(String text) {
     if(lastToast != null){
       lastToast.cancel();
     }
@@ -120,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
     toast.setGravity(Gravity.BOTTOM, 0, 0);
     toast.show();
     lastToast = toast;
-  }
+  } // showToast
 
   private void replaceFragment(Fragment fragment) {
     activeFragment = fragment;
@@ -143,9 +133,9 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  public void addNewItem(String name, String category, int amount, int weight, String expDate){
+  public void addNewItem(){
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-    transaction.add(cardLayout.getId(), ItemFragment.newInstance(name, category, amount, weight, expDate));
+    transaction.add(cardLayout.getId(), ItemFragment.newInstance("Toast", "Baked Goods", 1, 100, "23/01/2022"));
     transaction.commitNow();
 
     numItems = cardLayout.getChildCount();
@@ -163,14 +153,9 @@ public class MainActivity extends AppCompatActivity {
     });
   }
 
-  public void editItem(View view, EditText name, EditText amount, EditText expDate){
-    TextView currentName = view.findViewById(R.id.titleForItem);
-    TextView currentAmount = view.findViewById(R.id.amountLeftInPantryForItem);
-    TextView currentExpDate = view.findViewById(R.id.expiryDateForItem);
-
-    currentName.setText(name.getText());
-    currentAmount.setText(amount.getText());
-    currentExpDate.setText(expDate.getText());
+  public void editItem(TextView view){
+    //showToast(view.getText() + " is the title for this card, changed now to Oreos");
+    view.setText("Potato Chips");
   }
 
   public void showAll(){
@@ -275,66 +260,29 @@ public class MainActivity extends AppCompatActivity {
   public void showAddItemDialog(){
     Dialog addDialog = new Dialog(this);
     addDialog.setContentView(R.layout.add_item_dialog);
-    Button add = addDialog.findViewById(R.id.confirmEditButton);
-    EditText name = addDialog.findViewById(R.id.editNameEdit);
-    EditText amount = addDialog.findViewById(R.id.editAmountEdit);
-    EditText expDate = addDialog.findViewById(R.id.editDateEdit);
+    Button add = addDialog.findViewById(R.id.confirmButton);
+    EditText name = addDialog.findViewById(R.id.editName);
+    EditText size = addDialog.findViewById(R.id.editSize);
+    EditText amount = addDialog.findViewById(R.id.editAmount);
+    EditText expDate = addDialog.findViewById(R.id.editDate);
+    Spinner categorySpinner = addDialog.findViewById(R.id.spinner);
+    ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_item);
+    categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    categorySpinner.setAdapter(categoryAdapter);
+    // Need to disable the user from clicking anywhere because if the user clicks on the buttons on
+    // the side, then the dialog closes
     add.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        addNewItem(name.getText().toString(), "Baked Goods", Integer.parseInt(amount.getText().toString()), 10, expDate.getText().toString());
-        saveToHashMap();
-        showToast(hashMap.pantry.size() + "");
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(cardLayout.getId(), ItemFragment.newInstance(name.getText().toString(), categorySpinner.getSelectedItem().toString(), Integer.parseInt(amount.getText().toString()), Integer.parseInt(size.getText().toString()), expDate.getText().toString()));
+        transaction.commitNow();
       }
     });
     addDialog.show();
   }
 
-  public void showEditItemDialog(View card){
-    Dialog editDialog = new Dialog(this);
-    editDialog.setContentView(R.layout.edit_item_dialog);
-    Button edit = editDialog.findViewById(R.id.confirmEditButton);
-    EditText name = editDialog.findViewById(R.id.editNameEdit);
-    EditText amount = editDialog.findViewById(R.id.editAmountEdit);
-    EditText expDate = editDialog.findViewById(R.id.editDateEdit);
-    TextView currentName = card.findViewById(R.id.titleForItem);
-    TextView currentAmount = card.findViewById(R.id.amountLeftInPantryForItem);
-    TextView currentExpDate = card.findViewById(R.id.expiryDateForItem);
-
-    name.setText(currentName.getText());
-    amount.setText(currentAmount.getText());
-    expDate.setText(currentExpDate.getText());
-
-    edit.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        editItem(card, name, amount, expDate);
-      }
-    });
-    editDialog.show();
-  }
-
-  public void saveToHashMap(){
-    try{
-      TextView title = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
-      TextView date = cardLayout.getChildAt(numItems-1).findViewById(R.id.expiryDateForItem);
-      TextView amount = cardLayout.getChildAt(numItems-1).findViewById(R.id.amountLeftInPantryForItem);
-      TextView size = cardLayout.getChildAt(numItems-1).findViewById(R.id.sizeForItem);
-      String test = date.getText().toString();
-      SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-      Date d;
-      d = dateFormat.parse(test);
-      String t = title.getText().toString();
-      int a = Integer.parseInt(amount.getText().toString());
-      int s = Integer.parseInt(size.getText().toString());
-      Item item = new Item(t, d, a, s);
-      hashMap.createNewItem(item);
-      hashMap.getHashMap();
-
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-
-
+  public void showEditItemDialog(View view){
+    //code here
   }
 } // class
