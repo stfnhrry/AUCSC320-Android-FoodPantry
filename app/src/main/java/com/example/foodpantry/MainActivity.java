@@ -179,12 +179,14 @@ public class MainActivity extends AppCompatActivity {
     TextView currentAmount = view.findViewById(R.id.amountLeftInPantryForItem);
     TextView currentSize = view.findViewById(R.id.sizeForItem);
     TextView currentExpDate = view.findViewById(R.id.expiryDateForItem);
+    TextView currentDaysTillExpiry = view.findViewById(R.id.daysTillExpiryForItem);
     TextView currentCategory = view.findViewById(R.id.categoryNameForItem);
 
     currentName.setText(name.getText());
     currentAmount.setText(amount.getText());
     currentSize.setText(size.getText());
     currentExpDate.setText(expDate.getText());
+    currentDaysTillExpiry.setText(calculateDateDifferenceNew(currentExpDate.getText().toString()));
     currentCategory.setText(category.getSelectedItem().toString());
   }
 
@@ -315,6 +317,28 @@ public class MainActivity extends AppCompatActivity {
 
       SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
       String formattedDate = df.format(c);
+
+      return dayDifference;
+
+    } catch (Exception exception){
+      showToast("Cannot find day difference");
+      return "null";
+    }
+  }
+
+  public String calculateDateDifferenceNew(String expiryDate){
+    Date calendar = Calendar.getInstance().getTime();
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+    String currentDate = dateFormat.format(calendar);
+
+    try{
+      Date date1;
+      Date date2;
+      date1 = calendar;
+      date2 = dateFormat.parse(expiryDate);
+      long difference = (date2.getTime() - date1.getTime());
+      long differenceDates = difference / (24 * 60 * 60 * 1000);
+      String dayDifference = Long.toString(differenceDates);
 
       return dayDifference;
 
