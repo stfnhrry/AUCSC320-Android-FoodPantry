@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
   Fragment activeFragment;
 
+  TextView currentPageText;
+
   int numItems;
 
   @Override
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     expiringSoon = findViewById(R.id.expiringSoonButton);
     expired = findViewById(R.id.expiredButton);
     shoppingList = findViewById(R.id.shoppingListButton);
+    // etActionBar().setTitle("Pantry");
+    currentPageText = findViewById(R.id.currentPageText);
     pantryFragment.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -77,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         //replaceFragment(new LowInStockFragment());
+        currentPageText.setText("Low In Stock");
         showLowInStock();
         enableAllButtons();
         clearAllHighlights();
@@ -88,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         //replaceFragment(new OutOfStockFragment());
+        currentPageText.setText("Out Of Stock");
         showOutOfStock();
         enableAllButtons();
         clearAllHighlights();
@@ -99,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         //replaceFragment(new ExpiringSoonFragment());
+        currentPageText.setText("Expiring Soon");
         showExpiringSoon();
         enableAllButtons();
         clearAllHighlights();
@@ -110,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         //replaceFragment(new ExpiredFragment());
+        currentPageText.setText("Expired");
         showExpired();
         enableAllButtons();
         clearAllHighlights();
