@@ -327,7 +327,8 @@ public class MainActivity extends AppCompatActivity {
   public void showAddItemDialog(){
     Dialog addDialog = new Dialog(this);
     addDialog.setContentView(R.layout.add_item_dialog);
-    Button add = addDialog.findViewById(R.id.confirmButton);
+    Button addButton = addDialog.findViewById(R.id.confirmButton);
+    Button closeButton = addDialog.findViewById(R.id.cancelButton);
     EditText name = addDialog.findViewById(R.id.editName);
     name.setText("Bread");
 //    String nameString = name.getText().toString();
@@ -347,7 +348,7 @@ public class MainActivity extends AppCompatActivity {
 //    showToast(categorySpinner.getSelectedItem().toString() + " is what the category returns");
     // Need to disable the user from clicking anywhere because if the user clicks on the buttons on
     // the side, then the dialog closes
-    add.setOnClickListener(new View.OnClickListener() {
+    addButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         String nameString = name.getText().toString();
@@ -358,6 +359,13 @@ public class MainActivity extends AppCompatActivity {
         // Need to disable the user from clicking anywhere because if the user clicks on the buttons on
         // the side, then the dialog closes
         addNewItem(nameString, categoryString, amountInteger, sizeInteger, expDateString);
+      }
+    });
+
+    closeButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        addDialog.dismiss();
       }
     });
     addDialog.show();
