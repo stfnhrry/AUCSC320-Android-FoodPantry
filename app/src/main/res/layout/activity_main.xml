@@ -10,11 +10,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+    <ScrollView
+        android:layout_width="1000dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@color/very_light_grey"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <LinearLayout
         android:id="@+id/FrameLayout"
         android:layout_width="1000dp"
         android:layout_height="match_parent"
-        android:layout_marginStart="300dp" />
+        android:layout_marginStart="300dp"
+        android:orientation="vertical" />
 
     <Button
         android:id="@+id/pantryButton"
@@ -27,9 +49,8 @@
         android:text="Pantry"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
-        android:textSize="24sp"
-        android:visibility="visible"
 
+        android:textSize="24sp"
         app:layout_constraintTop_toBottomOf="@+id/currentPageText" />
 
     <Button
@@ -44,7 +65,6 @@
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:visibility="visible"
 
         app:layout_constraintTop_toBottomOf="@+id/pantryButton" />
 
@@ -60,7 +80,6 @@
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:visibility="visible"
 
         app:layout_constraintTop_toBottomOf="@+id/removeItemButton" />
 
@@ -76,7 +95,6 @@
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:visibility="visible"
 
         app:layout_constraintTop_toBottomOf="@+id/addItemButton" />
 
@@ -84,30 +102,28 @@
         android:id="@+id/outOfStockButton"
         android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginTop="490dp"
         android:layout_marginStart="80dp"
+        android:layout_marginTop="490dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Out Of Stock"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/lowInStockButton" />
 
     <Button
         android:id="@+id/expiringSoonButton"
         android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginTop="560dp"
         android:layout_marginStart="80dp"
+        android:layout_marginTop="560dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Expiring Soon"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/outOfStockButton" />
 
     <Button
@@ -122,7 +138,6 @@
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/expiringSoonButton" />
 
     <Button
@@ -137,7 +152,6 @@
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/expiredButton" />
 
     <TextView
@@ -149,7 +163,6 @@
         android:fontFamily="sans-serif-condensed-light"
         android:text="Pantry"
         android:textSize="60sp"
-        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -159,7 +172,6 @@
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="210dp"
-        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currentPageText"
         app:srcCompat="@drawable/ic_baseline_home_24" />
@@ -170,7 +182,6 @@
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="280dp"
-        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:srcCompat="@drawable/ic_baseline_add_circle_24" />
@@ -181,7 +192,6 @@
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="350dp"
-        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:srcCompat="@drawable/ic_baseline_remove_circle_24" />
@@ -192,7 +202,6 @@
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="420dp"
-        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:srcCompat="@drawable/ic_baseline_warning_24" />
@@ -203,7 +212,6 @@
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="490dp"
-        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
         app:srcCompat="@drawable/ic_baseline_inventory_24" />
@@ -214,7 +222,6 @@
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="560dp"
-        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
         app:srcCompat="@drawable/ic_baseline_error_24" />
@@ -225,7 +232,6 @@
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="630dp"
-        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6"
         app:srcCompat="@drawable/ic_baseline_delete_24" />
@@ -236,7 +242,6 @@
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="700dp"
-        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView7"
         app:srcCompat="@drawable/ic_baseline_shopping_cart_24" />

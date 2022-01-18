@@ -14,14 +14,12 @@
 
         <ScrollView
             android:id="@+id/scrollingViewForShoppingListFragmentFragment"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/very_light_grey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchBarForShoppingList"
-            android:layout_width="match_parent"
-            android:layout_height="750dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/very_light_grey">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/scrollIViewForShoppingListFragmentFragmentConstraint"
@@ -55,8 +53,8 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="16dp"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:text="January 14th, 2021"
-                            android:textSize="20sp"
+                            android:text="January 17th, 2021"
+                            android:textSize="28sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,7 +67,7 @@
                             android:layout_marginEnd="350dp"
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="1) 5 Cookies - 5 kg per Cookie"
-                            android:textSize="20sp"
+                            android:textSize="28sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/shoppingListTitle" />
@@ -83,7 +81,7 @@
                             android:layout_marginEnd="350dp"
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="2) 14 Cakes - 17 kg per Cake"
-                            android:textSize="20sp"
+                            android:textSize="28sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/pantryItem1" />
@@ -97,7 +95,7 @@
                             android:layout_marginEnd="350dp"
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="3) 23 Slices of Pizza - 2 kg per Pizza"
-                            android:textSize="20sp"
+                            android:textSize="28sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.454"
                             app:layout_constraintStart_toStartOf="parent"
@@ -111,9 +109,9 @@
                             android:layout_marginEnd="32dp"
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="Shopping List"
-                            android:textSize="24sp"
+                            android:textSize="48sp"
                             app:layout_constraintEnd_toStartOf="@+id/printButton"
-                            app:layout_constraintHorizontal_bias="0.431"
+                            app:layout_constraintHorizontal_bias="0.305"
                             app:layout_constraintStart_toEndOf="@+id/dateForShoppingList"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -136,75 +134,5 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/searchBarForShoppingList"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:background="@color/light_grey"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/searchMagIconForShoppingList"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/ic_baseline_search_24"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/searchEditTextForShoppingListFragment"
-                android:layout_width="400dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:background="@android:color/transparent"
-                android:ems="12"
-                android:hint="Use the search bar to find a specific pantry item"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textAlignment="center"
-                app:layout_constraintStart_toEndOf="@+id/searchMagIconForShoppingList"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:id="@+id/addCardButtonForShoppingListFragment"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:alpha=".7"
-                android:background="@drawable/ic_baseline_add_circle_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SpeakableTextPresentCheck" />
-
-            <ImageButton
-                android:id="@+id/removeCardButtonForShoppingListFragment"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:alpha=".7"
-                android:background="@drawable/ic_baseline_remove_circle_24"
-                app:layout_constraintEnd_toStartOf="@+id/addCardButtonForShoppingListFragment"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SpeakableTextPresentCheck" />
-
-            <TextView
-                android:id="@+id/currentDateShoppingListFragmentText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="January 14th, 2021"
-                android:textSize="28sp"
-                app:layout_constraintEnd_toStartOf="@+id/removeCardButtonForShoppingListFragment"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
