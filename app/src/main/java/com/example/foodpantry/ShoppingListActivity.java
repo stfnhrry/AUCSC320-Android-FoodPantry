@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class ShoppingListActivity extends AppCompatActivity {
 
@@ -19,12 +20,17 @@ public class ShoppingListActivity extends AppCompatActivity {
     Button backButton = (Button) findViewById(R.id.backToMainActivityButton);
     Intent toPantry = new Intent (this, MainActivity.class);
     startActivity(toPantry);
+    ImageButton print = findViewById(R.id.printButton);
+    printShoppingList(print);
   } // backToPantry
 
   public void printShoppingList(View view) {
-    Intent sentIntent = new Intent();
-    sentIntent.setAction(Intent.ACTION_SEND);
-    startActivity(sentIntent);
+
+    Intent sendIntent = new Intent(String.valueOf(view));
+    sendIntent.setAction(Intent.ACTION_SEND);
+    sendIntent.putExtra(Intent.EXTRA_TEXT, "printing function");
+    sendIntent.setType("text/plain");
+    startActivity(sendIntent);
 
   }
 
