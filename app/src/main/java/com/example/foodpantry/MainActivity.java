@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
         showAddItemDialog();
         enableAllButtons();
         clearAllHighlights();
-        addItem.setEnabled(false);
         addItem.setBackgroundColor(Color.LTGRAY);
       }
     });
