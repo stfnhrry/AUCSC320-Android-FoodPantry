@@ -103,26 +103,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:layout_marginEnd="32dp"
                         android:fontFamily="sans-serif-condensed-medium"
                         android:text="Shopping List"
                         android:textSize="48sp"
-                        app:layout_constraintEnd_toStartOf="@+id/printButton"
-                        app:layout_constraintHorizontal_bias="0.305"
                         app:layout_constraintStart_toEndOf="@+id/dateForShoppingList"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageButton
-                        android:id="@+id/printButton"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="16dp"
-                        android:alpha=".7"
-                        android:background="@drawable/ic_baseline_print_24"
+                    <Button
+                        android:id="@+id/shareList"
+                        android:layout_width="115dp"
+                        android:layout_height="56dp"
+                        android:onClick="printShoppingList"
+                        android:text="Button"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.876"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="SpeakableTextPresentCheck" />
+                        app:layout_constraintVertical_bias="0.026" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

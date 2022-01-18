@@ -14,17 +14,16 @@ public class ShoppingListActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_shopping_list);
+
   } // onCreate
 
   public void backToPantry(View aView) {
     Button backButton = (Button) findViewById(R.id.backToMainActivityButton);
     Intent toPantry = new Intent (this, MainActivity.class);
     startActivity(toPantry);
-    printShoppingList(findViewById(R.id.printButton));
   } // backToPantry
 
   public void printShoppingList(View view) {
-
     Intent sendIntent = new Intent();
     sendIntent.setAction(Intent.ACTION_SEND);
     sendIntent.putExtra(Intent.EXTRA_TEXT, "printing function");
