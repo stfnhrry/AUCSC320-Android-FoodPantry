@@ -375,6 +375,7 @@ public class MainActivity extends AppCompatActivity {
     Dialog editDialog = new Dialog(this);
     editDialog.setContentView(R.layout.edit_item_dialog);
     Button edit = editDialog.findViewById(R.id.confirmButton);
+    Button closeButton = editDialog.findViewById(R.id.cancelButton);
     EditText name = editDialog.findViewById(R.id.editName);
     EditText amount = editDialog.findViewById(R.id.editAmount);
     EditText size = editDialog.findViewById(R.id.editSize);
@@ -406,6 +407,13 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         editItem(card, name, categorySpinner, amount, size, expDate);
+      }
+    });
+
+    closeButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        editDialog.dismiss();
       }
     });
     editDialog.show();
