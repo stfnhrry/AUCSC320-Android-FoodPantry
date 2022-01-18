@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="500dp"
-    android:layout_height="600dp"
+    android:layout_height="500dp"
     android:innerRadius="0dp"
     android:shape="ring"
     app:cardBackgroundColor="@color/very_light_grey"
@@ -12,7 +12,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
 
         <Button
             android:id="@+id/cancelButton"
@@ -46,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-condensed-medium"
-            android:text="Add new item"
+            android:text="Add New Item"
             android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/confirmButton"
             app:layout_constraintStart_toEndOf="@+id/cancelButton"
