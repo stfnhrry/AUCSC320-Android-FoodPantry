@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -49,11 +50,11 @@ public class MainActivity extends AppCompatActivity {
     expiringSoon = findViewById(R.id.expiringSoonButton);
     expired = findViewById(R.id.expiredButton);
     shoppingList = findViewById(R.id.shoppingListButton);
-
     pantryFragment.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         showAll();
+        // pantryFragment.setBackgroundColor(Color.TRANSPARENT);
       }
     });
     addItem.setOnClickListener(new View.OnClickListener() {
@@ -95,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
     shoppingList.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        replaceFragment(new ShoppingListFragment());
-
+        Intent toShoppingActivity = new Intent(getApplicationContext(), ShoppingListActivity.class);
+        startActivity(toShoppingActivity);
       }
     });
   } // onCreate

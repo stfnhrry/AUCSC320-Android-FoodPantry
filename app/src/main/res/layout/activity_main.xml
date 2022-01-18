@@ -44,7 +44,6 @@
         android:layout_height="58dp"
         android:layout_marginStart="80dp"
         android:layout_marginTop="210dp"
-        android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Pantry"
         android:textAlignment="viewStart"
