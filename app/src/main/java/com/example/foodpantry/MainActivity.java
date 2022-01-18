@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -186,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
     currentAmount.setText(amount.getText());
     currentSize.setText(size.getText());
     currentExpDate.setText(expDate.getText());
-    currentDaysTillExpiry.setText(calculateDateDifferenceNew(currentExpDate.getText().toString()));
+    currentDaysTillExpiry.setText(getDateDifferenceAsString(currentExpDate.getText().toString()));
     currentCategory.setText(category.getSelectedItem().toString());
   }
 
@@ -228,29 +227,15 @@ public class MainActivity extends AppCompatActivity {
   public void showExpiringSoon(){
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       TextView date = cardLayout.getChildAt(i).findViewById(R.id.expiryDateForItem);
+      String finalDate = date.getText().toString();
 
-      try{
-        String currentDate = "17/01/2022";
-        String finalDate = date.getText().toString();
-        Date date1;
-        Date date2;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        date1 = dateFormat.parse(currentDate);
-        date2 = dateFormat.parse(finalDate);
-        long difference = (date2.getTime() - date1.getTime());
-        long differenceDates = difference / (24 * 60 * 60 * 1000);
-        String dayDifference = Long.toString(differenceDates);
-        //showToast("The difference between the two dates is " + dayDifference + " days");
+      long differenceDates = getDateDifferenceAsLong(finalDate);
 
-        if(differenceDates < 30 && differenceDates > 0){
-          cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
-        }
-        else{
-          cardLayout.getChildAt(i).setVisibility(View.GONE);
-        }
-
-      } catch (Exception exception){
-        showToast("Cannot find day difference");
+      if(differenceDates < 30 && differenceDates > 0){
+        cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
+      }
+      else{
+        cardLayout.getChildAt(i).setVisibility(View.GONE);
       }
     }//for
 
@@ -260,29 +245,15 @@ public class MainActivity extends AppCompatActivity {
   public void showExpired(){
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       TextView date = cardLayout.getChildAt(i).findViewById(R.id.expiryDateForItem);
+      String finalDate = date.getText().toString();
 
-      try{
-        String currentDate = "17/01/2022";
-        String finalDate = date.getText().toString();
-        Date date1;
-        Date date2;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        date1 = dateFormat.parse(currentDate);
-        date2 = dateFormat.parse(finalDate);
-        long difference = (date2.getTime() - date1.getTime());
-        long differenceDates = difference / (24 * 60 * 60 * 1000);
-        String dayDifference = Long.toString(differenceDates);
-        //showToast("The difference between the two dates is " + dayDifference + " days");
+      long difference = getDateDifferenceAsLong(finalDate);
 
-        if(differenceDates < 1){
-          cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
-        }
-        else{
-          cardLayout.getChildAt(i).setVisibility(View.GONE);
-        }
-
-      } catch (Exception exception){
-        showToast("Cannot find day difference");
+      if(difference < 1){
+        cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
+      }
+      else{
+        cardLayout.getChildAt(i).setVisibility(View.GONE);
       }
     }//for
 
@@ -295,28 +266,16 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  public String calculateDateDifference(View newCard, String expiryDate){
-    TextView date = newCard.findViewById(R.id.expiryDateForItem);
-    TextView daysCount = newCard.findViewById(R.id.daysTillExpiryForItem);
+  public String getDateDifferenceAsString(String expiryDate){
+    Date calendar = Calendar.getInstance().getTime();
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
     try{
-      String currentDate = "17/01/2022";
-      String finalDate = date.getText().toString();
-      Date date1;
       Date date2;
-      SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-      date1 = dateFormat.parse(currentDate);
-      date2 = dateFormat.parse(finalDate);
-      long difference = (date2.getTime() - date1.getTime());
+      date2 = dateFormat.parse(expiryDate);
+      long difference = (date2.getTime() - calendar.getTime());
       long differenceDates = difference / (24 * 60 * 60 * 1000);
       String dayDifference = Long.toString(differenceDates);
-      //showToast("The difference between the two dates is " + dayDifference + " days");
-
-      Date c = Calendar.getInstance().getTime();
-      System.out.println("Current time => " + c);
-
-      SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
-      String formattedDate = df.format(c);
 
       return dayDifference;
 
@@ -326,25 +285,21 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  public String calculateDateDifferenceNew(String expiryDate){
+  public long getDateDifferenceAsLong(String expiryDate){
     Date calendar = Calendar.getInstance().getTime();
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-    String currentDate = dateFormat.format(calendar);
 
     try{
-      Date date1;
       Date date2;
-      date1 = calendar;
       date2 = dateFormat.parse(expiryDate);
-      long difference = (date2.getTime() - date1.getTime());
+      long difference = (date2.getTime() - calendar.getTime());
       long differenceDates = difference / (24 * 60 * 60 * 1000);
-      String dayDifference = Long.toString(differenceDates);
 
-      return dayDifference;
+      return differenceDates;
 
     } catch (Exception exception){
       showToast("Cannot find day difference");
-      return "null";
+      return 99999;
     }
   }
 
@@ -421,8 +376,7 @@ public class MainActivity extends AppCompatActivity {
     expDate.setText(currentExpDate.getText());
 
     for (int i = 0; i < (categorySpinner.getCount()); i++) {
-      if(categorySpinner.getItemAtPosition(i).toString() == currentCategory.getText().toString()){
-        //showToast(categorySpinner.getItemAtPosition(i) + " is the item of items");
+      if(categorySpinner.getItemAtPosition(i).toString().equalsIgnoreCase(currentCategory.getText().toString())){
         categorySpinner.setSelection(i);
       }
     }
@@ -431,6 +385,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         editItem(card, name, categorySpinner, amount, size, expDate);
+        editDialog.dismiss();
       }
     });
 
