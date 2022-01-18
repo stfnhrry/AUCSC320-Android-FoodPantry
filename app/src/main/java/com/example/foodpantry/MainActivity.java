@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Dialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -34,37 +35,27 @@ public class MainActivity extends AppCompatActivity {
 
   int numItems;
 
-
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
     cardLayout = findViewById(R.id.linearLayout);
     numItems = cardLayout.getChildCount();
-
-
     pantryFragment = findViewById(R.id.pantryButton);
     addItem = findViewById(R.id.addItemButton);
-    removeItem= findViewById(R.id.removeItemButton);
+    removeItem = findViewById(R.id.removeItemButton);
     lowInStock = findViewById(R.id.lowInStockButton);
     outOfStock = findViewById(R.id.outOfStockButton);
     expiringSoon = findViewById(R.id.expiringSoonButton);
     expired = findViewById(R.id.expiredButton);
     shoppingList = findViewById(R.id.shoppingListButton);
 
-    // When the user opens the app, the keyboard doesn't appear automatically
-    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-
     pantryFragment.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //removeFragment();
         showAll();
       }
     });
-
     addItem.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -72,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         showAddItemDialog();
       }
     });
-
     lowInStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -80,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         showLowInStock();
       }
     });
-
     outOfStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -88,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
         showOutOfStock();
       }
     });
-
     expiringSoon.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -96,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         showExpiringSoon();
       }
     });
-
     expired.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -109,11 +96,12 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         replaceFragment(new ShoppingListFragment());
+
       }
     });
-  }
+  } // onCreate
 
-  public void showToast(String text){
+  public void showToast(String text) {
     if(lastToast != null){
       lastToast.cancel();
     }
@@ -121,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
     toast.setGravity(Gravity.BOTTOM, 0, 0);
     toast.show();
     lastToast = toast;
-  }
+  } // showToast
 
   private void replaceFragment(Fragment fragment) {
     activeFragment = fragment;
