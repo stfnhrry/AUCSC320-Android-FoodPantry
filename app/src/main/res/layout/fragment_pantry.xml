@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="980dp"
     android:layout_height="match_parent"
-    android:background="@color/light_grey"
+    android:background="@color/very_light_grey"
     tools:context=".PantryFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,140 +13,36 @@
         android:layout_height="match_parent">
 
         <ScrollView
-            android:id="@+id/scrollingViewForPantryFragment"
+            android:id="@+id/scrollingItemView"
             android:layout_width="match_parent"
-            android:layout_height="750dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/very_light_grey"
+            android:layout_height="800dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchBar">
+            app:layout_constraintStart_toStartOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/scrollIViewForPantryFragmentConstraint"
+                android:id="@+id/scrollItemConstraint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/anItemCard"
-                    android:layout_width="450dp"
-                    android:layout_height="150dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:innerRadius="0dp"
-                    android:shape="ring"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="5dp"
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick"
+                    android:text="Button"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <FrameLayout
+                    android:id="@+id/child_fragment_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:id="@+id/iconForItem0"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginStart="16dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_baseline_cookie_24" />
-
-                        <TextView
-                            android:id="@+id/titleForItem0"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="40dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="Cookies"
-                            android:textSize="34sp"
-                            app:layout_constraintStart_toEndOf="@+id/iconForItem0"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/expiryDateForItem0"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginBottom="36dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="Expires in 45 days"
-                            android:textColor="#2196F3"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/iconForItem0" />
-
-                        <TextView
-                            android:id="@+id/sizeForItem0"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="48dp"
-                            android:layout_marginEnd="16dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="5 kg"
-                            android:textColor="#A8A8A8"
-                            android:textSize="24sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/categoryNameForItem0"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="SNACKS"
-                            android:textColor="#C6C6C6"
-                            android:textSize="16sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/amountLeftInPantryForItem0"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="18dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="30 Left In Pantry"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent" />
-
-                        <ImageButton
-                            android:id="@+id/editButtonForItem0"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:adjustViewBounds="true"
-                            android:background="@android:color/transparent"
-                            android:padding="10dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_baseline_edit_24"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="SpeakableTextPresentCheck" />
-
-                        <ImageButton
-                            android:id="@+id/addToShoppingCartButtonForItem0"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:adjustViewBounds="true"
-                            android:background="@android:color/transparent"
-                            android:paddingStart="20dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_baseline_add_shopping_cart_24"
-                            app:layout_constraintEnd_toStartOf="@+id/editButtonForItem0"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="SpeakableTextPresentCheck" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.cardview.widget.CardView>
+                </FrameLayout>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/itemCard1"
@@ -261,126 +157,6 @@
                             android:scaleType="fitCenter"
                             android:src="@drawable/ic_baseline_add_shopping_cart_24"
                             app:layout_constraintEnd_toStartOf="@+id/editButtonForItem1"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="SpeakableTextPresentCheck" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/itemCard2"
-                    android:layout_width="450dp"
-                    android:layout_height="150dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:innerRadius="0dp"
-                    android:shape="ring"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="5dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/anItemCard">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:id="@+id/iconForItem2"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginStart="16dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_baseline_cookie_24" />
-
-                        <TextView
-                            android:id="@+id/titleForItem2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="40dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="Cookies"
-                            android:textSize="34sp"
-                            app:layout_constraintStart_toEndOf="@+id/iconForItem2"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/expiryDateForItem2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginBottom="36dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="Expires in 45 days"
-                            android:textColor="#2196F3"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/iconForItem2" />
-
-                        <TextView
-                            android:id="@+id/sizeForItem2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="48dp"
-                            android:layout_marginEnd="16dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="5 kg"
-                            android:textColor="#A8A8A8"
-                            android:textSize="24sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/categoryNameForItem2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="SNACKS"
-                            android:textColor="#C6C6C6"
-                            android:textSize="16sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/amountLeftInPantryForItem2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="18dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="30 Left In Pantry"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent" />
-
-                        <ImageButton
-                            android:id="@+id/editButtonForItem2"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:adjustViewBounds="true"
-                            android:background="@android:color/transparent"
-                            android:padding="10dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_baseline_edit_24"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="SpeakableTextPresentCheck" />
-
-                        <ImageButton
-                            android:id="@+id/addToShoppingCartButtonForItem2"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:adjustViewBounds="true"
-                            android:background="@android:color/transparent"
-                            android:paddingStart="20dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_baseline_add_shopping_cart_24"
-                            app:layout_constraintEnd_toStartOf="@+id/editButtonForItem2"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -509,126 +285,6 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/itemCard4"
-                    android:layout_width="450dp"
-                    android:layout_height="150dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:innerRadius="0dp"
-                    android:shape="ring"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="5dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/itemCard2">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:id="@+id/iconForItem4"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginStart="16dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_baseline_cookie_24" />
-
-                        <TextView
-                            android:id="@+id/titleForItem4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="40dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="Cookies"
-                            android:textSize="34sp"
-                            app:layout_constraintStart_toEndOf="@+id/iconForItem4"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/expiryDateForItem4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginBottom="36dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="Expires in 45 days"
-                            android:textColor="#2196F3"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/iconForItem4" />
-
-                        <TextView
-                            android:id="@+id/sizeForItem4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="48dp"
-                            android:layout_marginEnd="16dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="5 kg"
-                            android:textColor="#A8A8A8"
-                            android:textSize="24sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/categoryNameForItem4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="SNACKS"
-                            android:textColor="#C6C6C6"
-                            android:textSize="16sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/amountLeftInPantryForItem4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="18dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="30 Left In Pantry"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent" />
-
-                        <ImageButton
-                            android:id="@+id/editButtonForItem4"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:adjustViewBounds="true"
-                            android:background="@android:color/transparent"
-                            android:padding="10dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_baseline_edit_24"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="SpeakableTextPresentCheck" />
-
-                        <ImageButton
-                            android:id="@+id/addToShoppingCartButtonForItem4"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:adjustViewBounds="true"
-                            android:background="@android:color/transparent"
-                            android:paddingStart="20dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_baseline_add_shopping_cart_24"
-                            app:layout_constraintEnd_toStartOf="@+id/editButtonForItem4"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="SpeakableTextPresentCheck" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
                     android:id="@+id/itemCard5"
                     android:layout_width="450dp"
                     android:layout_height="150dp"
@@ -741,126 +397,6 @@
                             android:scaleType="fitCenter"
                             android:src="@drawable/ic_baseline_add_shopping_cart_24"
                             app:layout_constraintEnd_toStartOf="@+id/editButtonForItem5"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="SpeakableTextPresentCheck" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/itemCard6"
-                    android:layout_width="450dp"
-                    android:layout_height="150dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:innerRadius="0dp"
-                    android:shape="ring"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="5dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/itemCard4">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:id="@+id/iconForItem6"
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
-                            android:layout_marginStart="16dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_baseline_cookie_24" />
-
-                        <TextView
-                            android:id="@+id/titleForItem6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="40dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="Cookies"
-                            android:textSize="34sp"
-                            app:layout_constraintStart_toEndOf="@+id/iconForItem6"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/expiryDateForItem6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginBottom="36dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="Expires in 45 days"
-                            android:textColor="#2196F3"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/iconForItem6" />
-
-                        <TextView
-                            android:id="@+id/sizeForItem6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="48dp"
-                            android:layout_marginEnd="16dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="5 kg"
-                            android:textColor="#A8A8A8"
-                            android:textSize="24sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/categoryNameForItem6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="SNACKS"
-                            android:textColor="#C6C6C6"
-                            android:textSize="16sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/amountLeftInPantryForItem6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:layout_marginBottom="18dp"
-                            android:fontFamily="sans-serif-condensed-medium"
-                            android:text="30 Left In Pantry"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent" />
-
-                        <ImageButton
-                            android:id="@+id/editButtonForItem6"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:adjustViewBounds="true"
-                            android:background="@android:color/transparent"
-                            android:padding="10dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_baseline_edit_24"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="SpeakableTextPresentCheck" />
-
-                        <ImageButton
-                            android:id="@+id/addToShoppingCartButtonForItem6"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:adjustViewBounds="true"
-                            android:background="@android:color/transparent"
-                            android:paddingStart="20dp"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/ic_baseline_add_shopping_cart_24"
-                            app:layout_constraintEnd_toStartOf="@+id/editButtonForItem6"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -994,58 +530,10 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/searchBar"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:background="@color/light_grey"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey"
+            app:layout_constraintBottom_toTopOf="@+id/scrollingItemView"
             app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/imageView9"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/ic_baseline_search_24"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/searchEditText"
-                android:layout_width="400dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:background="@android:color/transparent"
-                android:ems="12"
-                android:hint="Use the search bar to find a specific pantry item"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textAlignment="center"
-                app:layout_constraintStart_toEndOf="@+id/imageView9"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:alpha=".7"
-                android:background="@drawable/ic_baseline_add_circle_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SpeakableTextPresentCheck" />
-
-            <ImageButton
-                android:id="@+id/imageButton2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:alpha=".7"
-                android:background="@drawable/ic_baseline_remove_circle_24"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SpeakableTextPresentCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
