@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -187,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         addToCart(card);
+        addToShop.setEnabled(false);
         showToast("Item added to cart");
       }
     });

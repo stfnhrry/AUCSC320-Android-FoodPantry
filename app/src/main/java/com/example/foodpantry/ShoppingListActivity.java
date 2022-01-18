@@ -15,7 +15,8 @@ import java.util.ArrayList;
 
 public class ShoppingListActivity extends AppCompatActivity {
   Toast lastToast;
-  //TextView test = (TextView) findViewById(R.id.pantryItem1);
+  Button clear;
+
   ArrayList<String> foodNames;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,14 @@ public class ShoppingListActivity extends AppCompatActivity {
       t.setText(foodNames.get(i));
       linearLayout.addView(t);
     }
+    clear = (Button) findViewById(R.id.ClearAll);
+    clear.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        linearLayout.removeAllViews();
+      }
+    });
+
 
   } // onCreate
 
@@ -48,12 +57,8 @@ public class ShoppingListActivity extends AppCompatActivity {
     lastToast = toast;
   }
 
-//  public void createList(){
-//    for (int i = 0; i < foodNames.size()-1; i++){
-//      TextView t = new TextView(this);
-//      t.setText(foodNames.get(i));
-//      this.hi.addView(t);
-//    }
-//  }
+  public void clear(){
+
+  }
 
 } // class
