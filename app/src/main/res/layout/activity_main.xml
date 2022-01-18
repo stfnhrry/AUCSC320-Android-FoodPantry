@@ -49,8 +49,8 @@
         android:text="Pantry"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
-        android:textSize="24sp"
 
+        android:textSize="24sp"
         app:layout_constraintTop_toBottomOf="@+id/currentPageText" />
 
     <Button
@@ -242,7 +242,6 @@
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="700dp"
-        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView7"
         app:srcCompat="@drawable/ic_baseline_shopping_cart_24" />

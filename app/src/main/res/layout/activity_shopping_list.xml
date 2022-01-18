@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/very_light_grey"
+    tools:context=".ShoppingListActivity">
+
+    <ScrollView
+        android:id="@+id/scrollingViewForShoppingListFragmentFragment"
+        android:layout_width="match_parent"
+        android:layout_height="844dp"
+        android:layout_marginTop="64dp"
+        android:background="@color/very_light_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/scrollIViewForShoppingListFragmentFragmentConstraint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ShoppingListFragmentItemCard0"
+                android:layout_width="939dp"
+                android:layout_height="1000dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:innerRadius="0dp"
+                android:shape="ring"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/dateForShoppingList"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="January 17th, 2021"
+                        android:textSize="28sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/pantryItem1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="350dp"
+                        android:layout_marginTop="48dp"
+                        android:layout_marginEnd="350dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="1) 5 Cookies - 5 kg per Cookie"
+                        android:textSize="28sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/shoppingListTitle" />
+
+                    <TextView
+                        android:id="@+id/pantryItem2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="350dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="350dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="2) 14 Cakes - 17 kg per Cake"
+                        android:textSize="28sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/pantryItem1" />
+
+                    <TextView
+                        android:id="@+id/pantryItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="350dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="350dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="3) 23 Slices of Pizza - 2 kg per Pizza"
+                        android:textSize="28sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.454"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/pantryItem2" />
+
+                    <TextView
+                        android:id="@+id/shoppingListTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:text="Shopping List"
+                        android:textSize="48sp"
+                        app:layout_constraintStart_toEndOf="@+id/dateForShoppingList"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/shareList"
+                        android:layout_width="115dp"
+                        android:layout_height="56dp"
+                        android:onClick="printShoppingList"
+                        android:text="Button"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.876"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.026" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/backToMainActivityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:onClick="backToPantry"
+        android:text="Back"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

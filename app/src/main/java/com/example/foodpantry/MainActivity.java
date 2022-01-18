@@ -9,6 +9,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
     pantryFragment = findViewById(R.id.pantryButton);
     addItem = findViewById(R.id.addItemButton);
-    removeItem= findViewById(R.id.removeItemButton);
+    removeItem = findViewById(R.id.removeItemButton);
     lowInStock = findViewById(R.id.lowInStockButton);
     outOfStock = findViewById(R.id.outOfStockButton);
     expiringSoon = findViewById(R.id.expiringSoonButton);
@@ -67,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         showAll();
+        enableAllButtons();
+        clearAllHighlights();
+        pantryFragment.setEnabled(false);
+        pantryFragment.setBackgroundColor(Color.LTGRAY);
       }
     });
 
@@ -74,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         showAddItemDialog();
+        enableAllButtons();
+        clearAllHighlights();
+        addItem.setEnabled(false);
+        addItem.setBackgroundColor(Color.LTGRAY);
       }
     });
 
@@ -81,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         showLowInStock();
+        enableAllButtons();
+        clearAllHighlights();
+        lowInStock.setEnabled(false);
+        lowInStock.setBackgroundColor(Color.LTGRAY);
       }
     });
 
@@ -88,30 +102,74 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         showOutOfStock();
+        enableAllButtons();
+        clearAllHighlights();
+        outOfStock.setEnabled(false);
+        outOfStock.setBackgroundColor(Color.LTGRAY);
       }
     });
 
     expiringSoon.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        //replaceFragment(new ExpiringSoonFragment());
         showExpiringSoon();
+        enableAllButtons();
+        clearAllHighlights();
+        expiringSoon.setEnabled(false);
+        expiringSoon.setBackgroundColor(Color.LTGRAY);
       }
     });
 
     expired.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        //replaceFragment(new ExpiredFragment());
         showExpired();
+        enableAllButtons();
+        clearAllHighlights();
+        expired.setEnabled(false);
+        expired.setBackgroundColor(Color.LTGRAY);
       }
     });
 
     shoppingList.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        replaceFragment(new ShoppingListFragment());
+        Intent toShoppingActivity = new Intent(getApplicationContext(), ShoppingListActivity.class);
+        startActivity(toShoppingActivity);
       }
     });
-  }
+  } // onCreate
+
+  /**
+   * Enables all buttons.
+   */
+  private void enableAllButtons() {
+    pantryFragment.setEnabled(true);
+    addItem.setEnabled(true);
+    removeItem.setEnabled(true);
+    lowInStock.setEnabled(true);
+    outOfStock.setEnabled(true);
+    expiringSoon.setEnabled(true);
+    expired.setEnabled(true);
+    shoppingList.setEnabled(true);
+  } // enableAllButtons
+
+
+  /**
+   * Clears all highlighted buttons by setting the background of the buttons to be transparent.
+   */
+  private void clearAllHighlights() {
+    pantryFragment.setBackgroundColor(Color.TRANSPARENT);
+    addItem.setBackgroundColor(Color.TRANSPARENT);
+    removeItem.setBackgroundColor(Color.TRANSPARENT);
+    lowInStock.setBackgroundColor(Color.TRANSPARENT);
+    outOfStock.setBackgroundColor(Color.TRANSPARENT);
+    expiringSoon.setBackgroundColor(Color.TRANSPARENT);
+    expired.setBackgroundColor(Color.TRANSPARENT);
+    shoppingList.setBackgroundColor(Color.TRANSPARENT);
+  } // clearAllHighlights
 
   public void showToast(String text){
     if(lastToast != null){
@@ -157,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        //editItem(cardText);
         showEditItemDialog(card);
       }
     });
@@ -342,6 +401,14 @@ public class MainActivity extends AppCompatActivity {
     addDialog.show();
   }
 
+  public void showEditItemDialog(View view){
+    //code here
+  }
+  public void drawableArray(){
+    int[] iconDrawables = new int[]{R.drawable.can_icon, R.drawable.granola_bar_icon, R.drawable.jar_icon,
+    R.drawable.juice_box_icon, R.drawable.wheat_icon, R.drawable.picture2, R.drawable.cookies};
+// later...
+  //  iconDrawables.setImageResource(myImageList[i]);
   public void showEditItemDialog(View card){
     Dialog editDialog = new Dialog(this);
     editDialog.setContentView(R.layout.edit_item_dialog);

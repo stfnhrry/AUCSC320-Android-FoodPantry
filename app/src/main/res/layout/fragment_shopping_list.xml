@@ -53,8 +53,8 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="16dp"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:text="January 14th, 2021"
-                            android:textSize="20sp"
+                            android:text="January 17th, 2021"
+                            android:textSize="28sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -67,7 +67,7 @@
                             android:layout_marginEnd="350dp"
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="1) 5 Cookies - 5 kg per Cookie"
-                            android:textSize="20sp"
+                            android:textSize="28sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/shoppingListTitle" />
@@ -81,7 +81,7 @@
                             android:layout_marginEnd="350dp"
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="2) 14 Cakes - 17 kg per Cake"
-                            android:textSize="20sp"
+                            android:textSize="28sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/pantryItem1" />
@@ -95,7 +95,7 @@
                             android:layout_marginEnd="350dp"
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="3) 23 Slices of Pizza - 2 kg per Pizza"
-                            android:textSize="20sp"
+                            android:textSize="28sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.454"
                             app:layout_constraintStart_toStartOf="parent"
@@ -109,9 +109,9 @@
                             android:layout_marginEnd="32dp"
                             android:fontFamily="sans-serif-condensed-medium"
                             android:text="Shopping List"
-                            android:textSize="24sp"
+                            android:textSize="48sp"
                             app:layout_constraintEnd_toStartOf="@+id/printButton"
-                            app:layout_constraintHorizontal_bias="0.431"
+                            app:layout_constraintHorizontal_bias="0.305"
                             app:layout_constraintStart_toEndOf="@+id/dateForShoppingList"
                             app:layout_constraintTop_toTopOf="parent" />
 
