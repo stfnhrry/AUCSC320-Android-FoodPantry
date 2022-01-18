@@ -420,6 +420,7 @@ public class MainActivity extends AppCompatActivity {
     addDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
       @Override
       public void onDismiss(DialogInterface dialogInterface) {
+        addItem.setBackgroundColor(Color.TRANSPARENT);
         hideKeyboard();
       }
     });
