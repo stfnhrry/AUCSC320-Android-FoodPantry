@@ -1,6 +1,7 @@
 package com.example.foodpantry;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -10,10 +11,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -126,6 +128,33 @@ public class MainActivity extends AppCompatActivity {
   } // onCreate
 
   /**
+   * Inflates a menu, allowing the user to search for items in the catalog.
+   * // TODO Add search functionality so the user can search for items that will be in the pantry
+   * // TODO When a new item is added, it should be added to the array adapter to search for items
+   * @param menu the menu with the search bar
+   * @return - the current menu
+   */
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.search_menu, menu);
+    MenuItem searchBar = menu.findItem(R.id.search_bar);
+    SearchView searchView = (SearchView) searchBar.getActionView();
+    searchView.setQueryHint("Type here to search");
+    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+      @Override
+      public boolean onQueryTextSubmit(String query) {
+        return false;
+      }
+
+      @Override
+      public boolean onQueryTextChange(String newText) {
+        return false;
+      }
+    });
+    return super.onCreateOptionsMenu(menu);
+  } // onCreateOptionsMenu
+
+  /**
    * Enables all buttons.
    */
   private void enableAllButtons() {
@@ -138,7 +167,6 @@ public class MainActivity extends AppCompatActivity {
     expired.setEnabled(true);
     shoppingList.setEnabled(true);
   } // enableAllButtons
-
 
   /**
    * Clears all highlighted buttons by setting the background of the buttons to be transparent.
