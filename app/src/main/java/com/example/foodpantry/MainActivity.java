@@ -274,10 +274,10 @@ public class MainActivity extends AppCompatActivity {
   public void showAddItemDialog(){
     Dialog addDialog = new Dialog(this);
     addDialog.setContentView(R.layout.add_item_dialog);
-    Button add = addDialog.findViewById(R.id.confirmEditButton);
-    EditText name = addDialog.findViewById(R.id.editNameEdit);
-    EditText amount = addDialog.findViewById(R.id.editAmountEdit);
-    EditText expDate = addDialog.findViewById(R.id.editDateEdit);
+    Button add = addDialog.findViewById(R.id.confirmButton);
+    EditText name = addDialog.findViewById(R.id.editName);
+    EditText amount = addDialog.findViewById(R.id.editAmount);
+    EditText expDate = addDialog.findViewById(R.id.editDate);
     add.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
