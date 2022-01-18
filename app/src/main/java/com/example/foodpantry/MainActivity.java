@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -164,13 +165,15 @@ public class MainActivity extends AppCompatActivity {
     });
   }
 
-  public void editItem(View view, EditText name, EditText amount, EditText expDate){
+  public void editItem(View view, EditText name, EditText size, EditText amount, EditText expDate){
     TextView currentName = view.findViewById(R.id.titleForItem);
     TextView currentAmount = view.findViewById(R.id.amountLeftInPantryForItem);
+    TextView currentSize = view.findViewById(R.id.sizeForItem);
     TextView currentExpDate = view.findViewById(R.id.expiryDateForItem);
 
     currentName.setText(name.getText());
     currentAmount.setText(amount.getText());
+    currentSize.setText(size.getText());
     currentExpDate.setText(expDate.getText());
   }
 
@@ -284,18 +287,31 @@ public class MainActivity extends AppCompatActivity {
     addDialog.setContentView(R.layout.add_item_dialog);
     Button add = addDialog.findViewById(R.id.confirmButton);
     EditText name = addDialog.findViewById(R.id.editName);
+//    String nameString = name.getText().toString();
     EditText amount = addDialog.findViewById(R.id.editAmount);
+//    int amountInteger = Integer.parseInt(amount.getText().toString());
+    EditText size = addDialog.findViewById(R.id.editSize);
+//    int sizeInteger = Integer.parseInt(size.getText().toString());
     EditText expDate = addDialog.findViewById(R.id.editDate);
+//    String expDateString = expDate.getText().toString();
     Spinner categorySpinner = addDialog.findViewById(R.id.spinner);
     ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_item);
     categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     categorySpinner.setAdapter(categoryAdapter);
+//    showToast(categorySpinner.getSelectedItem().toString() + " is what the category returns");
     // Need to disable the user from clicking anywhere because if the user clicks on the buttons on
     // the side, then the dialog closes
     add.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        addNewItem(name.getText().toString(), "Baked Goods", Integer.parseInt(amount.getText().toString()), 10, expDate.getText().toString());
+        String nameString = name.getText().toString();
+        String categoryString = categorySpinner.getSelectedItem().toString();
+        int amountInteger = Integer.parseInt(amount.getText().toString());
+        int sizeInteger = Integer.parseInt(size.getText().toString());
+        String expDateString = expDate.getText().toString();
+        // Need to disable the user from clicking anywhere because if the user clicks on the buttons on
+        // the side, then the dialog closes
+        addNewItem(nameString, categoryString, amountInteger, sizeInteger, expDateString);
       }
     });
     addDialog.show();
@@ -304,24 +320,27 @@ public class MainActivity extends AppCompatActivity {
   public void showEditItemDialog(View card){
     Dialog editDialog = new Dialog(this);
     editDialog.setContentView(R.layout.edit_item_dialog);
-    Button edit = editDialog.findViewById(R.id.confirmEditButton);
-    EditText name = editDialog.findViewById(R.id.editNameEdit);
-    EditText amount = editDialog.findViewById(R.id.editAmountEdit);
-    EditText expDate = editDialog.findViewById(R.id.editDateEdit);
-    TextView currentName = card.findViewById(R.id.titleForItem);
-    TextView currentAmount = card.findViewById(R.id.amountLeftInPantryForItem);
-    TextView currentExpDate = card.findViewById(R.id.expiryDateForItem);
-
-    name.setText(currentName.getText());
-    amount.setText(currentAmount.getText());
-    expDate.setText(currentExpDate.getText());
-
-    edit.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        editItem(card, name, amount, expDate);
-      }
-    });
-    editDialog.show();
+    Button edit = editDialog.findViewById(R.id.confirmButton);
+//    EditText name = editDialog.findViewById(R.id.editName);
+//    EditText amount = editDialog.findViewById(R.id.editAmount);
+//    EditText size = editDialog.findViewById(R.id.editSize);
+//    EditText expDate = editDialog.findViewById(R.id.editDate);
+//    TextView currentName = card.findViewById(R.id.titleForItem);
+//    TextView currentAmount = card.findViewById(R.id.amountLeftInPantryForItem);
+//    TextView currentSize = card.findViewById(R.id.sizeForItem);
+//    TextView currentExpDate = card.findViewById(R.id.expiryDateForItem);
+//
+//    name.setText(currentName.getText());
+//    size.setText(currentSize.getText());
+//    amount.setText(currentAmount.getText());
+//    expDate.setText(currentExpDate.getText());
+//
+//    edit.setOnClickListener(new View.OnClickListener() {
+//      @Override
+//      public void onClick(View view) {
+//        editItem(card, name, amount, size, expDate);
+//      }
+//    });
+//    editDialog.show();
   }
 } // class
