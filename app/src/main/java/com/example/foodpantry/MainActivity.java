@@ -273,6 +273,12 @@ public class MainActivity extends AppCompatActivity {
     removeAllFragmentsFromScreen();
   }
 
+  public void showNone(){
+    for (int i = 0; i < cardLayout.getChildCount(); i++) {
+      cardLayout.getChildAt(i).setVisibility(View.GONE);
+    }
+  }
+
   public void showAddItemDialog(){
     Dialog addDialog = new Dialog(this);
     addDialog.setContentView(R.layout.add_item_dialog);
