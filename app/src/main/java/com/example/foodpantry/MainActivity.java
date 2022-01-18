@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
   Fragment activeFragment;
 
   TextView currentPageText;
+
+  ArrayList<String> hello = new ArrayList<>();
 
   int numItems;
 
@@ -129,11 +132,16 @@ public class MainActivity extends AppCompatActivity {
     shoppingList.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Intent toShoppingActivity = new Intent(getApplicationContext(), ShoppingListActivity.class);
-        startActivity(toShoppingActivity);
+        toShoppingList();
       }
     });
   } // onCreate
+
+  private void toShoppingList() {
+    Intent toShoppingActivity = new Intent(this, ShoppingListActivity.class);
+    toShoppingActivity.putStringArrayListExtra("Testing", hello);
+    startActivity(toShoppingActivity);
+  }
 
   /**
    * Inflates a menu, allowing the user to search for items in the catalog.
@@ -221,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  public void addNewItem(){
+  public void addNewItem() {
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
     transaction.add(cardLayout.getId(), ItemFragment.newInstance("Toast", "Baked Goods", 1, 100, "23/01/2022"));
     transaction.commitNow();
@@ -231,12 +239,20 @@ public class MainActivity extends AppCompatActivity {
     View card = cardLayout.getChildAt(numItems - 1);
     TextView cardText = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
     ImageButton editButton = cardLayout.getChildAt(numItems - 1).findViewById(R.id.editButtonForItem);
+    ImageButton addToCartButton = cardLayout.getChildAt(numItems - 1).findViewById(R.id.addToShoppingCartButtonForItem);
 
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         //editItem(cardText);
         showEditItemDialog(card);
+      }
+    });
+    addToCartButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        System.out.println("You clicked on the add button!");
+        addToCart(card);
       }
     });
   }
@@ -369,6 +385,13 @@ public class MainActivity extends AppCompatActivity {
     });
     addDialog.show();
   }
+
+  public void addToCart(View card) {
+    TextView itemName = card.findViewById(R.id.titleForItem);
+    String name = itemName.getText().toString();
+    hello.add(name);
+    System.out.println("Size of hello: " + hello);
+  } // addToCart
 
   public void showEditItemDialog(View view){
     //code here

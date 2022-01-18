@@ -13,11 +13,16 @@ import java.util.ArrayList;
 
 public class ShoppingListActivity extends AppCompatActivity {
 
+  ArrayList<String> pantryItems;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_shopping_list);
+    pantryItems = (ArrayList<String>) getIntent().getStringArrayListExtra("Testing");
+    System.out.println("Size of the pantry items: " + pantryItems.size());
     addToShoppingList();
+
   } // onCreate
 
   /**
@@ -35,11 +40,10 @@ public class ShoppingListActivity extends AppCompatActivity {
    * Adds all pantry items sent from the main activity to the shopping list.
    */
   public void addToShoppingList() {
-    ArrayList<String> pantryItems = new ArrayList<>();
     // ArrayList<TextView> pantryItemsTextView = new ArrayList<>();
-    LinearLayout linearLayout = (LinearLayout)findViewById(R.id.shoppingListLinearLayout);
-    pantryItems.add("Bread");
-    pantryItems.add("Cheese");
+    LinearLayout linearLayout = (LinearLayout) findViewById(R.id.shoppingListLinearLayout);
+    // pantryItems.add("Bread");
+    // pantryItems.add("Cheese");
     for (int index = 0; index < pantryItems.size(); index++) {
       TextView aTextView = new TextView(this);
       // pantryItemsTextView.add(new TextView(this));

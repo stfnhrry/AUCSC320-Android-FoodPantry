@@ -6,21 +6,21 @@
     android:layout_height="match_parent"
     android:background="@color/light_grey"
     tools:context=".MainActivity">
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ScrollView
-        android:layout_width="1000dp"
+        android:id="@+id/scrollView2"
+        android:layout_width="980dp"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
         android:background="@color/very_light_grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck">
 
         <LinearLayout
@@ -33,126 +33,130 @@
 
     <LinearLayout
         android:id="@+id/FrameLayout"
-        android:layout_width="1000dp"
+        android:layout_width="980dp"
         android:layout_height="match_parent"
-        android:layout_marginStart="300dp"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/pantryButton"
         android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="24dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Pantry"
+
         android:textAlignment="viewStart"
         android:textColor="@color/black"
-
         android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView2"
         app:layout_constraintTop_toBottomOf="@+id/currentPageText" />
 
     <Button
         android:id="@+id/addItemButton"
         android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="24dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Add Item"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
-        android:textSize="24sp"
 
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView2"
         app:layout_constraintTop_toBottomOf="@+id/pantryButton" />
 
     <Button
         android:id="@+id/lowInStockButton"
         android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="24dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Low In Stock"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
-        android:textSize="24sp"
 
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView2"
         app:layout_constraintTop_toBottomOf="@+id/removeItemButton" />
 
     <Button
         android:id="@+id/removeItemButton"
         android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="24dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Remove Item"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
-        android:textSize="24sp"
 
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView2"
         app:layout_constraintTop_toBottomOf="@+id/addItemButton" />
 
     <Button
         android:id="@+id/outOfStockButton"
         android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="490dp"
+        android:layout_marginTop="24dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Out Of Stock"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView2"
         app:layout_constraintTop_toBottomOf="@+id/lowInStockButton" />
 
     <Button
         android:id="@+id/expiringSoonButton"
         android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="560dp"
+        android:layout_marginTop="24dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Expiring Soon"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView2"
         app:layout_constraintTop_toBottomOf="@+id/outOfStockButton" />
 
     <Button
         android:id="@+id/expiredButton"
         android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="630dp"
+        android:layout_marginTop="24dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Expired"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView2"
         app:layout_constraintTop_toBottomOf="@+id/expiringSoonButton" />
 
     <Button
         android:id="@+id/shoppingListButton"
         android:layout_width="215dp"
         android:layout_height="58dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="700dp"
+        android:layout_marginTop="24dp"
         android:background="@android:color/transparent"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Shopping List"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@+id/expiredButton" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/scrollView2"
+        app:layout_constraintTop_toBottomOf="@+id/expiredButton"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/currentPageText"
@@ -171,7 +175,7 @@
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currentPageText"
         app:srcCompat="@drawable/ic_baseline_home_24" />
@@ -181,7 +185,7 @@
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:srcCompat="@drawable/ic_baseline_add_circle_24" />
@@ -191,7 +195,7 @@
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:srcCompat="@drawable/ic_baseline_remove_circle_24" />
@@ -201,7 +205,7 @@
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:srcCompat="@drawable/ic_baseline_warning_24" />
@@ -211,7 +215,7 @@
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="490dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
         app:srcCompat="@drawable/ic_baseline_inventory_24" />
@@ -221,7 +225,7 @@
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="560dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
         app:srcCompat="@drawable/ic_baseline_error_24" />
@@ -231,7 +235,7 @@
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="630dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6"
         app:srcCompat="@drawable/ic_baseline_delete_24" />
@@ -241,10 +245,12 @@
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="700dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView7"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_baseline_shopping_cart_24" />
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
