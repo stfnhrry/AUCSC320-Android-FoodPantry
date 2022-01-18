@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
   Fragment activeFragment;
 
   int numItems;
+
+  SaveInfo hashMap = new SaveInfo();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -277,6 +280,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(cardLayout.getId(), ItemFragment.newInstance(name.getText().toString(), categorySpinner.getSelectedItem().toString(), Integer.parseInt(amount.getText().toString()), Integer.parseInt(size.getText().toString()), expDate.getText().toString()));
         transaction.commitNow();
+
       }
     });
     addDialog.show();
@@ -284,5 +288,28 @@ public class MainActivity extends AppCompatActivity {
 
   public void showEditItemDialog(View view){
     //code here
+  }
+  public void saveToHashMap(){
+    try{
+      TextView title = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
+      TextView date = cardLayout.getChildAt(numItems-1).findViewById(R.id.expiryDateForItem);
+      TextView amount = cardLayout.getChildAt(numItems-1).findViewById(R.id.amountLeftInPantryForItem);
+      TextView size = cardLayout.getChildAt(numItems-1).findViewById(R.id.sizeForItem);
+      String test = date.getText().toString();
+      SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+      Date d;
+      d = dateFormat.parse(test);
+      String t = title.getText().toString();
+      int a = Integer.parseInt(amount.getText().toString());
+      int s = Integer.parseInt(size.getText().toString());
+      Item item = new Item(t, d, a, s);
+      hashMap.createNewItem(item);
+      hashMap.getHashMap();
+
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+
+
   }
 } // class
