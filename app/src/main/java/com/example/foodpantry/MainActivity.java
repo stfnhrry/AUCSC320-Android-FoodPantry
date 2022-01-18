@@ -21,7 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -152,6 +154,13 @@ public class MainActivity extends AppCompatActivity {
 
     numItems = cardLayout.getChildCount();
 
+    Date c = Calendar.getInstance().getTime();
+    System.out.println("Current time => " + c);
+
+    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+    String formattedDate = df.format(c);
+    showToast(formattedDate + "is the current date");
+
     View card = cardLayout.getChildAt(numItems - 1);
     TextView cardText = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
     ImageButton editButton = cardLayout.getChildAt(numItems - 1).findViewById(R.id.editButtonForItem);
@@ -165,16 +174,18 @@ public class MainActivity extends AppCompatActivity {
     });
   }
 
-  public void editItem(View view, EditText name, EditText size, EditText amount, EditText expDate){
+  public void editItem(View view, EditText name, Spinner category, EditText amount, EditText size, EditText expDate){
     TextView currentName = view.findViewById(R.id.titleForItem);
     TextView currentAmount = view.findViewById(R.id.amountLeftInPantryForItem);
     TextView currentSize = view.findViewById(R.id.sizeForItem);
     TextView currentExpDate = view.findViewById(R.id.expiryDateForItem);
+    TextView currentCategory = view.findViewById(R.id.categoryNameForItem);
 
     currentName.setText(name.getText());
     currentAmount.setText(amount.getText());
     currentSize.setText(size.getText());
     currentExpDate.setText(expDate.getText());
+    currentCategory.setText(category.getSelectedItem().toString());
   }
 
   public void showAll(){
@@ -282,17 +293,52 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
+  public String calculateDateDifference(View newCard, String expiryDate){
+    TextView date = newCard.findViewById(R.id.expiryDateForItem);
+    TextView daysCount = newCard.findViewById(R.id.daysTillExpiryForItem);
+
+    try{
+      String currentDate = "17/01/2022";
+      String finalDate = date.getText().toString();
+      Date date1;
+      Date date2;
+      SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+      date1 = dateFormat.parse(currentDate);
+      date2 = dateFormat.parse(finalDate);
+      long difference = (date2.getTime() - date1.getTime());
+      long differenceDates = difference / (24 * 60 * 60 * 1000);
+      String dayDifference = Long.toString(differenceDates);
+      //showToast("The difference between the two dates is " + dayDifference + " days");
+
+      Date c = Calendar.getInstance().getTime();
+      System.out.println("Current time => " + c);
+
+      SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+      String formattedDate = df.format(c);
+
+      return dayDifference;
+
+    } catch (Exception exception){
+      showToast("Cannot find day difference");
+      return "null";
+    }
+  }
+
   public void showAddItemDialog(){
     Dialog addDialog = new Dialog(this);
     addDialog.setContentView(R.layout.add_item_dialog);
     Button add = addDialog.findViewById(R.id.confirmButton);
     EditText name = addDialog.findViewById(R.id.editName);
+    name.setText("Bread");
 //    String nameString = name.getText().toString();
     EditText amount = addDialog.findViewById(R.id.editAmount);
+    amount.setText("2");
 //    int amountInteger = Integer.parseInt(amount.getText().toString());
     EditText size = addDialog.findViewById(R.id.editSize);
+    size.setText("3");
 //    int sizeInteger = Integer.parseInt(size.getText().toString());
     EditText expDate = addDialog.findViewById(R.id.editDate);
+    expDate.setText("21/02/2022");
 //    String expDateString = expDate.getText().toString();
     Spinner categorySpinner = addDialog.findViewById(R.id.spinner);
     ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_item);
@@ -321,26 +367,39 @@ public class MainActivity extends AppCompatActivity {
     Dialog editDialog = new Dialog(this);
     editDialog.setContentView(R.layout.edit_item_dialog);
     Button edit = editDialog.findViewById(R.id.confirmButton);
-//    EditText name = editDialog.findViewById(R.id.editName);
-//    EditText amount = editDialog.findViewById(R.id.editAmount);
-//    EditText size = editDialog.findViewById(R.id.editSize);
-//    EditText expDate = editDialog.findViewById(R.id.editDate);
-//    TextView currentName = card.findViewById(R.id.titleForItem);
-//    TextView currentAmount = card.findViewById(R.id.amountLeftInPantryForItem);
-//    TextView currentSize = card.findViewById(R.id.sizeForItem);
-//    TextView currentExpDate = card.findViewById(R.id.expiryDateForItem);
-//
-//    name.setText(currentName.getText());
-//    size.setText(currentSize.getText());
-//    amount.setText(currentAmount.getText());
-//    expDate.setText(currentExpDate.getText());
-//
-//    edit.setOnClickListener(new View.OnClickListener() {
-//      @Override
-//      public void onClick(View view) {
-//        editItem(card, name, amount, size, expDate);
-//      }
-//    });
-//    editDialog.show();
+    EditText name = editDialog.findViewById(R.id.editName);
+    EditText amount = editDialog.findViewById(R.id.editAmount);
+    EditText size = editDialog.findViewById(R.id.editSize);
+    EditText expDate = editDialog.findViewById(R.id.editDate);
+    Spinner categorySpinner = editDialog.findViewById(R.id.spinner);
+    ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_item);
+    categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    categorySpinner.setAdapter(categoryAdapter);
+
+    TextView currentName = card.findViewById(R.id.titleForItem);
+    TextView currentAmount = card.findViewById(R.id.amountLeftInPantryForItem);
+    TextView currentSize = card.findViewById(R.id.sizeForItem);
+    TextView currentExpDate = card.findViewById(R.id.expiryDateForItem);
+    TextView currentCategory = card.findViewById(R.id.categoryNameForItem);
+
+    name.setText(currentName.getText());
+    size.setText(currentSize.getText());
+    amount.setText(currentAmount.getText());
+    expDate.setText(currentExpDate.getText());
+
+    for (int i = 0; i < (categorySpinner.getCount()); i++) {
+      if(categorySpinner.getItemAtPosition(i).toString() == currentCategory.getText().toString()){
+        showToast(categorySpinner.getItemAtPosition(i) + " is the item of items");
+        categorySpinner.setSelection(i);
+      }
+    }
+
+    edit.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        editItem(card, name, categorySpinner, amount, size, expDate);
+      }
+    });
+    editDialog.show();
   }
 } // class

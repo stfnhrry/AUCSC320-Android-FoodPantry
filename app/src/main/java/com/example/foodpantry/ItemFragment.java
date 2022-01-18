@@ -15,7 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +36,8 @@ public class ItemFragment extends Fragment {
   public TextView amountText;
   public String expiryDate;
   public TextView dateText;
+  public String expiryDays;
+  public TextView daysText;
   public int size;
   public TextView sizeText;
 
@@ -100,9 +105,11 @@ public class ItemFragment extends Fragment {
     amountText = (TextView) getView().findViewById(R.id.amountLeftInPantryForItem);
     amountText.setText(amount + "");
     sizeText = (TextView) getView().findViewById(R.id.sizeForItem);
-    sizeText.setText(size + "kg");
+    sizeText.setText(size + "");
     dateText = (TextView) getView().findViewById(R.id.expiryDateForItem);
-    dateText.setText(expiryDate + "");
+    dateText.setText(expiryDate.toString());
+    daysText = (TextView) getView().findViewById(R.id.daysTillExpiryForItem);
+    daysText.setText(calculateDateDifference(dateText.getText().toString()));
   }
 
   public void showToast(String text){
@@ -113,5 +120,27 @@ public class ItemFragment extends Fragment {
     toast.setGravity(Gravity.BOTTOM, 0, 0);
     toast.show();
     lastToast = toast;
+  }
+
+  public String calculateDateDifference(String expiryDate){
+    Date calendar = Calendar.getInstance().getTime();
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+    String currentDate = dateFormat.format(calendar);
+
+    try{
+      Date date1;
+      Date date2;
+      date1 = dateFormat.parse(currentDate);
+      date2 = dateFormat.parse(expiryDate);
+      long difference = (date2.getTime() - date1.getTime());
+      long differenceDates = difference / (24 * 60 * 60 * 1000);
+      String dayDifference = Long.toString(differenceDates);
+
+      return dayDifference;
+
+    } catch (Exception exception){
+      showToast("Cannot find day difference");
+      return "null";
+    }
   }
 }
