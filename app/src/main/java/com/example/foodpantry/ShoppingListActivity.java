@@ -21,4 +21,11 @@ public class ShoppingListActivity extends AppCompatActivity {
     startActivity(toPantry);
   } // backToPantry
 
+  public void printShoppingList(View view) {
+    Intent sentIntent = new Intent();
+    sentIntent.setAction(Intent.ACTION_SEND);
+    startActivity(sentIntent);
+
+  }
+
 } // class
