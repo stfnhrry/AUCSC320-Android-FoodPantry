@@ -54,7 +54,10 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         showAll();
-        // pantryFragment.setBackgroundColor(Color.TRANSPARENT);
+        enableAllButtons();
+        clearAllHighlights();
+        pantryFragment.setEnabled(false);
+        pantryFragment.setBackgroundColor(Color.LTGRAY);
       }
     });
     addItem.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
       public void onClick(View view) {
         //addNewItem();
         showAddItemDialog();
+        enableAllButtons();
+        clearAllHighlights();
+        addItem.setEnabled(false);
+        addItem.setBackgroundColor(Color.LTGRAY);
       }
     });
     lowInStock.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
       public void onClick(View view) {
         //replaceFragment(new LowInStockFragment());
         showLowInStock();
+        enableAllButtons();
+        clearAllHighlights();
+        lowInStock.setEnabled(false);
+        lowInStock.setBackgroundColor(Color.LTGRAY);
       }
     });
     outOfStock.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +87,10 @@ public class MainActivity extends AppCompatActivity {
       public void onClick(View view) {
         //replaceFragment(new OutOfStockFragment());
         showOutOfStock();
+        enableAllButtons();
+        clearAllHighlights();
+        outOfStock.setEnabled(false);
+        outOfStock.setBackgroundColor(Color.LTGRAY);
       }
     });
     expiringSoon.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +98,10 @@ public class MainActivity extends AppCompatActivity {
       public void onClick(View view) {
         //replaceFragment(new ExpiringSoonFragment());
         showExpiringSoon();
+        enableAllButtons();
+        clearAllHighlights();
+        expiringSoon.setEnabled(false);
+        expiringSoon.setBackgroundColor(Color.LTGRAY);
       }
     });
     expired.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +109,10 @@ public class MainActivity extends AppCompatActivity {
       public void onClick(View view) {
         //replaceFragment(new ExpiredFragment());
         showExpired();
+        enableAllButtons();
+        clearAllHighlights();
+        expired.setEnabled(false);
+        expired.setBackgroundColor(Color.LTGRAY);
       }
     });
 
@@ -101,6 +124,35 @@ public class MainActivity extends AppCompatActivity {
       }
     });
   } // onCreate
+
+  /**
+   * Enables all buttons.
+   */
+  private void enableAllButtons() {
+    pantryFragment.setEnabled(true);
+    addItem.setEnabled(true);
+    removeItem.setEnabled(true);
+    lowInStock.setEnabled(true);
+    outOfStock.setEnabled(true);
+    expiringSoon.setEnabled(true);
+    expired.setEnabled(true);
+    shoppingList.setEnabled(true);
+  } // enableAllButtons
+
+
+  /**
+   * Clears all highlighted buttons by setting the background of the buttons to be transparent.
+   */
+  private void clearAllHighlights() {
+    pantryFragment.setBackgroundColor(Color.TRANSPARENT);
+    addItem.setBackgroundColor(Color.TRANSPARENT);
+    removeItem.setBackgroundColor(Color.TRANSPARENT);
+    lowInStock.setBackgroundColor(Color.TRANSPARENT);
+    outOfStock.setBackgroundColor(Color.TRANSPARENT);
+    expiringSoon.setBackgroundColor(Color.TRANSPARENT);
+    expired.setBackgroundColor(Color.TRANSPARENT);
+    shoppingList.setBackgroundColor(Color.TRANSPARENT);
+  } // clearAllHighlights
 
   public void showToast(String text) {
     if(lastToast != null){
