@@ -6,6 +6,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -14,13 +17,14 @@ import android.widget.Button;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -39,12 +43,16 @@ public class MainActivity extends AppCompatActivity {
 
   Boolean shoppingListVisible;
 
+  SaveInfo hashMap = new SaveInfo();
+
+  ArrayList<String> hi = new ArrayList<>();
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    cardLayout = findViewById(R.id.linearLayout);
+    cardLayout = findViewById(R.id.thisoneJames);
     numItems = cardLayout.getChildCount();
 
 
@@ -111,7 +119,8 @@ public class MainActivity extends AppCompatActivity {
     shoppingList.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        replaceFragment(new ShoppingListFragment());
+       // replaceFragment(new ShoppingListFragment());
+        toShoppingList();
       }
     });
   }
@@ -164,12 +173,21 @@ public class MainActivity extends AppCompatActivity {
     View card = cardLayout.getChildAt(numItems - 1);
     TextView cardText = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
     ImageButton editButton = cardLayout.getChildAt(numItems - 1).findViewById(R.id.editButtonForItem);
+    ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
 
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         //editItem(cardText);
         showEditItemDialog(card);
+      }
+
+    });
+    addToShop.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        addToCart(card);
+        showToast("Item added to cart");
       }
     });
   }
@@ -358,6 +376,7 @@ public class MainActivity extends AppCompatActivity {
         // Need to disable the user from clicking anywhere because if the user clicks on the buttons on
         // the side, then the dialog closes
         addNewItem(nameString, categoryString, amountInteger, sizeInteger, expDateString);
+        saveToHashMap();
       }
     });
     addDialog.show();
@@ -402,4 +421,46 @@ public class MainActivity extends AppCompatActivity {
     });
     editDialog.show();
   }
+  public void addToCart(View card){
+
+    TextView itemName = card.findViewById(R.id.titleForItem);
+    TextView size = card.findViewById(R.id.sizeForItem);
+
+    String name = itemName.getText().toString();
+    String sze = size.getText().toString();
+
+    hi.add(name);
+
+  }
+  public void saveToHashMap(){
+    try{
+      TextView title = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
+      TextView date = cardLayout.getChildAt(numItems-1).findViewById(R.id.expiryDateForItem);
+      TextView amount = cardLayout.getChildAt(numItems-1).findViewById(R.id.amountLeftInPantryForItem);
+      TextView size = cardLayout.getChildAt(numItems-1).findViewById(R.id.sizeForItem);
+      String test = date.getText().toString();
+      SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+      Date d;
+      d = dateFormat.parse(test);
+      String t = title.getText().toString();
+      int a = Integer.parseInt(amount.getText().toString());
+      int s = Integer.parseInt(size.getText().toString());
+      Item item = new Item(t, d, a, s);
+      hashMap.createNewItem(item);
+      hashMap.getHashMap();
+
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+
+
+  }
+
+  public void toShoppingList(){
+    Intent switchActivityIntent = new Intent(this, ShoppingListActivity.class);
+    switchActivityIntent.putStringArrayListExtra("test", hi);
+    startActivity(switchActivityIntent);
+
+  }
+
 } // class

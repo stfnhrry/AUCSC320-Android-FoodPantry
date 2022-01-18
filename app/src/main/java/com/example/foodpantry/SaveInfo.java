@@ -36,13 +36,6 @@ public class SaveInfo {
 
     public void getHashMap(){
         int numkeys = pantry.size();
-        for (int i = 0; i < numkeys; i++){
-            System.out.println(pantry.get(i).getItemName());
-            System.out.println(pantry.get(i).getExpDate());
-            System.out.println(pantry.get(i).getWeight());
-            System.out.println(pantry.get(i).getAmount());
-
-        }
 
     }
 
