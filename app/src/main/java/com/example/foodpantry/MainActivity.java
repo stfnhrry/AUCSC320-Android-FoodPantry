@@ -387,6 +387,13 @@ public class MainActivity extends AppCompatActivity {
         editDialog.dismiss();
       }
     });
+
+    editDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+      @Override
+      public void onDismiss(DialogInterface dialogInterface) {
+        hideKeyboard();
+      }
+    });
     editDialog.show();
   }
 
