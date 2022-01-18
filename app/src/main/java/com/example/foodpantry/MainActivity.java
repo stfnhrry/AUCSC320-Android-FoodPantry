@@ -337,4 +337,10 @@ public class MainActivity extends AppCompatActivity {
   public void showEditItemDialog(View view){
     //code here
   }
+  public void drawableArray(){
+    int[] iconDrawables = new int[]{R.drawable.can_icon, R.drawable.granola_bar_icon, R.drawable.jar_icon,
+    R.drawable.juice_box_icon, R.drawable.wheat_icon, R.drawable.picture2, R.drawable.cookies};
+// later...
+  //  iconDrawables.setImageResource(myImageList[i]);
+  }
 } // class
