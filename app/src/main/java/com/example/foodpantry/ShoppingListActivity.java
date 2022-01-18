@@ -20,13 +20,12 @@ public class ShoppingListActivity extends AppCompatActivity {
     Button backButton = (Button) findViewById(R.id.backToMainActivityButton);
     Intent toPantry = new Intent (this, MainActivity.class);
     startActivity(toPantry);
-    ImageButton print = findViewById(R.id.printButton);
-    printShoppingList(print);
+    printShoppingList(findViewById(R.id.printButton));
   } // backToPantry
 
   public void printShoppingList(View view) {
 
-    Intent sendIntent = new Intent(String.valueOf(view));
+    Intent sendIntent = new Intent();
     sendIntent.setAction(Intent.ACTION_SEND);
     sendIntent.putExtra(Intent.EXTRA_TEXT, "printing function");
     sendIntent.setType("text/plain");
