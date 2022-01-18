@@ -14,14 +14,12 @@
 
         <ScrollView
             android:id="@+id/scrollingViewForShoppingListFragmentFragment"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/very_light_grey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchBarForShoppingList"
-            android:layout_width="match_parent"
-            android:layout_height="750dp"
-            android:layout_marginBottom="16dp"
-            android:background="@color/very_light_grey">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/scrollIViewForShoppingListFragmentFragmentConstraint"
@@ -136,74 +134,5 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/searchBarForShoppingList"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:background="@color/light_grey">
-
-            <ImageView
-                android:id="@+id/searchMagIconForShoppingList"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/ic_baseline_search_24" />
-
-            <EditText
-                android:id="@+id/searchEditTextForShoppingListFragment"
-                app:layout_constraintStart_toEndOf="@+id/searchMagIconForShoppingList"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="400dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:background="@android:color/transparent"
-                android:ems="12"
-                android:hint="Use the search bar to find a specific pantry item"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textAlignment="center" />
-
-            <ImageButton
-                android:id="@+id/addCardButtonForShoppingListFragment"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:alpha=".7"
-                android:background="@drawable/ic_baseline_add_circle_24"
-                tools:ignore="SpeakableTextPresentCheck" />
-
-            <ImageButton
-                android:id="@+id/removeCardButtonForShoppingListFragment"
-                app:layout_constraintEnd_toStartOf="@+id/addCardButtonForShoppingListFragment"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:alpha=".7"
-                android:background="@drawable/ic_baseline_remove_circle_24"
-                tools:ignore="SpeakableTextPresentCheck" />
-
-            <TextView
-                android:id="@+id/currentDateShoppingListFragmentText"
-                app:layout_constraintEnd_toStartOf="@+id/removeCardButtonForShoppingListFragment"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="January 14th, 2021"
-                android:textSize="28sp" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
