@@ -130,7 +130,8 @@ public class ItemFragment extends Fragment {
     try{
       Date date1;
       Date date2;
-      date1 = dateFormat.parse(currentDate);
+      date1 = calendar;
+//              dateFormat.parse(currentDate);
       date2 = dateFormat.parse(expiryDate);
       long difference = (date2.getTime() - date1.getTime());
       long differenceDates = difference / (24 * 60 * 60 * 1000);

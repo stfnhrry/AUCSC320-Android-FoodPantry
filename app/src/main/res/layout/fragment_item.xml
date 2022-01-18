@@ -52,6 +52,20 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/expiryDateForItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="36dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="20/03/2022"
+                android:textColor="#2196F3"
+                android:textSize="16sp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/daysTillExpiryText" />
+
+            <TextView
                 android:id="@+id/daysTillExpiryForItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -130,7 +144,7 @@
                 android:id="@+id/leftInPantryText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="12dp"
                 android:layout_marginBottom="18dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Left In Pantry"
@@ -154,6 +168,7 @@
                 android:id="@+id/addToShoppingCartButtonForItem"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:layout_marginEnd="16dp"
                 android:adjustViewBounds="true"
                 android:background="@android:color/transparent"
                 android:paddingStart="5dp"
@@ -164,16 +179,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/expiryDateForItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed-medium"
-            android:text="45"
-            android:textColor="#2196F3"
-            android:textSize="16sp"
-            android:visibility="invisible" />
 
     </androidx.cardview.widget.CardView>
 

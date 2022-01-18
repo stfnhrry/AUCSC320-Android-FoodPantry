@@ -389,7 +389,7 @@ public class MainActivity extends AppCompatActivity {
 
     for (int i = 0; i < (categorySpinner.getCount()); i++) {
       if(categorySpinner.getItemAtPosition(i).toString() == currentCategory.getText().toString()){
-        showToast(categorySpinner.getItemAtPosition(i) + " is the item of items");
+        //showToast(categorySpinner.getItemAtPosition(i) + " is the item of items");
         categorySpinner.setSelection(i);
       }
     }
