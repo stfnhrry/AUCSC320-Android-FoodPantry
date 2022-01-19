@@ -495,6 +495,7 @@ public class MainActivity extends AppCompatActivity {
     });
     editDialog.show();
   }
+
   public void addToCart(View card){
 
     TextView itemName = card.findViewById(R.id.titleForItem);
@@ -505,8 +506,8 @@ public class MainActivity extends AppCompatActivity {
 
     itemNames.add(name);
     sizes.add(sze);
-
   }
+
   public void saveToHashMap(){
     try{
       TextView title = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
@@ -527,8 +528,6 @@ public class MainActivity extends AppCompatActivity {
     } catch (ParseException e) {
       e.printStackTrace();
     }
-
-
   }
 
   public void toShoppingList(){
