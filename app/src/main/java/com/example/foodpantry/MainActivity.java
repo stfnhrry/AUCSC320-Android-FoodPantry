@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
   int numItems;
 
+  int test = 0;
+
   Boolean shoppingListVisible;
 
   SaveInfo hashMap = new SaveInfo();
@@ -214,7 +216,8 @@ public class MainActivity extends AppCompatActivity {
     removeTest.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        cardLayout.removeViewAt(0);
+        int i = cardLayout.indexOfChild(card);
+        cardLayout.removeViewAt(i);
       }
     });
   }
