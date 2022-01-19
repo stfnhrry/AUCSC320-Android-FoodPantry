@@ -119,24 +119,27 @@ public class MainActivity extends AppCompatActivity {
     removeItem.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //loadHashmap();
+//        loadHashmap();
         //readFromSP();
-        //insertToSP(hashMap.pantry);
+        enableAllButtons();
+        clearAllHighlights();
+        showToast("Clicked");
+        //insertToSP(map);
 //        hashmaptest();
-        writeSettings();
+//        writeSettings();
       }
     });
 
     lowInStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-//        showLowInStock();
-//        enableAllButtons();
-//        clearAllHighlights();
-//        lowInStock.setEnabled(false);
-//        lowInStock.setBackgroundColor(Color.LTGRAY);
+        showLowInStock();
+        enableAllButtons();
+        clearAllHighlights();
+        lowInStock.setEnabled(false);
+        lowInStock.setBackgroundColor(Color.LTGRAY);
 //        readFromSP();
-        readSetttings();
+//        readSetttings();
       }
     });
 
@@ -249,11 +252,11 @@ public class MainActivity extends AppCompatActivity {
 
     numItems = cardLayout.getChildCount();
 
+
     View card = cardLayout.getChildAt(numItems - 1);
     ImageButton editButton = card.findViewById(R.id.editButtonForItem);
     ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
     saveToHashMap((numItems - 1), ItemFragment.newInstance(icon, name, category, amount, weight, expDate));
-    //insertToSP(hashMap.pantry);
 
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -288,6 +291,14 @@ public class MainActivity extends AppCompatActivity {
     currentExpDate.setText(expDate.getText());
     currentDaysTillExpiry.setText(getDateDifferenceAsString(currentExpDate.getText().toString()));
     currentCategory.setText(category.getSelectedItem().toString());
+
+    //cardLayout.indexOfChild(view);
+    //hashMap.getItemAt(cardLayout.indexOfChild(view)).updateInfo(setIconFromCategory(category), name.getText().toString(), category.getSelectedItem().toString(), Integer.parseInt(amount.getText().toString()), Integer.parseInt(size.getText().toString()), expDate.getText().toString());
+    if(hashMap.getItemAt(cardLayout.indexOfChild(view)) != null){
+      showToast("Existssss");
+      //hashMap.getItemAt(cardLayout.indexOfChild(view)).showToast("I'm here too");
+    }
+    map.replace(cardLayout.indexOfChild(view), ItemFragment.newInstance(setIconFromCategory(category), name.getText().toString(), category.getSelectedItem().toString(), Integer.parseInt(amount.getText().toString()), Integer.parseInt(size.getText().toString()), expDate.getText().toString()));
   }
 
   public void showAll(){
@@ -549,12 +560,6 @@ public class MainActivity extends AppCompatActivity {
     } catch (ParseException e) {
       e.printStackTrace();
     }
-//    if(hashMap.pantry == null){
-//      showToast("Pantry is null");
-//    }else{
-//      showToast("Pantry is not null and can be worked with");
-//    }
-    //insertToSP(hashMap.pantry);
   }
 
   public void loadHashmap(){
@@ -563,22 +568,18 @@ public class MainActivity extends AppCompatActivity {
     //showToast(title.getText().toString() + "is the item at 0");
   }
 
-  private void insertToSP(HashMap<Integer, View> jsonMap) {
-//    String jsonString = new Gson().toJson(jsonMap);
-//    SharedPreferences sharedPreferences = getSharedPreferences("HashMap", MODE_PRIVATE);
+  private void insertToSP(Map<Integer, ItemFragment> jsonMap) {
     SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
     SharedPreferences.Editor editor = sharedPreferences.edit();
-//    editor.putString("map", jsonString);
-//    editor.apply();
-    String l = new Gson().toJson(cardLayout);
-    editor.clear().apply();
-    editor.putString("list", l).apply();
+    //String l = new Gson().toJson(jsonMap);
+    //editor.clear().apply();
+    //editor.putString("list", l).apply();
 
-    Set<String> set = new HashSet<String>();
+//    Set<String> set = new HashSet<String>();
 //    SharedPreferences prefs = getApplicationContext().getSharedPreferences(
 //            "My Preferences", Context.MODE_PRIVATE);
-    editor.putStringSet("myStringSet", set);
-    editor.commit();
+//    editor.putStringSet("myStringSet", set);
+//    editor.commit();
 
     showToast("Added to preferences");
   }
