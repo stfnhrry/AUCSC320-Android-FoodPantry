@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         //addNewItem();
+        setIcon();
         showAddItemDialog();
       }
     });
@@ -213,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
     removeTest.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-       // cardLayout.removeViewAt();
+        cardLayout.removeViewAt(0);
       }
     });
   }
