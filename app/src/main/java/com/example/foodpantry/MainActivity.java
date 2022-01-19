@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
     pantryFragment.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        //removeFragment();
+        setIcon();
         showAll();
         enableAllButtons();
         clearAllHighlights();
@@ -83,9 +85,21 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
+    removeItem.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        for (int i = 0; i < cardLayout.getChildCount(); i++) {
+          cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.GONE);
+          cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.VISIBLE);
+        }
+      }
+    });
+
     addItem.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        //addNewItem();
+        setIcon();
         showAddItemDialog();
         enableAllButtons();
         clearAllHighlights();
@@ -96,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
     lowInStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        //replaceFragment(new LowInStockFragment());
+        setIcon();
         showLowInStock();
         enableAllButtons();
         clearAllHighlights();
@@ -107,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
     outOfStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        //replaceFragment(new OutOfStockFragment());
+        setIcon();
         showOutOfStock();
         enableAllButtons();
         clearAllHighlights();
@@ -118,6 +136,8 @@ public class MainActivity extends AppCompatActivity {
     expiringSoon.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        //replaceFragment(new ExpiringSoonFragment());
+        setIcon();
         showExpiringSoon();
         enableAllButtons();
         clearAllHighlights();
@@ -129,6 +149,8 @@ public class MainActivity extends AppCompatActivity {
     expired.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        //replaceFragment(new ExpiredFragment());
+        setIcon();
         showExpired();
         enableAllButtons();
         clearAllHighlights();
@@ -215,7 +237,11 @@ public class MainActivity extends AppCompatActivity {
 
     View card = cardLayout.getChildAt(numItems - 1);
     ImageButton editButton = card.findViewById(R.id.editButtonForItem);
+    ImageButton removeTest = cardLayout.getChildAt(numItems -1).findViewById(R.id.removeIcon);
+    TextView cardText = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
+    ImageButton editButton = cardLayout.getChildAt(numItems - 1).findViewById(R.id.editButtonForItem);
     ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
+    removeTest.setVisibility(View.GONE);
 
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -232,6 +258,23 @@ public class MainActivity extends AppCompatActivity {
         showToast("Item added to cart");
       }
     });
+    removeTest.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        cardLayout.removeViewAt(0);
+      }
+    });
+  }
+
+  public void removing(View view){
+
+  }
+
+  public void setIcon(){
+    for (int i = 0; i < cardLayout.getChildCount(); i++) {
+      cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.GONE);
+      cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.VISIBLE);
+    }
   }
 
   public void editItem(View view, EditText name, Spinner category, EditText amount, EditText size, EditText expDate){
