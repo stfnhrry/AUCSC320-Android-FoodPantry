@@ -74,7 +74,18 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         //removeFragment();
+        setIcon();
         showAll();
+      }
+    });
+
+    removeItem.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        for (int i = 0; i < cardLayout.getChildCount(); i++) {
+          cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.GONE);
+          cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.VISIBLE);
+        }
       }
     });
 
@@ -90,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         //replaceFragment(new LowInStockFragment());
+        setIcon();
         showLowInStock();
       }
     });
@@ -98,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         //replaceFragment(new OutOfStockFragment());
+        setIcon();
         showOutOfStock();
       }
     });
@@ -106,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         //replaceFragment(new ExpiringSoonFragment());
+        setIcon();
         showExpiringSoon();
       }
     });
@@ -114,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         //replaceFragment(new ExpiredFragment());
+        setIcon();
         showExpired();
       }
     });
@@ -173,9 +188,11 @@ public class MainActivity extends AppCompatActivity {
     showToast(formattedDate + "is the current date");
 
     View card = cardLayout.getChildAt(numItems - 1);
+    ImageButton removeTest = cardLayout.getChildAt(numItems -1).findViewById(R.id.removeIcon);
     TextView cardText = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
     ImageButton editButton = cardLayout.getChildAt(numItems - 1).findViewById(R.id.editButtonForItem);
     ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
+    removeTest.setVisibility(View.GONE);
 
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -193,6 +210,23 @@ public class MainActivity extends AppCompatActivity {
         showToast("Item added to cart");
       }
     });
+    removeTest.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+       // cardLayout.removeViewAt();
+      }
+    });
+  }
+
+  public void removing(View view){
+
+  }
+
+  public void setIcon(){
+    for (int i = 0; i < cardLayout.getChildCount(); i++) {
+      cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.GONE);
+      cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.VISIBLE);
+    }
   }
 
   public void editItem(View view, EditText name, Spinner category, EditText amount, EditText size, EditText expDate){
