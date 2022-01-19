@@ -1,7 +1,5 @@
 package com.example.foodpantry;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -28,6 +26,7 @@ import java.util.Locale;
 public class ItemFragment extends Fragment {
 
   public ImageView icon;
+  public int iconInt;
   public String title;
   public TextView titleText;
   public String category;
@@ -45,6 +44,7 @@ public class ItemFragment extends Fragment {
 
   // TODO: Rename parameter arguments, choose names that match
   // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+  private static String ARG_ICON = "R.drawable.cookies";
   private static String ARG_TITLE = "title";
   private static final String ARG_CATEGORY = "category";
   public static String ARG_AMOUNT = "1";
@@ -64,9 +64,10 @@ public class ItemFragment extends Fragment {
    * @return A new instance of fragment ItemFragment.
    */
   // TODO: Rename and change types and number of parameters
-  public static ItemFragment newInstance(String title, String category, int number, int weight, String date) {
+  public static ItemFragment newInstance(int icon, String title, String category, int number, int weight, String date) {
     ItemFragment fragment = new ItemFragment();
     Bundle args = new Bundle();
+    args.putInt(ARG_ICON, icon);
     args.putString(ARG_TITLE, title);
     args.putString(ARG_CATEGORY, category);
     args.putInt(ARG_AMOUNT, number);
@@ -80,6 +81,7 @@ public class ItemFragment extends Fragment {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     if (getArguments() != null) {
+      iconInt = getArguments().getInt(ARG_ICON);
       title = getArguments().getString(ARG_TITLE);
       category = getArguments().getString(ARG_CATEGORY);
       amount = getArguments().getInt(ARG_AMOUNT);
@@ -98,6 +100,8 @@ public class ItemFragment extends Fragment {
 
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState){
+    icon = (ImageView) getView().findViewById(R.id.iconForItem);
+    icon.setImageResource(iconInt);
     titleText = (TextView) getView().findViewById(R.id.titleForItem);
     titleText.setText(title);
     categoryText = (TextView) getView().findViewById(R.id.categoryNameForItem);

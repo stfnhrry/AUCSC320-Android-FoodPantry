@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -57,9 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     cardLayout = findViewById(R.id.linearLayout);
 
-    //cardLayout = findViewById(R.id.linearLayout);
     numItems = cardLayout.getChildCount();
-
 
     pantryFragment = findViewById(R.id.pantryButton);
     addItem = findViewById(R.id.addItemButton);
@@ -119,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
     expiringSoon.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //replaceFragment(new ExpiringSoonFragment());
         showExpiringSoon();
         enableAllButtons();
         clearAllHighlights();
@@ -131,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
     expired.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //replaceFragment(new ExpiredFragment());
         showExpired();
         enableAllButtons();
         clearAllHighlights();
@@ -209,23 +206,20 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  public void addNewItem(String name, String category, int amount, int weight, String expDate){
+  public void addNewItem(int icon, String name, String category, int amount, int weight, String expDate){
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-    transaction.add(cardLayout.getId(), ItemFragment.newInstance(name, category, amount, weight, expDate));
+    transaction.add(cardLayout.getId(), ItemFragment.newInstance(icon, name, category, amount, weight, expDate));
     transaction.commitNow();
 
     numItems = cardLayout.getChildCount();
 
     View card = cardLayout.getChildAt(numItems - 1);
     ImageButton editButton = card.findViewById(R.id.editButtonForItem);
-    TextView cardText = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
-    //ImageButton editButton = cardLayout.getChildAt(numItems - 1).findViewById(R.id.editButtonForItem);
     ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
 
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //editItem(cardText);
         showEditItemDialog(card);
       }
 
@@ -241,6 +235,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void editItem(View view, EditText name, Spinner category, EditText amount, EditText size, EditText expDate){
+    ImageView currentIcon = view.findViewById(R.id.iconForItem);
     TextView currentName = view.findViewById(R.id.titleForItem);
     TextView currentAmount = view.findViewById(R.id.amountLeftInPantryForItem);
     TextView currentSize = view.findViewById(R.id.sizeForItem);
@@ -248,6 +243,7 @@ public class MainActivity extends AppCompatActivity {
     TextView currentDaysTillExpiry = view.findViewById(R.id.daysTillExpiryForItem);
     TextView currentCategory = view.findViewById(R.id.categoryNameForItem);
 
+    currentIcon.setImageResource(setIconFromCategory(category));
     currentName.setText(name.getText());
     currentAmount.setText(amount.getText());
     currentSize.setText(size.getText());
@@ -398,6 +394,7 @@ public class MainActivity extends AppCompatActivity {
     addButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        int image = setIconFromCategory(categorySpinner);
         String nameString = name.getText().toString();
         String categoryString = categorySpinner.getSelectedItem().toString();
         int amountInteger = Integer.parseInt(amount.getText().toString());
@@ -405,7 +402,7 @@ public class MainActivity extends AppCompatActivity {
         String expDateString = expDate.getText().toString();
         // Need to disable the user from clicking anywhere because if the user clicks on the buttons on
         // the side, then the dialog closes
-        addNewItem(nameString, categoryString, amountInteger, sizeInteger, expDateString);
+        addNewItem(image, nameString, categoryString, amountInteger, sizeInteger, expDateString);
         saveToHashMap();
       }
     });
@@ -425,21 +422,6 @@ public class MainActivity extends AppCompatActivity {
       }
     });
     addDialog.show();
-  }
-
-  public void drawableArray() {
-    int[] iconDrawables =
-        new int[] {
-          R.drawable.can_icon,
-          R.drawable.granola_bar_icon,
-          R.drawable.jar_icon,
-          R.drawable.juice_box_icon,
-          R.drawable.wheat_icon,
-          R.drawable.picture2,
-          R.drawable.cookies
-        };
-    // later...
-    //  iconDrawables.setImageResource(myImageList[i]);
   }
 
   public void showEditItemDialog(View card){
@@ -496,6 +478,7 @@ public class MainActivity extends AppCompatActivity {
     });
     editDialog.show();
   }
+
   public void addToCart(View card){
 
     TextView itemName = card.findViewById(R.id.titleForItem);
@@ -508,6 +491,7 @@ public class MainActivity extends AppCompatActivity {
     sizes.add(sze);
 
   }
+
   public void saveToHashMap(){
     try{
       TextView title = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
@@ -540,10 +524,30 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
-
   public void hideKeyboard() {
     InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
     imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+  }
+
+  public int setIconFromCategory(Spinner category){
+    int index = category.getSelectedItemPosition();
+    int itemIcon = R.drawable.cookies;
+    switch (index){
+      case 0 : itemIcon = R.drawable.can_icon;
+      break;
+      case 1 : itemIcon = R.drawable.jar_icon;
+      break;
+      case 2 : itemIcon = R.drawable.juice_box_icon;
+      break;
+      case 3 : itemIcon = R.drawable.granola_bar_icon;
+      break;
+      case 4 : itemIcon = R.drawable.wheat_icon;
+      break;
+      case 5 : itemIcon = R.drawable.cookies;
+      break;
+      case 6 : itemIcon = R.drawable.picture2;
+    }
+    return itemIcon;
   }
 
 } // class
