@@ -236,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
     numItems = cardLayout.getChildCount();
 
     View card = cardLayout.getChildAt(numItems - 1);
-    ImageButton editButton = card.findViewById(R.id.editButtonForItem);
+
     ImageButton removeTest = cardLayout.getChildAt(numItems -1).findViewById(R.id.removeIcon);
     TextView cardText = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
     ImageButton editButton = cardLayout.getChildAt(numItems - 1).findViewById(R.id.editButtonForItem);
