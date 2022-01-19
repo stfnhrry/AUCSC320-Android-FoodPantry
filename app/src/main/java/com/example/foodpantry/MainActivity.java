@@ -93,6 +93,13 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
+    removeItem.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        loadHashmap();
+      }
+    });
+
     lowInStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -216,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
     View card = cardLayout.getChildAt(numItems - 1);
     ImageButton editButton = card.findViewById(R.id.editButtonForItem);
     ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
+    saveToHashMap(card);
 
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -403,7 +411,6 @@ public class MainActivity extends AppCompatActivity {
         // Need to disable the user from clicking anywhere because if the user clicks on the buttons on
         // the side, then the dialog closes
         addNewItem(image, nameString, categoryString, amountInteger, sizeInteger, expDateString);
-        saveToHashMap();
       }
     });
 
@@ -492,7 +499,7 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
-  public void saveToHashMap(){
+  public void saveToHashMap(View view){
     try{
       TextView title = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
       TextView date = cardLayout.getChildAt(numItems-1).findViewById(R.id.expiryDateForItem);
@@ -505,8 +512,8 @@ public class MainActivity extends AppCompatActivity {
       String t = title.getText().toString();
       int a = Integer.parseInt(amount.getText().toString());
       int s = Integer.parseInt(size.getText().toString());
-      Item item = new Item(t, d, a, s);
-      hashMap.createNewItem(item);
+      //Item item = new Item(t, d, a, s);
+      hashMap.createNewItem(view);
       hashMap.getHashMap();
 
     } catch (ParseException e) {
@@ -514,6 +521,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+  }
+
+  public void loadHashmap(){
+    View savedItem = hashMap.getItemAt(0);
+    TextView title = savedItem.findViewById(R.id.titleForItem);
+    showToast(title.getText().toString() + "is the item at 0");
   }
 
   public void toShoppingList(){
