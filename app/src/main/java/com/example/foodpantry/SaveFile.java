@@ -3,6 +3,7 @@ package com.example.foodpantry;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -15,8 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SaveInfo {
-    public Map<Integer, View> pantry = new HashMap<Integer, View>();
+public class SaveFile {
+    public Map<Integer, ItemFragment> pantry = new HashMap<Integer, ItemFragment>();
     public int itemKey = 0;
 
     /**
@@ -26,23 +27,28 @@ public class SaveInfo {
      * the class instances into the hashmap.
      */
 
-    public void createNewItem(View myview){
-
-        pantry.put(itemKey, myview);
+    public void createNewEntry(int index, ItemFragment myItem){
+        pantry.put(index, myItem);
         itemKey +=1;
-
     }
 
-    public View getItemAt(int index){
+    public void removeEntry(int index, View myview){
+        pantry.remove(index);
+    }
+
+    public ItemFragment getItemAt(int index){
         return pantry.get(index);
     }
 
     public void getHashMap(){
         int numkeys = pantry.size();
-
     }
 
-
+    public void refreshAll(LinearLayout itemContainer, int lastIndex){
+        for (int i = 0; i < lastIndex; i++) {
+          //createNewEntry(i, itemContainer.getChildAt(i));
+        }
+    }
 
 
 

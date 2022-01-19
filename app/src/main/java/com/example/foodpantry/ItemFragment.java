@@ -116,6 +116,30 @@ public class ItemFragment extends Fragment {
     daysText.setText(calculateDateDifference(dateText.getText().toString()));
   }
 
+  public void updateInfo(int iconUpdate, String titleUpdate, String categoryUpdate, int amountUpdate, int weightUpdate, String dateUpdate){
+    iconInt = iconUpdate;
+    title = titleUpdate;
+    category = getArguments().getString(ARG_CATEGORY);
+    amount = getArguments().getInt(ARG_AMOUNT);
+    size = getArguments().getInt(ARG_SIZE);
+    expiryDate = getArguments().getString(ARG_DATE);
+
+    icon = (ImageView) getView().findViewById(R.id.iconForItem);
+    icon.setImageResource(iconInt);
+    titleText = (TextView) getView().findViewById(R.id.titleForItem);
+    titleText.setText(title);
+    categoryText = (TextView) getView().findViewById(R.id.categoryNameForItem);
+    categoryText.setText(category);
+    amountText = (TextView) getView().findViewById(R.id.amountLeftInPantryForItem);
+    amountText.setText(amount + "");
+    sizeText = (TextView) getView().findViewById(R.id.sizeForItem);
+    sizeText.setText(size + "");
+    dateText = (TextView) getView().findViewById(R.id.expiryDateForItem);
+    dateText.setText(expiryDate.toString());
+    daysText = (TextView) getView().findViewById(R.id.daysTillExpiryForItem);
+    daysText.setText(calculateDateDifference(dateText.getText().toString()));
+  }
+
   public void showToast(String text){
     if(lastToast != null){
       lastToast.cancel();

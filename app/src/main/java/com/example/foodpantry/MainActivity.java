@@ -7,10 +7,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -25,12 +28,28 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,13 +59,17 @@ public class MainActivity extends AppCompatActivity {
 
   LinearLayout cardLayout;
 
+  View testCard;
+
   Fragment activeFragment;
 
   int numItems;
 
   Boolean shoppingListVisible;
 
-  SaveInfo hashMap = new SaveInfo();
+  SaveFile hashMap = new SaveFile();
+
+  Map<Integer, ItemFragment> map = hashMap.pantry;
 
   ArrayList<String> itemNames = new ArrayList<>();
   ArrayList<Integer> sizes = new ArrayList<>();
@@ -96,18 +119,24 @@ public class MainActivity extends AppCompatActivity {
     removeItem.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        loadHashmap();
+        //loadHashmap();
+        //readFromSP();
+        //insertToSP(hashMap.pantry);
+//        hashmaptest();
+        writeSettings();
       }
     });
 
     lowInStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        showLowInStock();
-        enableAllButtons();
-        clearAllHighlights();
-        lowInStock.setEnabled(false);
-        lowInStock.setBackgroundColor(Color.LTGRAY);
+//        showLowInStock();
+//        enableAllButtons();
+//        clearAllHighlights();
+//        lowInStock.setEnabled(false);
+//        lowInStock.setBackgroundColor(Color.LTGRAY);
+//        readFromSP();
+        readSetttings();
       }
     });
 
@@ -223,7 +252,8 @@ public class MainActivity extends AppCompatActivity {
     View card = cardLayout.getChildAt(numItems - 1);
     ImageButton editButton = card.findViewById(R.id.editButtonForItem);
     ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
-    saveToHashMap(card);
+    saveToHashMap((numItems - 1), ItemFragment.newInstance(icon, name, category, amount, weight, expDate));
+    //insertToSP(hashMap.pantry);
 
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -499,7 +529,7 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
-  public void saveToHashMap(View view){
+  public void saveToHashMap(int index, ItemFragment myItem){
     try{
       TextView title = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
       TextView date = cardLayout.getChildAt(numItems-1).findViewById(R.id.expiryDateForItem);
@@ -513,20 +543,197 @@ public class MainActivity extends AppCompatActivity {
       int a = Integer.parseInt(amount.getText().toString());
       int s = Integer.parseInt(size.getText().toString());
       //Item item = new Item(t, d, a, s);
-      hashMap.createNewItem(view);
+      hashMap.createNewEntry(index, myItem);
       hashMap.getHashMap();
 
     } catch (ParseException e) {
       e.printStackTrace();
     }
-
-
+//    if(hashMap.pantry == null){
+//      showToast("Pantry is null");
+//    }else{
+//      showToast("Pantry is not null and can be worked with");
+//    }
+    //insertToSP(hashMap.pantry);
   }
 
   public void loadHashmap(){
-    View savedItem = hashMap.getItemAt(0);
-    TextView title = savedItem.findViewById(R.id.titleForItem);
-    showToast(title.getText().toString() + "is the item at 0");
+    //View savedItem = hashMap.getItemAt(0);
+    //TextView title = savedItem.findViewById(R.id.titleForItem);
+    //showToast(title.getText().toString() + "is the item at 0");
+  }
+
+  private void insertToSP(HashMap<Integer, View> jsonMap) {
+//    String jsonString = new Gson().toJson(jsonMap);
+//    SharedPreferences sharedPreferences = getSharedPreferences("HashMap", MODE_PRIVATE);
+    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+    SharedPreferences.Editor editor = sharedPreferences.edit();
+//    editor.putString("map", jsonString);
+//    editor.apply();
+    String l = new Gson().toJson(cardLayout);
+    editor.clear().apply();
+    editor.putString("list", l).apply();
+
+    Set<String> set = new HashSet<String>();
+//    SharedPreferences prefs = getApplicationContext().getSharedPreferences(
+//            "My Preferences", Context.MODE_PRIVATE);
+    editor.putStringSet("myStringSet", set);
+    editor.commit();
+
+    showToast("Added to preferences");
+  }
+
+  private HashMap<Integer, View> readFromSP(){
+//    SharedPreferences sharedPreferences = getSharedPreferences("HashMap", MODE_PRIVATE);
+    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+    String defValue = new Gson().toJson(new HashMap<String, List<String>>());
+    String json=sharedPreferences.getString("map",defValue);
+    TypeToken<HashMap<String,List<String>>> token = new TypeToken<HashMap<String,List<String>>>() {};
+    HashMap<Integer, View> retrievedMap=new Gson().fromJson(json,token.getType());
+//    if(retrievedMap == null){
+//      showToast("Loaded map is invalid");
+//    }
+//    else{
+//      showToast(retrievedMap.get(0).findViewById(R.id.titleForItem) + "is the item at 0");
+//    }
+//    return retrievedMap;
+
+    String l = sharedPreferences.getString("list", "");
+//    LinearLayout loaded = new Gson().fromJson(l, TypeToken(LinearLayout));
+    return null;
+  }
+
+  private void hashmaptest()
+  {
+    //create test hashmap
+    HashMap<String, String> testHashMap = new HashMap<String, String>();
+    testHashMap.put("key1", cardLayout.getChildAt(0).toString());
+    testHashMap.put("key2", cardLayout.getChildAt(1).toString());
+
+    //convert to string using gson
+    Gson gson = new Gson();
+    String hashMapString = gson.toJson(testHashMap);
+
+    //save in shared prefs
+    SharedPreferences prefs = getSharedPreferences("test", MODE_PRIVATE);
+    prefs.edit().putString("hashString", hashMapString).apply();
+
+    //get from shared prefs
+    String storedHashMapString = prefs.getString("hashString", "oopsDintWork");
+    java.lang.reflect.Type type = new TypeToken<HashMap<String, String>>(){}.getType();
+    HashMap<String, String> testHashMap2 = gson.fromJson(storedHashMapString, type);
+
+    //use values
+    String toastString = testHashMap2.get("key1") + " | " + testHashMap2.get("key2");
+    //Toast.makeText(this, toastString, Toast.LENGTH_LONG).show();
+
+    if(testHashMap2.get("key1").equals(cardLayout.getChildAt(0).toString())){
+      showToast("Read just fine from file");
+    }
+    else{
+      showToast("Garbage");
+    }
+  }
+
+  private String subFolder = "/userdata";
+  private String file = "test.ser";
+
+  public void writeSettings() {
+    File cacheDir = null;
+    File appDirectory = null;
+
+    if (android.os.Environment.getExternalStorageState().
+            equals(android.os.Environment.MEDIA_MOUNTED)) {
+      cacheDir = getApplicationContext().getExternalCacheDir();
+      appDirectory = new File(cacheDir + subFolder);
+
+    } else {
+      cacheDir = getApplicationContext().getCacheDir();
+      String BaseFolder = cacheDir.getAbsolutePath();
+      appDirectory = new File(BaseFolder + subFolder);
+
+    }
+
+    if (appDirectory != null && !appDirectory.exists()) {
+      appDirectory.mkdirs();
+    }
+
+    File fileName = new File(appDirectory, file);
+
+    FileOutputStream fos = null;
+    ObjectOutputStream out = null;
+    try {
+      fos = new FileOutputStream(fileName);
+      out = new ObjectOutputStream(fos);
+      out.writeObject(map);
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }  catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      try {
+        if (fos != null)
+          fos.flush();
+        fos.close();
+        if (out != null)
+          out.flush();
+        out.close();
+      } catch (Exception e) {
+
+      }
+    }
+  }
+
+
+  public void readSetttings() {
+    File cacheDir = null;
+    File appDirectory = null;
+    if (android.os.Environment.getExternalStorageState().
+            equals(android.os.Environment.MEDIA_MOUNTED)) {
+      cacheDir = getApplicationContext().getExternalCacheDir();
+      appDirectory = new File(cacheDir + subFolder);
+    } else {
+      cacheDir = getApplicationContext().getCacheDir();
+      String BaseFolder = cacheDir.getAbsolutePath();
+      appDirectory = new File(BaseFolder + subFolder);
+    }
+
+    if (appDirectory != null && !appDirectory.exists()) return; // File does not exist
+
+    File fileName = new File(appDirectory, file);
+
+    FileInputStream fis = null;
+    ObjectInputStream in = null;
+    try {
+      fis = new FileInputStream(fileName);
+      in = new ObjectInputStream(fis);
+      Map<Integer, View> myHashMap = (Map<Integer, View> ) in.readObject();
+      //map = myHashMap;
+      System.out.println("count of hash map::"+map.size() + " " + map);
+
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (StreamCorruptedException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }finally {
+
+      try {
+        if(fis != null) {
+          fis.close();
+        }
+        if(in != null) {
+          in.close();
+        }
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
   public void toShoppingList(){
