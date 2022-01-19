@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     cardLayout = findViewById(R.id.linearLayout);
 
-    //cardLayout = findViewById(R.id.linearLayout);
+    cardLayout = findViewById(R.id.linearLayout);
     numItems = cardLayout.getChildCount();
 
 
@@ -228,8 +228,8 @@ public class MainActivity extends AppCompatActivity {
         //editItem(cardText);
         showEditItemDialog(card);
       }
-
     });
+
     addToShop.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -539,7 +539,6 @@ public class MainActivity extends AppCompatActivity {
     startActivity(switchActivityIntent);
 
   }
-
 
   public void hideKeyboard() {
     InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
