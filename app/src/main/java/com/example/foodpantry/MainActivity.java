@@ -407,6 +407,7 @@ public class MainActivity extends AppCompatActivity {
         // the side, then the dialog closes
         addNewItem(nameString, categoryString, amountInteger, sizeInteger, expDateString);
         saveToHashMap();
+        showToast("Added Item");
       }
     });
 
@@ -438,8 +439,6 @@ public class MainActivity extends AppCompatActivity {
           R.drawable.picture2,
           R.drawable.cookies
         };
-    // later...
-    //  iconDrawables.setImageResource(myImageList[i]);
   }
 
   public void showEditItemDialog(View card){
