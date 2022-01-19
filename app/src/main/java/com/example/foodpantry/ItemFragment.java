@@ -111,7 +111,7 @@ public class ItemFragment extends Fragment {
     sizeText = (TextView) getView().findViewById(R.id.sizeForItem);
     sizeText.setText(size + "");
     dateText = (TextView) getView().findViewById(R.id.expiryDateForItem);
-    dateText.setText(expiryDate.toString());
+    dateText.setText(expiryDate);
     daysText = (TextView) getView().findViewById(R.id.daysTillExpiryForItem);
     daysText.setText(calculateDateDifference(dateText.getText().toString()));
   }
@@ -119,10 +119,10 @@ public class ItemFragment extends Fragment {
   public void updateInfo(int iconUpdate, String titleUpdate, String categoryUpdate, int amountUpdate, int weightUpdate, String dateUpdate){
     iconInt = iconUpdate;
     title = titleUpdate;
-    category = getArguments().getString(ARG_CATEGORY);
-    amount = getArguments().getInt(ARG_AMOUNT);
-    size = getArguments().getInt(ARG_SIZE);
-    expiryDate = getArguments().getString(ARG_DATE);
+    category = categoryUpdate;
+    amount = amountUpdate;
+    size = weightUpdate;
+    expiryDate = dateUpdate;
 
     icon = (ImageView) getView().findViewById(R.id.iconForItem);
     icon.setImageResource(iconInt);
@@ -135,7 +135,7 @@ public class ItemFragment extends Fragment {
     sizeText = (TextView) getView().findViewById(R.id.sizeForItem);
     sizeText.setText(size + "");
     dateText = (TextView) getView().findViewById(R.id.expiryDateForItem);
-    dateText.setText(expiryDate.toString());
+    dateText.setText(expiryDate);
     daysText = (TextView) getView().findViewById(R.id.daysTillExpiryForItem);
     daysText.setText(calculateDateDifference(dateText.getText().toString()));
   }
