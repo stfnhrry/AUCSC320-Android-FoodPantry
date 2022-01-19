@@ -261,7 +261,8 @@ public class MainActivity extends AppCompatActivity {
     removeTest.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        cardLayout.removeViewAt(0);
+        int i = cardLayout.indexOfChild(card);
+        cardLayout.removeViewAt(i);
       }
     });
   }
