@@ -111,15 +111,9 @@ public class MainActivity extends AppCompatActivity {
     removeItem.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-//        loadHashmap();
-        //readFromSP();
-//        enableAllButtons();
-//        clearAllHighlights();
- //       showToast("Clicked");
-        //insertToSP(map);
-//        hashmaptest();
-        //hashmaptestArrays();
-//        writeSettings();
+        enableAllButtons();
+        clearAllHighlights();
+        removeItem.setBackgroundColor(Color.LTGRAY);
         loadFromHashmap();
       }
     });
@@ -172,6 +166,9 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         toShoppingList();
+        enableAllButtons();
+        clearAllHighlights();
+        //shoppingList.setBackgroundColor(Color.LTGRAY);
       }
     });
   } // onCreate
