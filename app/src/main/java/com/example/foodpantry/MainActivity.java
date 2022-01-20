@@ -31,27 +31,17 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.StreamCorruptedException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-  Button pantryFragment, addItem, removeItem, lowInStock, outOfStock, expiringSoon, expired, shoppingList;
+  Button pantryButton, addItem, removeItem, lowInStock, outOfStock, expiringSoon, expired, shoppingList;
 
   Toast lastToast;
 
@@ -85,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     numItems = cardLayout.getChildCount();
 
-    pantryFragment = findViewById(R.id.pantryButton);
+    pantryButton = findViewById(R.id.pantryButton);
     addItem = findViewById(R.id.addItemButton);
     removeItem = findViewById(R.id.removeItemButton);
     lowInStock = findViewById(R.id.lowInStockButton);
@@ -97,14 +87,14 @@ public class MainActivity extends AppCompatActivity {
     // When the user opens the app, the keyboard doesn't appear automatically
     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-    pantryFragment.setOnClickListener(new View.OnClickListener() {
+    pantryButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         showAll();
         enableAllButtons();
         clearAllHighlights();
-        pantryFragment.setEnabled(false);
-        pantryFragment.setBackgroundColor(Color.LTGRAY);
+        pantryButton.setEnabled(false);
+        pantryButton.setBackgroundColor(Color.LTGRAY);
       }
     });
 
@@ -142,8 +132,6 @@ public class MainActivity extends AppCompatActivity {
         clearAllHighlights();
         lowInStock.setEnabled(false);
         lowInStock.setBackgroundColor(Color.LTGRAY);
-//        readFromSP();
-//        readSetttings();
       }
     });
 
@@ -183,19 +171,16 @@ public class MainActivity extends AppCompatActivity {
     shoppingList.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-       // replaceFragment(new ShoppingListFragment());
         toShoppingList();
       }
     });
-
-    //loadFromHashmap();
   } // onCreate
 
   /**
    * Enables all buttons.
    */
   private void enableAllButtons() {
-    pantryFragment.setEnabled(true);
+    pantryButton.setEnabled(true);
     addItem.setEnabled(true);
     removeItem.setEnabled(true);
     lowInStock.setEnabled(true);
@@ -210,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
    * Clears all highlighted buttons by setting the background of the buttons to be transparent.
    */
   private void clearAllHighlights() {
-    pantryFragment.setBackgroundColor(Color.TRANSPARENT);
+    pantryButton.setBackgroundColor(Color.TRANSPARENT);
     addItem.setBackgroundColor(Color.TRANSPARENT);
     removeItem.setBackgroundColor(Color.TRANSPARENT);
     lowInStock.setBackgroundColor(Color.TRANSPARENT);
