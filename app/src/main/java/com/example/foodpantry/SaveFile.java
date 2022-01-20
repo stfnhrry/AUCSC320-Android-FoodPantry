@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SaveFile {
-    public Map<Integer, ItemFragment> pantry = new HashMap<Integer, ItemFragment>();
+    public Map<Integer, String[]> pantry = new HashMap<Integer, String[]>();
     public int itemKey = 0;
 
     /**
@@ -28,7 +28,7 @@ public class SaveFile {
      */
 
     public void createNewEntry(int index, ItemFragment myItem){
-        pantry.put(index, myItem);
+        //pantry.put(index, myItem);
         itemKey +=1;
     }
 
@@ -36,7 +36,7 @@ public class SaveFile {
         pantry.remove(index);
     }
 
-    public ItemFragment getItemAt(int index){
+    public String[] getItemAt(int index){
         return pantry.get(index);
     }
 

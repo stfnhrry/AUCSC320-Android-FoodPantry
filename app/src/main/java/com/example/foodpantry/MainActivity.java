@@ -13,7 +13,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -45,11 +44,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,11 +62,20 @@ public class MainActivity extends AppCompatActivity {
 
   int numItems;
 
+  int count = 0;
+
   Boolean shoppingListVisible;
 
-  SaveFile hashMap = new SaveFile();
+  SaveFile hashMapFile = new SaveFile();
 
-  Map<Integer, ItemFragment> map = hashMap.pantry;
+  ArrayList<String> itemInfo = new ArrayList<String>();
+
+  String[] itemArray = {"1", "TestName", "TestCategory", "TestAmount", "TestWeight", "TestDate"};
+  String[] itemArray2 = {"2", "TestName2", "TestCategory2", "TestAmount2", "TestWeight2", "TestDate2"};
+
+  //use firebase for data streaming
+
+  Map<Integer, String[]> map = hashMapFile.pantry;
 
   ArrayList<String> itemNames = new ArrayList<>();
   ArrayList<Integer> sizes = new ArrayList<>();
@@ -121,12 +127,14 @@ public class MainActivity extends AppCompatActivity {
       public void onClick(View view) {
 //        loadHashmap();
         //readFromSP();
-        enableAllButtons();
-        clearAllHighlights();
-        showToast("Clicked");
+//        enableAllButtons();
+//        clearAllHighlights();
+ //       showToast("Clicked");
         //insertToSP(map);
 //        hashmaptest();
+        //hashmaptestArrays();
 //        writeSettings();
+        loadFromHashmap();
       }
     });
 
@@ -183,6 +191,8 @@ public class MainActivity extends AppCompatActivity {
         toShoppingList();
       }
     });
+
+    //loadFromHashmap();
   } // onCreate
 
   /**
@@ -252,11 +262,65 @@ public class MainActivity extends AppCompatActivity {
 
     numItems = cardLayout.getChildCount();
 
+    View card = cardLayout.getChildAt(numItems - 1);
+    ImageButton editButton = card.findViewById(R.id.editButtonForItem);
+    ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
+    int id = numItems - 1;
+    if((numItems - 1) == 0){
+      saveToArray(icon, name, category, amount, weight, expDate, id);
+      showToast(numItems - 1 + " is the number of items part 1");
+    }
+    else{
+      saveToArray2(icon, name, category, amount, weight, expDate, id);
+      //showToast(numItems - 1 + " is the number of items part 2");
+    }
+    //saveToArray(icon, name, category, amount, weight, expDate, id);
+
+    //showToast(numItems - 1 + " is the number of items");
+
+    saveToHashmapNew((numItems - 1));
+
+    editButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        showEditItemDialog(card);
+      }
+
+    });
+    addToShop.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        addToCart(card);
+        addToShop.setEnabled(false);
+        showToast("Item added to cart");
+      }
+    });
+  }
+
+  public void loadNewItem(int icon, String name, String category, int amount, int weight, String expDate){
+    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+    transaction.add(cardLayout.getId(), ItemFragment.newInstance(icon, name, category, amount, weight, expDate));
+    transaction.commitNow();
+
+    numItems = cardLayout.getChildCount();
 
     View card = cardLayout.getChildAt(numItems - 1);
     ImageButton editButton = card.findViewById(R.id.editButtonForItem);
     ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
-    saveToHashMap((numItems - 1), ItemFragment.newInstance(icon, name, category, amount, weight, expDate));
+    int id = numItems - 1;
+//    if((numItems - 1) == 0){
+//      saveToArray(icon, name, category, amount, weight, expDate, id);
+//      showToast(numItems - 1 + " is the number of items part 1");
+//    }
+//    else{
+//      saveToArray2(icon, name, category, amount, weight, expDate, id);
+//      //showToast(numItems - 1 + " is the number of items part 2");
+//    }
+    //saveToArray(icon, name, category, amount, weight, expDate, id);
+
+    //showToast(numItems - 1 + " is the number of items");
+
+    //saveToHashmapNew((numItems - 1));
 
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -294,11 +358,11 @@ public class MainActivity extends AppCompatActivity {
 
     //cardLayout.indexOfChild(view);
     //hashMap.getItemAt(cardLayout.indexOfChild(view)).updateInfo(setIconFromCategory(category), name.getText().toString(), category.getSelectedItem().toString(), Integer.parseInt(amount.getText().toString()), Integer.parseInt(size.getText().toString()), expDate.getText().toString());
-    if(hashMap.getItemAt(cardLayout.indexOfChild(view)) != null){
-      showToast("Existssss");
+    if(hashMapFile.getItemAt(cardLayout.indexOfChild(view)) != null){
+      //showToast("Existssss");
       //hashMap.getItemAt(cardLayout.indexOfChild(view)).showToast("I'm here too");
     }
-    map.replace(cardLayout.indexOfChild(view), ItemFragment.newInstance(setIconFromCategory(category), name.getText().toString(), category.getSelectedItem().toString(), Integer.parseInt(amount.getText().toString()), Integer.parseInt(size.getText().toString()), expDate.getText().toString()));
+    //map.replace(cardLayout.indexOfChild(view), ItemFragment.newInstance(setIconFromCategory(category), name.getText().toString(), category.getSelectedItem().toString(), Integer.parseInt(amount.getText().toString()), Integer.parseInt(size.getText().toString()), expDate.getText().toString()));
   }
 
   public void showAll(){
@@ -554,8 +618,8 @@ public class MainActivity extends AppCompatActivity {
       int a = Integer.parseInt(amount.getText().toString());
       int s = Integer.parseInt(size.getText().toString());
       //Item item = new Item(t, d, a, s);
-      hashMap.createNewEntry(index, myItem);
-      hashMap.getHashMap();
+      hashMapFile.createNewEntry(index, myItem);
+      hashMapFile.getHashMap();
 
     } catch (ParseException e) {
       e.printStackTrace();
@@ -568,72 +632,125 @@ public class MainActivity extends AppCompatActivity {
     //showToast(title.getText().toString() + "is the item at 0");
   }
 
-  private void insertToSP(Map<Integer, ItemFragment> jsonMap) {
-    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-    SharedPreferences.Editor editor = sharedPreferences.edit();
-    //String l = new Gson().toJson(jsonMap);
-    //editor.clear().apply();
-    //editor.putString("list", l).apply();
-
-//    Set<String> set = new HashSet<String>();
-//    SharedPreferences prefs = getApplicationContext().getSharedPreferences(
-//            "My Preferences", Context.MODE_PRIVATE);
-//    editor.putStringSet("myStringSet", set);
-//    editor.commit();
-
-    showToast("Added to preferences");
-  }
-
-  private HashMap<Integer, View> readFromSP(){
-//    SharedPreferences sharedPreferences = getSharedPreferences("HashMap", MODE_PRIVATE);
-    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-    String defValue = new Gson().toJson(new HashMap<String, List<String>>());
-    String json=sharedPreferences.getString("map",defValue);
-    TypeToken<HashMap<String,List<String>>> token = new TypeToken<HashMap<String,List<String>>>() {};
-    HashMap<Integer, View> retrievedMap=new Gson().fromJson(json,token.getType());
-//    if(retrievedMap == null){
-//      showToast("Loaded map is invalid");
-//    }
-//    else{
-//      showToast(retrievedMap.get(0).findViewById(R.id.titleForItem) + "is the item at 0");
-//    }
-//    return retrievedMap;
-
-    String l = sharedPreferences.getString("list", "");
-//    LinearLayout loaded = new Gson().fromJson(l, TypeToken(LinearLayout));
-    return null;
-  }
-
-  private void hashmaptest()
+  private void hashmaptestArrays()
   {
     //create test hashmap
-    HashMap<String, String> testHashMap = new HashMap<String, String>();
-    testHashMap.put("key1", cardLayout.getChildAt(0).toString());
-    testHashMap.put("key2", cardLayout.getChildAt(1).toString());
+    HashMap<Integer, ArrayList<String>> testHashMap = new HashMap<Integer, ArrayList<String>>();
+    testHashMap.put(1, itemInfo);
+    testHashMap.put(2, itemInfo);
 
     //convert to string using gson
     Gson gson = new Gson();
     String hashMapString = gson.toJson(testHashMap);
 
     //save in shared prefs
-    SharedPreferences prefs = getSharedPreferences("test", MODE_PRIVATE);
-    prefs.edit().putString("hashString", hashMapString).apply();
+    SharedPreferences sharedPref2 = getPreferences(Context.MODE_PRIVATE);
+    SharedPreferences.Editor editor = sharedPref2.edit();
+    editor.putString("hashString", hashMapString).apply();
 
     //get from shared prefs
-    String storedHashMapString = prefs.getString("hashString", "oopsDintWork");
-    java.lang.reflect.Type type = new TypeToken<HashMap<String, String>>(){}.getType();
-    HashMap<String, String> testHashMap2 = gson.fromJson(storedHashMapString, type);
+    String storedHashMapString = sharedPref2.getString("hashString", "oopsDintWork");
+    java.lang.reflect.Type type = new TypeToken<HashMap<Integer, ArrayList<String>>>(){}.getType();
+    HashMap<Integer, ArrayList<String>> testHashMap2 = gson.fromJson(storedHashMapString, type);
 
     //use values
-    String toastString = testHashMap2.get("key1") + " | " + testHashMap2.get("key2");
-    //Toast.makeText(this, toastString, Toast.LENGTH_LONG).show();
+    String toastString = testHashMap2.get(1) + " | " + testHashMap2.get(2);
+    Toast.makeText(this, toastString, Toast.LENGTH_LONG).show();
+  }
 
-    if(testHashMap2.get("key1").equals(cardLayout.getChildAt(0).toString())){
-      showToast("Read just fine from file");
+  public void saveToArray(int icon, String name, String category, int amount, int weight, String expDate, int index){
+    String iconString = icon + "";
+    String amountString = amount + "";
+    String weightString = weight + "";
+
+    itemArray[0] = iconString;
+    itemArray[1] = name;
+    itemArray[2] = category;
+    itemArray[3] = amountString;
+    itemArray[4] = weightString;
+    itemArray[5] = expDate;
+
+    saveToHashmapNew(index);
+    //showToast(index + " is the index");
+  }
+
+  public void saveToArray2(int icon, String name, String category, int amount, int weight, String expDate, int index){
+    String iconString = icon + "";
+    String amountString = amount + "";
+    String weightString = weight + "";
+
+    itemArray2[0] = iconString;
+    itemArray2[1] = name;
+    itemArray2[2] = category;
+    itemArray2[3] = amountString;
+    itemArray2[4] = weightString;
+    itemArray2[5] = expDate;
+
+    showToast("Called from 2");
+    saveToHashmapNew2(index);
+    //showToast(index + " is the index");
+  }
+
+  public void loadFromArray(){
+    for (int i = 0; i < map.size(); i++) {
+      loadNewItem(Integer.parseInt(map.get(i)[0]), map.get(i)[1], map.get(i)[2], Integer.parseInt(map.get(i)[3]), Integer.parseInt(map.get(i)[4]), map.get(i)[5]);
     }
-    else{
-      showToast("Garbage");
+    //addNewItem();
+  }
+
+  public void saveToHashmapNew(int index){
+    map.put(index, itemArray);
+    //showToast(map + " is the map");
+
+    //convert to string using gson
+    Gson gson = new Gson();
+    String hashMapString = gson.toJson(map);
+
+    //save in shared prefs
+    SharedPreferences sharedPref2 = getPreferences(Context.MODE_PRIVATE);
+    SharedPreferences.Editor editor = sharedPref2.edit();
+    editor.clear();
+    editor.putString("hashString", hashMapString).apply();
+
+    //showToast(map + " Map 1");
+  }
+
+  public void saveToHashmapNew2(int index){
+    map.put(index, itemArray2);
+    showToast(map + " is the map 2");
+
+    //convert to string using gson
+    Gson gson = new Gson();
+    String hashMapString = gson.toJson(map);
+
+    //save in shared prefs
+    SharedPreferences sharedPref2 = getPreferences(Context.MODE_PRIVATE);
+    SharedPreferences.Editor editor = sharedPref2.edit();
+    editor.putString("hashString", hashMapString).apply();
+
+    //showToast(map + " Map 2");
+  }
+
+  public void loadFromHashmap(){
+    //get from shared prefs
+    SharedPreferences sharedPref2 = getPreferences(Context.MODE_PRIVATE);
+    SharedPreferences.Editor editor = sharedPref2.edit();
+
+    Gson gson = new Gson();
+
+    String storedHashMapString = sharedPref2.getString("hashString", "oopsDidntWork");
+    java.lang.reflect.Type type = new TypeToken<HashMap<Integer, String[]>>(){}.getType();
+    HashMap<Integer, String[]> testHashMap2 = gson.fromJson(storedHashMapString, type);
+
+    if (testHashMap2 == null){
+      showToast("its null");
+    }else{
+      showToast("its valid" + testHashMap2);
     }
+
+    map = testHashMap2;
+
+    loadFromArray();
   }
 
   private String subFolder = "/userdata";
@@ -747,7 +864,10 @@ public class MainActivity extends AppCompatActivity {
 
   public void hideKeyboard() {
     InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+    if(imm.isActive()){
+      imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+    }
+    //imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
   }
 
   public int setIconFromCategory(Spinner category){
