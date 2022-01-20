@@ -176,7 +176,6 @@ public class MainActivity extends AppCompatActivity {
     shoppingList.setEnabled(true);
   } // enableAllButtons
 
-
   /**
    * Clears all highlighted buttons by setting the background of the buttons to be transparent.
    */
@@ -191,11 +190,7 @@ public class MainActivity extends AppCompatActivity {
     shoppingList.setBackgroundColor(Color.TRANSPARENT);
   } // clearAllHighlights
 
-  /**
-   * Creates toast so we can easily add text later easily.
-   * @param text - any message
-   */
-  public void showToast(String text){
+  public void showToast(String text) {
     if(lastToast != null){
       lastToast.cancel();
     }
@@ -270,9 +265,9 @@ public class MainActivity extends AppCompatActivity {
   }
 
   /**
-   * Sets the icon to the correct image
+   * Sets the icon to the correct image.
    */
-  public void setIcon(){
+  public void setIcon() {
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.GONE);
       cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.VISIBLE);
@@ -440,7 +435,7 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  public void showAddItemDialog(){
+  public void showAddItemDialog() {
     Dialog addDialog = new Dialog(this);
     addDialog.setContentView(R.layout.add_item_dialog);
     Button addButton = addDialog.findViewById(R.id.confirmButton);
@@ -553,7 +548,7 @@ public class MainActivity extends AppCompatActivity {
     editDialog.show();
   }
 
-  public void addToCart(View card){
+  public void addToCart(View card) {
 
     TextView itemName = card.findViewById(R.id.titleForItem);
     TextView size = card.findViewById(R.id.sizeForItem);

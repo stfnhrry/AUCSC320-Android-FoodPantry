@@ -2,8 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="470dp"
-    android:layout_height="170dp"
+    android:layout_width="820dp"
+    android:layout_height="220dp"
     android:layout_margin="0dp"
     android:background="@android:color/transparent"
     android:orientation="vertical"
@@ -11,8 +11,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/itemCard0"
-        android:layout_width="450dp"
-        android:layout_height="150dp"
+        android:layout_width="800dp"
+        android:layout_height="200dp"
         android:innerRadius="0dp"
         android:padding="0dp"
         android:shape="ring"
@@ -31,8 +31,8 @@
 
             <ImageView
                 android:id="@+id/iconForItem"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
                 android:layout_marginStart="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
                 android:layout_marginTop="40dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Cookies"
-                android:textSize="34sp"
+                android:textSize="48sp"
                 app:layout_constraintStart_toEndOf="@+id/iconForItem"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,7 +60,7 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="20/03/2022"
                 android:textColor="#2196F3"
-                android:textSize="16sp"
+                android:textSize="24sp"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/daysTillExpiryText" />
@@ -74,7 +74,7 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="45"
                 android:textColor="#2196F3"
-                android:textSize="16sp"
+                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iconForItem" />
 
@@ -85,9 +85,9 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="36dp"
                 android:fontFamily="sans-serif-condensed-medium"
-                android:text="Days Till Expiry"
+                android:text="Days Until Expiry"
                 android:textColor="#2196F3"
-                android:textSize="16sp"
+                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/daysTillExpiryForItem" />
 
@@ -95,12 +95,12 @@
                 android:id="@+id/sizeForItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
-                android:layout_marginEnd="42dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="48dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="50"
                 android:textColor="#A8A8A8"
-                android:textSize="24sp"
+                android:textSize="34sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -108,10 +108,12 @@
                 android:id="@+id/kgText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="64dp"
                 android:layout_marginEnd="8dp"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:text="kg"
-                android:textSize="24sp"
+                android:textColor="#A8A8A8"
+                android:textSize="34sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/sizeForItem"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -125,7 +127,7 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="SNACKS"
                 android:textColor="#C6C6C6"
-                android:textSize="16sp"
+                android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -137,6 +139,7 @@
                 android:layout_marginBottom="18dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="30"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/leftInPantryText" />
 
@@ -148,6 +151,7 @@
                 android:layout_marginBottom="18dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Left In Pantry"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
