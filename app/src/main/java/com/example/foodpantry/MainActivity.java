@@ -6,7 +6,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
   SaveInfo hashMap = new SaveInfo();
 
-  public ArrayList<String> itemNames = new ArrayList<>();
+  public static ArrayList<String> itemNames = new ArrayList<>();
   ArrayList<Integer> sizes = new ArrayList<>();
 
 
@@ -141,8 +143,14 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
        // replaceFragment(new ShoppingListFragment());
+        if (getSharedPreferences("clear", Context.MODE_PRIVATE).getBoolean("clearClicked", false) == true){
+          itemNames.clear();
+          Log.d("clear", "if was ran");
+        }
+        else{
+          Log.d("clear", "else was ran");
+        }
         toShoppingList();
-        itemNames.clear();
       }
     });
   }
@@ -221,10 +229,6 @@ public class MainActivity extends AppCompatActivity {
         cardLayout.removeViewAt(i);
       }
     });
-  }
-
-  public void removing(View view){
-
   }
 
   public void setIcon(){

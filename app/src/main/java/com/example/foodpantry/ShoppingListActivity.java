@@ -2,7 +2,9 @@ package com.example.foodpantry;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -18,6 +20,8 @@ public class ShoppingListActivity extends AppCompatActivity {
   Button clear;
   ArrayList<String> foodNames;
   ArrayList<Integer> weight;
+  Boolean isCleared = false;
+  Toast lastToast;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -40,8 +44,10 @@ public class ShoppingListActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         linearLayout.removeAllViews();
+        MainActivity.itemNames.clear();
       }
     });
+
 
 
   } // onCreate
@@ -57,6 +63,16 @@ public class ShoppingListActivity extends AppCompatActivity {
   public void backToPantry(View aView) {
     onBackPressed();
   } // backToPantry
+
+  public void showToast(String text){
+    if(lastToast != null){
+      lastToast.cancel();
+    }
+    Toast toast = Toast.makeText(this, text, Toast.LENGTH_LONG);
+    toast.setGravity(Gravity.BOTTOM, 0, 0);
+    toast.show();
+    lastToast = toast;
+  }
 
 
 
