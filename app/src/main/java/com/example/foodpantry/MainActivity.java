@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
     cardLayout = findViewById(R.id.thisoneJames);
     numItems = cardLayout.getChildCount();
 
-
     pantryFragment = findViewById(R.id.pantryButton);
     addItem = findViewById(R.id.addItemButton);
     removeItem= findViewById(R.id.removeItemButton);
@@ -210,7 +209,6 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         addToCart(card);
-        addToShop.setEnabled(false);
         showToast("Item added to cart");
       }
     });
@@ -472,6 +470,9 @@ public class MainActivity extends AppCompatActivity {
     int sze = Integer.parseInt(size.getText().toString());
 
     itemNames.add(name);
+    for (String item : itemNames) {
+      Log.d("ITEMNAMES", item);
+    }
     sizes.add(sze);
 
   }

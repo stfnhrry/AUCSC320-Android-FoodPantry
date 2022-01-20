@@ -50,12 +50,12 @@ public class ShoppingListActivity extends AppCompatActivity {
    * Back to overview page
    * @param aView
    */
+  @Override
+  public void onBackPressed(){
+    super.onBackPressed();
+  }
   public void backToPantry(View aView) {
-    Button backButton = (Button) findViewById(R.id.backToMainActivityButton);
-
-    Intent toPantry = new Intent (this, MainActivity.class);
-
-    startActivity(toPantry);
+    onBackPressed();
   } // backToPantry
 
 
