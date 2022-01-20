@@ -607,8 +607,6 @@ public class MainActivity extends AppCompatActivity {
     Log.i("SAVE", "Saved to hashmap with 2: " + map.get(2) + " being " + map.get(2)[1].toString());
     }
 
-    //showToast(map + " is the map");
-
     //convert to string using gson
     Gson gson = new Gson();
     String hashMapString = gson.toJson(map);
@@ -618,8 +616,6 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences.Editor editor = sharedPref2.edit();
     editor.clear();
     editor.putString("hashString", hashMapString).apply();
-
-    //showToast(map + " Map 1");
   }
 
   public void loadFromHashmap(){
