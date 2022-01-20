@@ -318,7 +318,6 @@ public class MainActivity extends AppCompatActivity {
     currentAmount.setText(amount.getText());
     currentSize.setText(size.getText());
     currentExpDate.setText(expDate.getText());
-    //currentDaysTillExpiry.setText(getDateDifferenceAsString(currentExpDate.getText().toString()));
     currentCategory.setText(category.getSelectedItem().toString());
     if(getDateDifferenceAsLong(currentExpDate.getText().toString()) < 1){
       currentDaysTillExpiry.setText("Expired");
