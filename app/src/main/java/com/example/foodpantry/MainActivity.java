@@ -1,6 +1,8 @@
 package com.example.foodpantry;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
   Map<Integer, String[]> map = hashMapFile.pantry;
 
-  ArrayList<String> itemNames = new ArrayList<>();
+  public static ArrayList<String> itemNames = new ArrayList<>();
   ArrayList<Integer> sizes = new ArrayList<>();
 
   @Override
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     pantryButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        setIcon();
         showAll();
         enableAllButtons();
         clearAllHighlights();
@@ -90,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     addItem.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        setIcon();
         showAddItemDialog();
         enableAllButtons();
         clearAllHighlights();
@@ -100,16 +104,20 @@ public class MainActivity extends AppCompatActivity {
     removeItem.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        for (int i = 0; i < cardLayout.getChildCount(); i++) {
+          cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.GONE);
+          cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.VISIBLE);
+        }
         enableAllButtons();
         clearAllHighlights();
         removeItem.setBackgroundColor(Color.LTGRAY);
-        loadFromHashmap();
       }
     });
 
     lowInStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        setIcon();
         showLowInStock();
         enableAllButtons();
         clearAllHighlights();
@@ -120,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
     outOfStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        setIcon();
         showOutOfStock();
         enableAllButtons();
         clearAllHighlights();
@@ -130,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
     expiringSoon.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        setIcon();
         showExpiringSoon();
         enableAllButtons();
         clearAllHighlights();
@@ -140,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
     expired.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        setIcon();
         showExpired();
         enableAllButtons();
         clearAllHighlights();
@@ -153,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
         toShoppingList();
         enableAllButtons();
         clearAllHighlights();
-        //shoppingList.setBackgroundColor(Color.LTGRAY);
       }
     });
   } // onCreate
@@ -233,6 +243,15 @@ public class MainActivity extends AppCompatActivity {
     lastToast = toast;
   } // showToast
 
+  /**
+   * Adding new item to pantry.
+   * @param icon - image of the category
+   * @param name - name of the item
+   * @param category - which category it is in (like cans, jars, cookies, grains, other)
+   * @param amount - the amount in stock for a specific item
+   * @param weight - size of the item
+   * @param expDate - the date the item expires
+   */
   public void addNewItem(int icon, String name, String category, int amount, int weight, String expDate){
     Log.i("SAVE", "add new item");
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -245,8 +264,11 @@ public class MainActivity extends AppCompatActivity {
     Log.i("SAVE", "increment num items");
 
     View card = cardLayout.getChildAt(numItems - 1);
+    ImageButton removeTest = cardLayout.getChildAt(numItems -1).findViewById(R.id.removeIcon);
+    TextView cardText = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
     ImageButton editButton = card.findViewById(R.id.editButtonForItem);
     ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
+    removeTest.setVisibility(View.GONE);
 
     int id = numItems - 1;
     Log.i("SAVE", "set id index number to" + id);
@@ -278,8 +300,11 @@ public class MainActivity extends AppCompatActivity {
     numItems = cardLayout.getChildCount();
 
     View card = cardLayout.getChildAt(numItems - 1);
+    ImageButton removeTest = cardLayout.getChildAt(numItems -1).findViewById(R.id.removeIcon);
+    TextView cardText = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
     ImageButton editButton = card.findViewById(R.id.editButtonForItem);
     ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
+    removeTest.setVisibility(View.GONE);
 
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -292,11 +317,38 @@ public class MainActivity extends AppCompatActivity {
       public void onClick(View v) {
         addToCart(card);
         addToShop.setEnabled(false);
-        showToast("Items has added to cart");
+        showToast("Item added to cart");
+      }
+    });
+    removeTest.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        int i = cardLayout.indexOfChild(card);
+        cardLayout.removeViewAt(i);
       }
     });
   }
 
+  /**
+   * Sets the icon to the correct image.
+   */
+  public void setIcon() {
+  public void setIcon(){
+    for (int i = 0; i < cardLayout.getChildCount(); i++) {
+      cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.GONE);
+      cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.VISIBLE);
+    }
+  }
+
+  /**
+   * Edits an item already in the pantry.
+   * @param view - the edit button
+   * @param name - name of the item
+   * @param category - category of the item (can, jar, cookies,...)
+   * @param amount - the amount in stock of the item
+   * @param size - size of the item
+   * @param expDate - expiry date of the item
+   */
   public void editItem(View view, EditText name, Spinner category, EditText amount, EditText size, EditText expDate){
     ImageView currentIcon = view.findViewById(R.id.iconForItem);
     TextView currentName = view.findViewById(R.id.titleForItem);
@@ -330,12 +382,18 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
+  /**
+   * Shows all the items in the pantry
+   */
   public void showAll(){
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
     }
   }
 
+  /**
+   * Shows the items low in stock
+   */
   public void showLowInStock(){
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       TextView text = cardLayout.getChildAt(i).findViewById(R.id.amountLeftInPantryForItem);
@@ -349,6 +407,9 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
+  /**
+   * Shows the items that are out of stock
+   */
   public void showOutOfStock(){
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       TextView text = cardLayout.getChildAt(i).findViewById(R.id.amountLeftInPantryForItem);
@@ -362,6 +423,9 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
+  /**
+   * Shows the items that are expiring soon
+   */
   public void showExpiringSoon(){
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       TextView date = cardLayout.getChildAt(i).findViewById(R.id.expiryDateForItem);
@@ -378,6 +442,9 @@ public class MainActivity extends AppCompatActivity {
     }//for
   }
 
+  /**
+   * Shows the items that are expired
+   */
   public void showExpired(){
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       TextView date = cardLayout.getChildAt(i).findViewById(R.id.expiryDateForItem);
@@ -400,6 +467,11 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
+  /**
+   * Calculates the amount of days.
+   * @param expiryDate
+   * @return
+   */
   public String getDateDifferenceAsString(String expiryDate){
     Date calendar = Calendar.getInstance().getTime();
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
