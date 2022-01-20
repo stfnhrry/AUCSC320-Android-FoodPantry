@@ -332,7 +332,6 @@ public class MainActivity extends AppCompatActivity {
   /**
    * Sets the icon to the correct image.
    */
-  public void setIcon() {
   public void setIcon(){
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.GONE);
