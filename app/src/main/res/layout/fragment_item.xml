@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="670dp"
+    android:layout_width="820dp"
     android:layout_height="220dp"
     android:layout_margin="0dp"
     android:background="@android:color/transparent"
@@ -11,7 +11,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/itemCard0"
-        android:layout_width="650dp"
+        android:layout_width="800dp"
         android:layout_height="200dp"
         android:innerRadius="0dp"
         android:padding="0dp"
@@ -139,7 +139,7 @@
                 android:layout_marginBottom="18dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="30"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/leftInPantryText" />
 
@@ -151,7 +151,7 @@
                 android:layout_marginBottom="18dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="Left In Pantry"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
