@@ -310,6 +310,9 @@ public class MainActivity extends AppCompatActivity {
     currentCategory.setText(category.getSelectedItem().toString());
   }
 
+  /**
+   * Shows all the items in the pantry
+   */
   public void showAll(){
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
@@ -317,6 +320,9 @@ public class MainActivity extends AppCompatActivity {
     removeAllFragmentsFromScreen();
   }
 
+  /**
+   * Shows the items low in stock
+   */
   public void showLowInStock(){
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       TextView text = cardLayout.getChildAt(i).findViewById(R.id.amountLeftInPantryForItem);
@@ -331,6 +337,9 @@ public class MainActivity extends AppCompatActivity {
     removeAllFragmentsFromScreen();
   }
 
+  /**
+   * Shows the items that are out of stock
+   */
   public void showOutOfStock(){
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       TextView text = cardLayout.getChildAt(i).findViewById(R.id.amountLeftInPantryForItem);
@@ -345,6 +354,9 @@ public class MainActivity extends AppCompatActivity {
     removeAllFragmentsFromScreen();
   }
 
+  /**
+   * Shows the items that are expiring soon
+   */
   public void showExpiringSoon(){
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       TextView date = cardLayout.getChildAt(i).findViewById(R.id.expiryDateForItem);
@@ -362,6 +374,7 @@ public class MainActivity extends AppCompatActivity {
 
     removeAllFragmentsFromScreen();
   }
+
 
   public void showExpired(){
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
