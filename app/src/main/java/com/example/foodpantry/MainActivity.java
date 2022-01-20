@@ -47,10 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
   LinearLayout cardLayout;
 
-  View testCard;
-
-  Fragment activeFragment;
-
   int numItems;
 
   Boolean shoppingListVisible;
@@ -187,7 +183,6 @@ public class MainActivity extends AppCompatActivity {
     shoppingList.setEnabled(true);
   } // enableAllButtons
 
-
   /**
    * Clears all highlighted buttons by setting the background of the buttons to be transparent.
    */
@@ -212,40 +207,24 @@ public class MainActivity extends AppCompatActivity {
     lastToast = toast;
   } // showToast
 
-  private void replaceFragment(Fragment fragment) {
-    activeFragment = fragment;
-    FragmentManager fragmentManager = getSupportFragmentManager();
-    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-    fragmentTransaction.replace(R.id.FrameLayout, fragment);
-    fragmentTransaction.commit();
-  }
-
-  private void removeAllFragmentsFromScreen() {
-    if (activeFragment == null) {
-      return;
-    }
-    else{
-      FragmentManager fragmentManager = getSupportFragmentManager();
-      FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-      fragmentTransaction.remove(activeFragment);
-      activeFragment = null;
-      fragmentTransaction.commit();
-    }
-  }
-
   public void addNewItem(int icon, String name, String category, int amount, int weight, String expDate){
+    Log.i("SAVE", "add new item");
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
     transaction.add(cardLayout.getId(), ItemFragment.newInstance(icon, name, category, amount, weight, expDate));
     transaction.commitNow();
 
-    Log.i("SAVE", "addNewItem: Added committed to screen");
+    Log.i("SAVE", "commit to fragment");
+
     numItems = cardLayout.getChildCount();
+    Log.i("SAVE", "increment num items");
 
     View card = cardLayout.getChildAt(numItems - 1);
     ImageButton editButton = card.findViewById(R.id.editButtonForItem);
     ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
 
     int id = numItems - 1;
+    Log.i("SAVE", "set id index number to" + id);
+    Log.i("SAVE", "Call save to array next with parameters icon: " + icon + " , name: "+ name + " , id: " + id);
     saveToArray(icon, name, category, amount, weight, expDate, id);
 
     editButton.setOnClickListener(new View.OnClickListener() {
@@ -266,7 +245,6 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void loadNewItem(int icon, String name, String category, int amount, int weight, String expDate){
-    Log.i("SAVE", "loadNewItem: Added committed to screen");
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
     transaction.add(cardLayout.getId(), ItemFragment.newInstance(icon, name, category, amount, weight, expDate));
     transaction.commitNow();
@@ -276,27 +254,12 @@ public class MainActivity extends AppCompatActivity {
     View card = cardLayout.getChildAt(numItems - 1);
     ImageButton editButton = card.findViewById(R.id.editButtonForItem);
     ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
-    int id = numItems - 1;
-//    if((numItems - 1) == 0){
-//      saveToArray(icon, name, category, amount, weight, expDate, id);
-//      showToast(numItems - 1 + " is the number of items part 1");
-//    }
-//    else{
-//      saveToArray2(icon, name, category, amount, weight, expDate, id);
-//      //showToast(numItems - 1 + " is the number of items part 2");
-//    }
-    //saveToArray(icon, name, category, amount, weight, expDate, id);
-
-    //showToast(numItems - 1 + " is the number of items");
-
-    //saveToHashmapNew((numItems - 1));
 
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         showEditItemDialog(card);
       }
-
     });
     addToShop.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -309,7 +272,6 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void editItem(View view, EditText name, Spinner category, EditText amount, EditText size, EditText expDate){
-    Log.i("SAVE", "editItem: Added committed to screen");
     ImageView currentIcon = view.findViewById(R.id.iconForItem);
     TextView currentName = view.findViewById(R.id.titleForItem);
     TextView currentAmount = view.findViewById(R.id.amountLeftInPantryForItem);
@@ -326,7 +288,8 @@ public class MainActivity extends AppCompatActivity {
     currentDaysTillExpiry.setText(getDateDifferenceAsString(currentExpDate.getText().toString()));
     currentCategory.setText(category.getSelectedItem().toString());
 
-    //cardLayout.indexOfChild(view);
+    int index = cardLayout.indexOfChild(view);
+    showToast(map.get(index) + "is the index");
     //hashMap.getItemAt(cardLayout.indexOfChild(view)).updateInfo(setIconFromCategory(category), name.getText().toString(), category.getSelectedItem().toString(), Integer.parseInt(amount.getText().toString()), Integer.parseInt(size.getText().toString()), expDate.getText().toString());
     if(hashMapFile.getItemAt(cardLayout.indexOfChild(view)) != null){
       //showToast("Existssss");
@@ -339,7 +302,6 @@ public class MainActivity extends AppCompatActivity {
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       cardLayout.getChildAt(i).setVisibility(View.VISIBLE);
     }
-    removeAllFragmentsFromScreen();
   }
 
   public void showLowInStock(){
@@ -353,7 +315,6 @@ public class MainActivity extends AppCompatActivity {
         cardLayout.getChildAt(i).setVisibility(View.GONE);
       }
     }
-    removeAllFragmentsFromScreen();
   }
 
   public void showOutOfStock(){
@@ -367,7 +328,6 @@ public class MainActivity extends AppCompatActivity {
         cardLayout.getChildAt(i).setVisibility(View.GONE);
       }
     }
-    removeAllFragmentsFromScreen();
   }
 
   public void showExpiringSoon(){
@@ -384,8 +344,6 @@ public class MainActivity extends AppCompatActivity {
         cardLayout.getChildAt(i).setVisibility(View.GONE);
       }
     }//for
-
-    removeAllFragmentsFromScreen();
   }
 
   public void showExpired(){
@@ -402,8 +360,6 @@ public class MainActivity extends AppCompatActivity {
         cardLayout.getChildAt(i).setVisibility(View.GONE);
       }
     }//for
-
-    removeAllFragmentsFromScreen();
   }
 
   public void showNone(){
@@ -588,6 +544,7 @@ public class MainActivity extends AppCompatActivity {
     itemArray[4] = weightString;
     itemArray[5] = expDate;
 
+    Log.i("SAVE", "Call save to hashmap with parameters icon: " + iconString + " , name: " + name + " , id: " + index);
     saveToHashmapNew(index);
     //showToast(index + " is the index");
   }
@@ -601,8 +558,24 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void saveToHashmapNew(int index){
-    Log.i("SAVE", "SaveToHashmapNew");
+    Log.i("SAVE", "SaveToHashmapNew with index: " + index);
+    if (map != null) {
+      Log.i("SAVE", "Before saving the map is : " + map);
+    }
     map.put(index, itemArray);
+    if (map != null) {
+      Log.i("SAVE", "After saving the map is : " + map);
+    }
+    if(map.get(0) != null){
+      Log.i("SAVE", "Saved to hashmap with 0: " + map.get(0) + " being " + map.get(0)[1].toString());
+    }
+    if(map.get(1) != null){
+      Log.i("SAVE", "Saved to hashmap with 1: " + map.get(1) + " being " + map.get(1)[1].toString());
+    }
+    if(map.get(2) != null){
+    Log.i("SAVE", "Saved to hashmap with 2: " + map.get(2) + " being " + map.get(2)[1].toString());
+    }
+
     //showToast(map + " is the map");
 
     //convert to string using gson
@@ -636,8 +609,15 @@ public class MainActivity extends AppCompatActivity {
       showToast("its valid" + testHashMap2);
     }
 
+    Log.i("SAVE", "TestHashmap loaded with 0: " + testHashMap2.get(0) + " being " + testHashMap2.get(0)[1].toString());
+    Log.i("SAVE", "TestHashmap loaded with 1: " + testHashMap2.get(1) + " being " + testHashMap2.get(1)[1].toString());
+    Log.i("SAVE", "TestHashmap loaded with 2: " + testHashMap2.get(2) + " being " + testHashMap2.get(2)[1].toString());
     map = testHashMap2;
+    Log.i("SAVE", "map declared with 0: " + map.get(0) + " being " + map.get(0)[1].toString());
+    Log.i("SAVE", "map declared with 1: " + map.get(1) + " being " + map.get(1)[1].toString());
+    Log.i("SAVE", "map declared with 2: " + map.get(2) + " being " + map.get(2)[1].toString());
 
+    Log.i("SAVE", "Load from array called");
     loadFromArray();
   }
 
