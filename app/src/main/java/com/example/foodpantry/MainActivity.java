@@ -7,8 +7,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -48,8 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
   SaveInfo hashMap = new SaveInfo();
 
-  ArrayList<String> itemNames = new ArrayList<>();
+  public static ArrayList<String> itemNames = new ArrayList<>();
   ArrayList<Integer> sizes = new ArrayList<>();
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -268,6 +271,7 @@ public class MainActivity extends AppCompatActivity {
    * Sets the icon to the correct image.
    */
   public void setIcon() {
+  public void setIcon(){
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.GONE);
       cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.VISIBLE);
@@ -557,6 +561,9 @@ public class MainActivity extends AppCompatActivity {
     int sze = Integer.parseInt(size.getText().toString());
 
     itemNames.add(name);
+    for (String item : itemNames) {
+      Log.d("ITEMNAMES", item);
+    }
     sizes.add(sze);
 
   }

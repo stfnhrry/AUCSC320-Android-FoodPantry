@@ -2,7 +2,9 @@ package com.example.foodpantry;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -12,18 +14,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import android.widget.ImageButton;
 
 public class ShoppingListActivity extends AppCompatActivity {
 
   Button clear;
-
   ArrayList<String> foodNames;
   ArrayList<Integer> weight;
+  Boolean isCleared = false;
+  Toast lastToast;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_shopping_list);
+
     //get arraylist from main activity
     foodNames = (ArrayList<String>) getIntent().getStringArrayListExtra("names");
     weight = (ArrayList<Integer>) getIntent().getIntegerArrayListExtra("sizes");
@@ -32,37 +35,45 @@ public class ShoppingListActivity extends AppCompatActivity {
     for(int i= 0;i < foodNames.size(); i++){
       TextView t = new TextView(this);
       t.setTextSize(35);
-      t.setText(foodNames.get(i) + "  -  " + weight.get(i) + "kg");
+      t.setText(foodNames.get(i) + "  -" + weight.get(i) + "kg");
       linearLayout.addView(t);
+      //a bug
     }
     clear = (Button) findViewById(R.id.ClearAll);
     clear.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         linearLayout.removeAllViews();
+        MainActivity.itemNames.clear();
       }
     });
+
 
 
   } // onCreate
 
   /**
    * Back to overview page
-   * @param aView
+   * @param
    */
+  @Override
+  public void onBackPressed(){
+    super.onBackPressed();
+  }
   public void backToPantry(View aView) {
-    Button backButton = (Button) findViewById(R.id.backToMainActivityButton);
-    Intent toPantry = new Intent (this, MainActivity.class);
-    startActivity(toPantry);
+    onBackPressed();
   } // backToPantry
 
-  public void printShoppingList(View view) {
-    Intent sendIntent = new Intent();
-    sendIntent.setAction(Intent.ACTION_SEND);
-    sendIntent.putExtra(Intent.EXTRA_TEXT, "printing function");
-    sendIntent.setType("text/plain");
-    startActivity(sendIntent);
-
+  public void showToast(String text){
+    if(lastToast != null){
+      lastToast.cancel();
+    }
+    Toast toast = Toast.makeText(this, text, Toast.LENGTH_LONG);
+    toast.setGravity(Gravity.BOTTOM, 0, 0);
+    toast.show();
+    lastToast = toast;
   }
+
+
 
 } // class
