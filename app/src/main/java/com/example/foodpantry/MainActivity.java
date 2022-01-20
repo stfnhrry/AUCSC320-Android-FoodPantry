@@ -143,13 +143,6 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
        // replaceFragment(new ShoppingListFragment());
-        if (getSharedPreferences("clear", Context.MODE_PRIVATE).getBoolean("clearClicked", false) == true){
-          itemNames.clear();
-          Log.d("clear", "if was ran");
-        }
-        else{
-          Log.d("clear", "else was ran");
-        }
         toShoppingList();
       }
     });
