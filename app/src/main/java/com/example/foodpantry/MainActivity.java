@@ -291,10 +291,10 @@ public class MainActivity extends AppCompatActivity {
     int index = cardLayout.indexOfChild(view);
     showToast(map.get(index) + "is the index");
     //hashMap.getItemAt(cardLayout.indexOfChild(view)).updateInfo(setIconFromCategory(category), name.getText().toString(), category.getSelectedItem().toString(), Integer.parseInt(amount.getText().toString()), Integer.parseInt(size.getText().toString()), expDate.getText().toString());
-    if(hashMapFile.getItemAt(cardLayout.indexOfChild(view)) != null){
+    //if(hashMapFile.getItemAt(cardLayout.indexOfChild(view)) != null){
       //showToast("Existssss");
       //hashMap.getItemAt(cardLayout.indexOfChild(view)).showToast("I'm here too");
-    }
+    //}
     //map.replace(cardLayout.indexOfChild(view), ItemFragment.newInstance(setIconFromCategory(category), name.getText().toString(), category.getSelectedItem().toString(), Integer.parseInt(amount.getText().toString()), Integer.parseInt(size.getText().toString()), expDate.getText().toString()));
   }
 
@@ -537,6 +537,15 @@ public class MainActivity extends AppCompatActivity {
     String amountString = amount + "";
     String weightString = weight + "";
 
+    String[] temp = new String[6];
+
+    temp[0] = iconString;
+    temp[1] = name;
+    temp[2] = category;
+    temp[3] = amountString;
+    temp[4] = weightString;
+    temp[5] = expDate;
+
     itemArray[0] = iconString;
     itemArray[1] = name;
     itemArray[2] = category;
@@ -545,8 +554,59 @@ public class MainActivity extends AppCompatActivity {
     itemArray[5] = expDate;
 
     Log.i("SAVE", "Call save to hashmap with parameters icon: " + iconString + " , name: " + name + " , id: " + index);
-    saveToHashmapNew(index);
+    saveToHashmapNew(temp, index);
     //showToast(index + " is the index");
+  }
+
+  public void saveToArrayTest(int icon, String name, String category, int amount, int weight, String expDate, int index){
+    Log.i("SAVE", "saveToArray");
+    String iconString = icon + "";
+    String amountString = amount + "";
+    String weightString = weight + "";
+
+    String[] new0 = new String[6];
+
+    new0[0] = iconString;
+    new0[1] = name;
+    new0[2] = category;
+    new0[3] = amountString;
+    new0[4] = weightString;
+    new0[5] = expDate;
+
+    Log.i("SAVE", "Call save to hashmap with parameters icon: " + iconString + " , name: " + name + " , id: 0");
+    saveToHashmapNew(new0, 0);
+
+    iconString = icon + "";
+    amountString = amount + 1 + "";
+    weightString = weight + 1 + "";
+
+    String[] new1 = new String[6];
+
+    new1[0] = iconString;
+    new1[1] = name + "1";
+    new1[2] = category;
+    new1[3] = amountString;
+    new1[4] = weightString;
+    new1[5] = expDate;
+
+    Log.i("SAVE", "Call save to hashmap with parameters icon: " + iconString + " , name: " + name + "1 , id: 1");
+    saveToHashmapNew(new1, 1);
+
+    iconString = icon + "";
+    amountString = amount + 2 + "";
+    weightString = weight + 2 + "";
+
+    String[] new2 = new String[6];
+
+    new2[0] = iconString;
+    new2[1] = name + "2";
+    new2[2] = category;
+    new2[3] = amountString;
+    new2[4] = weightString;
+    new2[5] = expDate;
+
+    Log.i("SAVE", "Call save to hashmap with parameters icon: " + iconString + " , name: " + name + "2 , id: 2");
+    saveToHashmapNew(new2, 2);
   }
 
   public void loadFromArray(){
@@ -557,12 +617,12 @@ public class MainActivity extends AppCompatActivity {
     //addNewItem();
   }
 
-  public void saveToHashmapNew(int index){
+  public void saveToHashmapNew(String[] array, int index){
     Log.i("SAVE", "SaveToHashmapNew with index: " + index);
     if (map != null) {
       Log.i("SAVE", "Before saving the map is : " + map);
     }
-    map.put(index, itemArray);
+    map.put(index, array);
     if (map != null) {
       Log.i("SAVE", "After saving the map is : " + map);
     }
