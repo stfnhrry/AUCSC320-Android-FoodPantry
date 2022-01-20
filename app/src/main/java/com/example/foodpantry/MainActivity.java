@@ -111,12 +111,11 @@ public class MainActivity extends AppCompatActivity {
     lowInStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-//        showLowInStock();
+        showLowInStock();
         enableAllButtons();
         clearAllHighlights();
 //        lowInStock.setEnabled(false);
         lowInStock.setBackgroundColor(Color.LTGRAY);
-        refreshAllItems();
       }
     });
 
