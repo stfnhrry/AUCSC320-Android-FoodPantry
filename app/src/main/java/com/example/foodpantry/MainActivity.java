@@ -1,8 +1,6 @@
 package com.example.foodpantry;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
@@ -118,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         clearAllHighlights();
 //        lowInStock.setEnabled(false);
         lowInStock.setBackgroundColor(Color.LTGRAY);
-        updateDate();
+        refreshAllItems();
       }
     });
 
@@ -170,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
   protected void onStart(){
     super.onStart();
     Log.i("ACTIVITY STATE", "On Start");
+    refreshAllItems();
   }
 
   @Override
@@ -687,7 +686,7 @@ public class MainActivity extends AppCompatActivity {
     return itemIcon;
   }
 
-  public void updateDate(){
+  public void refreshAllItems(){
     cardLayout.removeAllViewsInLayout();
     loadFromHashmap();
   }
