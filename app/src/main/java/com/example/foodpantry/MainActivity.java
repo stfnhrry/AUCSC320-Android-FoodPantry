@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
     pantryFragment.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //removeFragment();
         setIcon();
         showAll();
         enableAllButtons();
@@ -110,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
     lowInStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //replaceFragment(new LowInStockFragment());
         setIcon();
         showLowInStock();
         enableAllButtons();
@@ -123,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
     outOfStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //replaceFragment(new OutOfStockFragment());
         setIcon();
         showOutOfStock();
         enableAllButtons();
@@ -136,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
     expiringSoon.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //replaceFragment(new ExpiringSoonFragment());
         setIcon();
         showExpiringSoon();
         enableAllButtons();
@@ -149,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
     expired.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        //replaceFragment(new ExpiredFragment());
         setIcon();
         showExpired();
         enableAllButtons();
@@ -162,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
     shoppingList.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-       // replaceFragment(new ShoppingListFragment());
         toShoppingList();
       }
     });
@@ -197,6 +191,10 @@ public class MainActivity extends AppCompatActivity {
     shoppingList.setBackgroundColor(Color.TRANSPARENT);
   } // clearAllHighlights
 
+  /**
+   * Creates toast so we can easily add text later easily.
+   * @param text - any message
+   */
   public void showToast(String text){
     if(lastToast != null){
       lastToast.cancel();
@@ -207,14 +205,9 @@ public class MainActivity extends AppCompatActivity {
     lastToast = toast;
   } // showToast
 
-  private void replaceFragment(Fragment fragment) {
-    activeFragment = fragment;
-    FragmentManager fragmentManager = getSupportFragmentManager();
-    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-    fragmentTransaction.replace(R.id.FrameLayout, fragment);
-    fragmentTransaction.commit();
-  }
-
+  /**
+   * Removes all the fragments on the screen
+   */
   private void removeAllFragmentsFromScreen() {
     if (activeFragment == null) {
       return;
@@ -228,6 +221,15 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
+  /**
+   * Adding new item to pantry.
+   * @param icon - image of the category
+   * @param name - name of the item
+   * @param category - which category it is in (like cans, jars, cookies, grains, other)
+   * @param amount - the amount in stock for a specific item
+   * @param weight - size of the item
+   * @param expDate - the date the item expires
+   */
   public void addNewItem(int icon, String name, String category, int amount, int weight, String expDate){
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
     transaction.add(cardLayout.getId(), ItemFragment.newInstance(icon, name, category, amount, weight, expDate));
