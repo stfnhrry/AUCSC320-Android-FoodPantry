@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
         showAll();
         enableAllButtons();
         clearAllHighlights();
-        pantryButton.setEnabled(false);
         pantryButton.setBackgroundColor(Color.LTGRAY);
       }
     });
@@ -114,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
         showLowInStock();
         enableAllButtons();
         clearAllHighlights();
-//        lowInStock.setEnabled(false);
         lowInStock.setBackgroundColor(Color.LTGRAY);
       }
     });
@@ -125,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
         showOutOfStock();
         enableAllButtons();
         clearAllHighlights();
-        outOfStock.setEnabled(false);
         outOfStock.setBackgroundColor(Color.LTGRAY);
       }
     });
@@ -136,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
         showExpiringSoon();
         enableAllButtons();
         clearAllHighlights();
-        expiringSoon.setEnabled(false);
         expiringSoon.setBackgroundColor(Color.LTGRAY);
       }
     });
@@ -147,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
         showExpired();
         enableAllButtons();
         clearAllHighlights();
-        expired.setEnabled(false);
         expired.setBackgroundColor(Color.LTGRAY);
       }
     });
