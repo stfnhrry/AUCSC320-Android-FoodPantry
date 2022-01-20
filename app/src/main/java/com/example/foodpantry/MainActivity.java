@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         showAll();
         enableAllButtons();
         clearAllHighlights();
-        handleSearch();
         pantryFragment.setEnabled(false);
         pantryFragment.setBackgroundColor(Color.LTGRAY);
       }
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     removeItem.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        for (int i = 1; i < cardLayout.getChildCount(); i++) {
+        for (int i = 0; i < cardLayout.getChildCount(); i++) {
           cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.GONE);
           cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.VISIBLE);
         }
@@ -194,53 +193,6 @@ public class MainActivity extends AppCompatActivity {
     shoppingList.setBackgroundColor(Color.TRANSPARENT);
   } // clearAllHighlights
 
-  public void handleSearch() {
-    SearchView searchView = (SearchView) findViewById(R.id.searchView);
-    System.out.println(itemNames.size());
-    if (itemNames.size() == 0) {
-      searchView.setQueryHint("No items are currently in the pantry.");
-      return;
-    } else {
-      searchView.setQueryHint("Use the search bar to find any items in the pantry.");
-    }
-    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-      @Override
-      public boolean onQueryTextSubmit(String query) {
-        // do something on text submit
-        return false;
-      }
-      @Override
-      public boolean onQueryTextChange(String newText) {
-        // do something when text changes
-        newText = searchView.getQuery().toString();
-        int trackerForCurrentLetterInSearchBar = newText.length();
-        if (newText.length() <= 0) {
-            showAll();
-          return true;
-        } else {
-          char currentCharacter = newText.charAt(trackerForCurrentLetterInSearchBar - 1);
-          System.out.println("Current character: " + currentCharacter);
-          System.out.println(itemNames.size());
-          for (int currentNameInArray = 0; currentNameInArray < itemNames.size(); currentNameInArray++) {
-            if (currentCharacter != itemNames.get(currentNameInArray).charAt(0)) {
-              cardLayout.getChildAt(currentNameInArray).setVisibility(View.GONE);
-            }
-          }
-          trackerForCurrentLetterInSearchBar++;
-          return false;
-        }
-      }
-    });
-    searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-      @Override
-      public boolean onClose() {
-        showAll();
-        return false;
-      }
-    });
-  } // handleSearch
-
-
   public void showToast(String text) {
     if(lastToast != null){
       lastToast.cancel();
@@ -315,15 +267,15 @@ public class MainActivity extends AppCompatActivity {
     });
   }
 
-  public void removing(View view){
+  public void removing(View view) {
 
   }
 
   /**
-   * Sets the icon to the correct image
+   * Sets the icon to the correct image.
    */
   public void setIcon() {
-    for (int i = 1; i < cardLayout.getChildCount(); i++) {
+    for (int i = 0; i < cardLayout.getChildCount(); i++) {
       cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.GONE);
       cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.VISIBLE);
     }
