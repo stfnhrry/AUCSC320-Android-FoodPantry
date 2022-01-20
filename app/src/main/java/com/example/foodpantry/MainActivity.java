@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -260,6 +261,7 @@ public class MainActivity extends AppCompatActivity {
     transaction.add(cardLayout.getId(), ItemFragment.newInstance(icon, name, category, amount, weight, expDate));
     transaction.commitNow();
 
+    Log.i("SAVE", "addNewItem: Added committed to screen");
     numItems = cardLayout.getChildCount();
 
     View card = cardLayout.getChildAt(numItems - 1);
@@ -274,11 +276,6 @@ public class MainActivity extends AppCompatActivity {
       saveToArray2(icon, name, category, amount, weight, expDate, id);
       //showToast(numItems - 1 + " is the number of items part 2");
     }
-    //saveToArray(icon, name, category, amount, weight, expDate, id);
-
-    //showToast(numItems - 1 + " is the number of items");
-
-    saveToHashmapNew((numItems - 1));
 
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -298,6 +295,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void loadNewItem(int icon, String name, String category, int amount, int weight, String expDate){
+    Log.i("SAVE", "loadNewItem: Added committed to screen");
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
     transaction.add(cardLayout.getId(), ItemFragment.newInstance(icon, name, category, amount, weight, expDate));
     transaction.commitNow();
@@ -340,6 +338,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void editItem(View view, EditText name, Spinner category, EditText amount, EditText size, EditText expDate){
+    Log.i("SAVE", "editItem: Added committed to screen");
     ImageView currentIcon = view.findViewById(R.id.iconForItem);
     TextView currentName = view.findViewById(R.id.titleForItem);
     TextView currentAmount = view.findViewById(R.id.amountLeftInPantryForItem);
@@ -480,6 +479,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void showAddItemDialog(){
+    Log.i("SAVE", "Show add item dialog");
     Dialog addDialog = new Dialog(this);
     addDialog.setContentView(R.layout.add_item_dialog);
     Button addButton = addDialog.findViewById(R.id.confirmButton);
@@ -659,6 +659,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void saveToArray(int icon, String name, String category, int amount, int weight, String expDate, int index){
+    Log.i("SAVE", "saveToArray");
     String iconString = icon + "";
     String amountString = amount + "";
     String weightString = weight + "";
@@ -675,6 +676,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void saveToArray2(int icon, String name, String category, int amount, int weight, String expDate, int index){
+    Log.i("SAVE", "saveToArray2");
     String iconString = icon + "";
     String amountString = amount + "";
     String weightString = weight + "";
@@ -692,6 +694,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void loadFromArray(){
+    Log.i("SAVE", "loadFromArray");
     for (int i = 0; i < map.size(); i++) {
       loadNewItem(Integer.parseInt(map.get(i)[0]), map.get(i)[1], map.get(i)[2], Integer.parseInt(map.get(i)[3]), Integer.parseInt(map.get(i)[4]), map.get(i)[5]);
     }
@@ -699,6 +702,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void saveToHashmapNew(int index){
+    Log.i("SAVE", "SaveToHashmapNew");
     map.put(index, itemArray);
     //showToast(map + " is the map");
 
@@ -716,6 +720,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void saveToHashmapNew2(int index){
+    Log.i("SAVE", "SaveToHashmapNew2");
     map.put(index, itemArray2);
     showToast(map + " is the map 2");
 
@@ -732,6 +737,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void loadFromHashmap(){
+    Log.i("SAVE", "Load from hashmap");
     //get from shared prefs
     SharedPreferences sharedPref2 = getPreferences(Context.MODE_PRIVATE);
     SharedPreferences.Editor editor = sharedPref2.edit();
@@ -863,6 +869,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void hideKeyboard() {
+    Log.i("SAVE", "Hide keyboard");
     InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
     if(imm.isActive()){
       imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
