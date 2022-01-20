@@ -1,12 +1,15 @@
 package com.example.foodpantry;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -49,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
   SaveInfo hashMap = new SaveInfo();
 
   ArrayList<String> itemNames = new ArrayList<>();
+  ArrayList<String> pantryItemNames = new ArrayList<>();
+
   ArrayList<Integer> sizes = new ArrayList<>();
 
   @Override
@@ -78,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         showAll();
         enableAllButtons();
         clearAllHighlights();
+        handleSearch();
         pantryFragment.setEnabled(false);
         pantryFragment.setBackgroundColor(Color.LTGRAY);
       }
@@ -160,7 +166,6 @@ public class MainActivity extends AppCompatActivity {
     shoppingList.setEnabled(true);
   } // enableAllButtons
 
-
   /**
    * Clears all highlighted buttons by setting the background of the buttons to be transparent.
    */
@@ -174,6 +179,53 @@ public class MainActivity extends AppCompatActivity {
     expired.setBackgroundColor(Color.TRANSPARENT);
     shoppingList.setBackgroundColor(Color.TRANSPARENT);
   } // clearAllHighlights
+
+  public void handleSearch() {
+    SearchView searchView = (SearchView) findViewById(R.id.searchView);
+    System.out.println(pantryItemNames.size());
+    if (pantryItemNames.size() == 0) {
+      searchView.setQueryHint("No items are currently in the pantry.");
+      return;
+    } else {
+      searchView.setQueryHint("Use the search bar to find any items in the pantry.");
+    }
+    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+      @Override
+      public boolean onQueryTextSubmit(String query) {
+        // do something on text submit
+        return false;
+      }
+      @Override
+      public boolean onQueryTextChange(String newText) {
+        // do something when text changes
+        newText = searchView.getQuery().toString();
+        int trackerForCurrentLetterInSearchBar = newText.length();
+        if (newText.length() <= 0) {
+            showAll();
+          return true;
+        } else {
+          char currentCharacter = newText.charAt(trackerForCurrentLetterInSearchBar - 1);
+          System.out.println("Current character: " + currentCharacter);
+          System.out.println(pantryItemNames.size());
+          for (int currentNameInArray = 0; currentNameInArray < pantryItemNames.size(); currentNameInArray++) {
+            if (currentCharacter != pantryItemNames.get(currentNameInArray).charAt(0)) {
+              cardLayout.getChildAt(currentNameInArray).setVisibility(View.GONE);
+            }
+          }
+          trackerForCurrentLetterInSearchBar++;
+          return false;
+        }
+      }
+    });
+    searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+      @Override
+      public boolean onClose() {
+        showAll();
+        return false;
+      }
+    });
+  } // handleSearch
+
 
   public void showToast(String text){
     if(lastToast != null){
@@ -366,7 +418,7 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  public void showAddItemDialog(){
+  public void showAddItemDialog() {
     Dialog addDialog = new Dialog(this);
     addDialog.setContentView(R.layout.add_item_dialog);
     Button addButton = addDialog.findViewById(R.id.confirmButton);
@@ -400,6 +452,7 @@ public class MainActivity extends AppCompatActivity {
         int amountInteger = Integer.parseInt(amount.getText().toString());
         int sizeInteger = Integer.parseInt(size.getText().toString());
         String expDateString = expDate.getText().toString();
+        pantryItemNames.add(nameString);
         // Need to disable the user from clicking anywhere because if the user clicks on the buttons on
         // the side, then the dialog closes
         addNewItem(image, nameString, categoryString, amountInteger, sizeInteger, expDateString);
@@ -479,7 +532,7 @@ public class MainActivity extends AppCompatActivity {
     editDialog.show();
   }
 
-  public void addToCart(View card){
+  public void addToCart(View card) {
 
     TextView itemName = card.findViewById(R.id.titleForItem);
     TextView size = card.findViewById(R.id.sizeForItem);
