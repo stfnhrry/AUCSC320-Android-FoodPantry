@@ -63,16 +63,11 @@ public class MainActivity extends AppCompatActivity {
 
   int numItems;
 
-  int count = 0;
-
   Boolean shoppingListVisible;
 
   SaveFile hashMapFile = new SaveFile();
 
-  ArrayList<String> itemInfo = new ArrayList<String>();
-
   String[] itemArray = {"1", "TestName", "TestCategory", "TestAmount", "TestWeight", "TestDate"};
-  String[] itemArray2 = {"2", "TestName2", "TestCategory2", "TestAmount2", "TestWeight2", "TestDate2"};
 
   //use firebase for data streaming
 
@@ -267,15 +262,9 @@ public class MainActivity extends AppCompatActivity {
     View card = cardLayout.getChildAt(numItems - 1);
     ImageButton editButton = card.findViewById(R.id.editButtonForItem);
     ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
+
     int id = numItems - 1;
-    if((numItems - 1) == 0){
-      saveToArray(icon, name, category, amount, weight, expDate, id);
-      showToast(numItems - 1 + " is the number of items part 1");
-    }
-    else{
-      saveToArray2(icon, name, category, amount, weight, expDate, id);
-      //showToast(numItems - 1 + " is the number of items part 2");
-    }
+    saveToArray(icon, name, category, amount, weight, expDate, id);
 
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -604,60 +593,6 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
-  public void saveToHashMap(int index, ItemFragment myItem){
-    try{
-      TextView title = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
-      TextView date = cardLayout.getChildAt(numItems-1).findViewById(R.id.expiryDateForItem);
-      TextView amount = cardLayout.getChildAt(numItems-1).findViewById(R.id.amountLeftInPantryForItem);
-      TextView size = cardLayout.getChildAt(numItems-1).findViewById(R.id.sizeForItem);
-      String test = date.getText().toString();
-      SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-      Date d;
-      d = dateFormat.parse(test);
-      String t = title.getText().toString();
-      int a = Integer.parseInt(amount.getText().toString());
-      int s = Integer.parseInt(size.getText().toString());
-      //Item item = new Item(t, d, a, s);
-      hashMapFile.createNewEntry(index, myItem);
-      hashMapFile.getHashMap();
-
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public void loadHashmap(){
-    //View savedItem = hashMap.getItemAt(0);
-    //TextView title = savedItem.findViewById(R.id.titleForItem);
-    //showToast(title.getText().toString() + "is the item at 0");
-  }
-
-  private void hashmaptestArrays()
-  {
-    //create test hashmap
-    HashMap<Integer, ArrayList<String>> testHashMap = new HashMap<Integer, ArrayList<String>>();
-    testHashMap.put(1, itemInfo);
-    testHashMap.put(2, itemInfo);
-
-    //convert to string using gson
-    Gson gson = new Gson();
-    String hashMapString = gson.toJson(testHashMap);
-
-    //save in shared prefs
-    SharedPreferences sharedPref2 = getPreferences(Context.MODE_PRIVATE);
-    SharedPreferences.Editor editor = sharedPref2.edit();
-    editor.putString("hashString", hashMapString).apply();
-
-    //get from shared prefs
-    String storedHashMapString = sharedPref2.getString("hashString", "oopsDintWork");
-    java.lang.reflect.Type type = new TypeToken<HashMap<Integer, ArrayList<String>>>(){}.getType();
-    HashMap<Integer, ArrayList<String>> testHashMap2 = gson.fromJson(storedHashMapString, type);
-
-    //use values
-    String toastString = testHashMap2.get(1) + " | " + testHashMap2.get(2);
-    Toast.makeText(this, toastString, Toast.LENGTH_LONG).show();
-  }
-
   public void saveToArray(int icon, String name, String category, int amount, int weight, String expDate, int index){
     Log.i("SAVE", "saveToArray");
     String iconString = icon + "";
@@ -672,24 +607,6 @@ public class MainActivity extends AppCompatActivity {
     itemArray[5] = expDate;
 
     saveToHashmapNew(index);
-    //showToast(index + " is the index");
-  }
-
-  public void saveToArray2(int icon, String name, String category, int amount, int weight, String expDate, int index){
-    Log.i("SAVE", "saveToArray2");
-    String iconString = icon + "";
-    String amountString = amount + "";
-    String weightString = weight + "";
-
-    itemArray2[0] = iconString;
-    itemArray2[1] = name;
-    itemArray2[2] = category;
-    itemArray2[3] = amountString;
-    itemArray2[4] = weightString;
-    itemArray2[5] = expDate;
-
-    showToast("Called from 2");
-    saveToHashmapNew2(index);
     //showToast(index + " is the index");
   }
 
@@ -719,23 +636,6 @@ public class MainActivity extends AppCompatActivity {
     //showToast(map + " Map 1");
   }
 
-  public void saveToHashmapNew2(int index){
-    Log.i("SAVE", "SaveToHashmapNew2");
-    map.put(index, itemArray2);
-    showToast(map + " is the map 2");
-
-    //convert to string using gson
-    Gson gson = new Gson();
-    String hashMapString = gson.toJson(map);
-
-    //save in shared prefs
-    SharedPreferences sharedPref2 = getPreferences(Context.MODE_PRIVATE);
-    SharedPreferences.Editor editor = sharedPref2.edit();
-    editor.putString("hashString", hashMapString).apply();
-
-    //showToast(map + " Map 2");
-  }
-
   public void loadFromHashmap(){
     Log.i("SAVE", "Load from hashmap");
     //get from shared prefs
@@ -757,107 +657,6 @@ public class MainActivity extends AppCompatActivity {
     map = testHashMap2;
 
     loadFromArray();
-  }
-
-  private String subFolder = "/userdata";
-  private String file = "test.ser";
-
-  public void writeSettings() {
-    File cacheDir = null;
-    File appDirectory = null;
-
-    if (android.os.Environment.getExternalStorageState().
-            equals(android.os.Environment.MEDIA_MOUNTED)) {
-      cacheDir = getApplicationContext().getExternalCacheDir();
-      appDirectory = new File(cacheDir + subFolder);
-
-    } else {
-      cacheDir = getApplicationContext().getCacheDir();
-      String BaseFolder = cacheDir.getAbsolutePath();
-      appDirectory = new File(BaseFolder + subFolder);
-
-    }
-
-    if (appDirectory != null && !appDirectory.exists()) {
-      appDirectory.mkdirs();
-    }
-
-    File fileName = new File(appDirectory, file);
-
-    FileOutputStream fos = null;
-    ObjectOutputStream out = null;
-    try {
-      fos = new FileOutputStream(fileName);
-      out = new ObjectOutputStream(fos);
-      out.writeObject(map);
-    } catch (IOException ex) {
-      ex.printStackTrace();
-    }  catch (Exception e) {
-      e.printStackTrace();
-    } finally {
-      try {
-        if (fos != null)
-          fos.flush();
-        fos.close();
-        if (out != null)
-          out.flush();
-        out.close();
-      } catch (Exception e) {
-
-      }
-    }
-  }
-
-
-  public void readSetttings() {
-    File cacheDir = null;
-    File appDirectory = null;
-    if (android.os.Environment.getExternalStorageState().
-            equals(android.os.Environment.MEDIA_MOUNTED)) {
-      cacheDir = getApplicationContext().getExternalCacheDir();
-      appDirectory = new File(cacheDir + subFolder);
-    } else {
-      cacheDir = getApplicationContext().getCacheDir();
-      String BaseFolder = cacheDir.getAbsolutePath();
-      appDirectory = new File(BaseFolder + subFolder);
-    }
-
-    if (appDirectory != null && !appDirectory.exists()) return; // File does not exist
-
-    File fileName = new File(appDirectory, file);
-
-    FileInputStream fis = null;
-    ObjectInputStream in = null;
-    try {
-      fis = new FileInputStream(fileName);
-      in = new ObjectInputStream(fis);
-      Map<Integer, View> myHashMap = (Map<Integer, View> ) in.readObject();
-      //map = myHashMap;
-      System.out.println("count of hash map::"+map.size() + " " + map);
-
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
-    } catch (StreamCorruptedException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }finally {
-
-      try {
-        if(fis != null) {
-          fis.close();
-        }
-        if(in != null) {
-          in.close();
-        }
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
   }
 
   public void toShoppingList(){
