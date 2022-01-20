@@ -273,6 +273,9 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
+  /**
+   * Sets the icon to the correct image
+   */
   public void setIcon(){
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.GONE);
@@ -280,6 +283,15 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
+  /**
+   * Edits an item already in the pantry.
+   * @param view - the edit button
+   * @param name - name of the item
+   * @param category - category of the item (can, jar, cookies,...)
+   * @param amount - the amount in stock of the item
+   * @param size - size of the item
+   * @param expDate - expiry date of the item
+   */
   public void editItem(View view, EditText name, Spinner category, EditText amount, EditText size, EditText expDate){
     ImageView currentIcon = view.findViewById(R.id.iconForItem);
     TextView currentName = view.findViewById(R.id.titleForItem);
