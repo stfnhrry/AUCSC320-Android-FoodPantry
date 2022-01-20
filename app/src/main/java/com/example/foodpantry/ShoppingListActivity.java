@@ -31,8 +31,9 @@ public class ShoppingListActivity extends AppCompatActivity {
     for(int i= 0;i < foodNames.size(); i++){
       TextView t = new TextView(this);
       t.setTextSize(35);
-      t.setText(foodNames.get(i) + "  -" + weight.get(i) + "kg per" + " " + foodNames.get(i));
+      t.setText(foodNames.get(i) + "  -" + weight.get(i) + "kg");
       linearLayout.addView(t);
+      //a bug
     }
     clear = (Button) findViewById(R.id.ClearAll);
     clear.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +52,9 @@ public class ShoppingListActivity extends AppCompatActivity {
    */
   public void backToPantry(View aView) {
     Button backButton = (Button) findViewById(R.id.backToMainActivityButton);
+
     Intent toPantry = new Intent (this, MainActivity.class);
+
     startActivity(toPantry);
   } // backToPantry
 

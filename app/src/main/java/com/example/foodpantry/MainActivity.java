@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -159,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
     activeFragment = fragment;
     FragmentManager fragmentManager = getSupportFragmentManager();
     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-    fragmentTransaction.replace(R.id.FrameLayout, fragment);
+  //  fragmentTransaction.replace(R.id.FrameLayout, fragment);
     fragmentTransaction.commit();
   }
 
@@ -505,5 +506,7 @@ public class MainActivity extends AppCompatActivity {
     startActivity(switchActivityIntent);
 
   }
+
+
 
 } // class
