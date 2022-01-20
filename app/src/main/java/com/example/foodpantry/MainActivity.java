@@ -269,10 +269,6 @@ public class MainActivity extends AppCompatActivity {
     });
   }
 
-  public void removing(View view){
-
-  }
-
   /**
    * Sets the icon to the correct image
    */
