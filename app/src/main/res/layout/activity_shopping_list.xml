@@ -9,8 +9,8 @@
 
     <ScrollView
         android:id="@+id/scrollingViewForShoppingListFragmentFragment"
-        android:layout_width="887dp"
-        android:layout_height="626dp"
+        android:layout_width="579dp"
+        android:layout_height="529dp"
         android:layout_marginTop="64dp"
         android:background="@color/very_light_grey"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,11 +45,11 @@
                     app:cardCornerRadius="15dp"
                     app:cardElevation="5dp">
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="530dp" />
                 </androidx.cardview.widget.CardView>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="530dp" />
             </LinearLayout>
 
             <TextView
