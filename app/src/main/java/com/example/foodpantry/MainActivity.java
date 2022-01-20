@@ -375,7 +375,9 @@ public class MainActivity extends AppCompatActivity {
     removeAllFragmentsFromScreen();
   }
 
-
+  /**
+   * Shows the items that are expired
+   */
   public void showExpired(){
     for (int i = 0; i < cardLayout.getChildCount(); i++) {
       TextView date = cardLayout.getChildAt(i).findViewById(R.id.expiryDateForItem);
@@ -400,6 +402,11 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
+  /**
+   * Calculates the amount of days.
+   * @param expiryDate
+   * @return
+   */
   public String getDateDifferenceAsString(String expiryDate){
     Date calendar = Calendar.getInstance().getTime();
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
