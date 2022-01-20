@@ -169,7 +169,7 @@ public class ItemFragment extends Fragment {
       return dayDifference;
 
     } catch (Exception exception){
-      showToast("Cannot find day difference");
+        //showToast("Cannot find day difference");
       return "null";
     }
   }

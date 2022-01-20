@@ -49,11 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
   int numItems;
 
-  Boolean shoppingListVisible;
-
   SaveFile hashMapFile = new SaveFile();
-
-  String[] itemArray = {"1", "TestName", "TestCategory", "TestAmount", "TestWeight", "TestDate"};
 
   //use firebase for data streaming
 
@@ -117,11 +113,12 @@ public class MainActivity extends AppCompatActivity {
     lowInStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        showLowInStock();
+//        showLowInStock();
         enableAllButtons();
         clearAllHighlights();
-        lowInStock.setEnabled(false);
+//        lowInStock.setEnabled(false);
         lowInStock.setBackgroundColor(Color.LTGRAY);
+        updateDate();
       }
     });
 
@@ -168,6 +165,42 @@ public class MainActivity extends AppCompatActivity {
       }
     });
   } // onCreate
+
+  @Override
+  protected void onStart(){
+    super.onStart();
+    Log.i("ACTIVITY STATE", "On Start");
+  }
+
+  @Override
+  protected void onRestart(){
+    super.onRestart();
+    Log.i("ACTIVITY STATE", "On Restart");
+  }
+
+  @Override
+  protected void onResume(){
+    super.onResume();
+    Log.i("ACTIVITY STATE", "On Resume");
+  }
+
+  @Override
+  protected void onPause(){
+    super.onPause();
+    Log.i("ACTIVITY STATE", "On Pause");
+  }
+
+  @Override
+  protected void onStop(){
+    super.onStop();
+    Log.i("ACTIVITY STATE", "On Stop");
+  }
+
+  @Override
+  protected void onDestroy(){
+    super.onDestroy();
+    Log.i("ACTIVITY STATE", "On Destroy");
+  }
 
   /**
    * Enables all buttons.
@@ -373,9 +406,8 @@ public class MainActivity extends AppCompatActivity {
       date2 = dateFormat.parse(expiryDate);
       long difference = (date2.getTime() - calendar.getTime());
       long differenceDates = difference / (24 * 60 * 60 * 1000);
-      String dayDifference = Long.toString(differenceDates);
 
-      return dayDifference;
+      return Long.toString(differenceDates);
 
     } catch (Exception exception){
       Log.i("DATE", "Cannot find day difference as string");
@@ -391,9 +423,8 @@ public class MainActivity extends AppCompatActivity {
       Date date2;
       date2 = dateFormat.parse(expiryDate);
       long difference = (date2.getTime() - calendar.getTime());
-      long differenceDates = difference / (24 * 60 * 60 * 1000);
 
-      return differenceDates;
+      return difference / (24 * 60 * 60 * 1000);
 
     } catch (Exception exception){
       Log.i("DATE", "Cannot find day difference as long");
@@ -654,6 +685,11 @@ public class MainActivity extends AppCompatActivity {
       case 6 : itemIcon = R.drawable.picture2;
     }
     return itemIcon;
+  }
+
+  public void updateDate(){
+    cardLayout.removeAllViewsInLayout();
+    loadFromHashmap();
   }
 
 } // class

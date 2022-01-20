@@ -13,6 +13,7 @@
         android:id="@+id/itemCard0"
         android:layout_width="450dp"
         android:layout_height="150dp"
+        android:backgroundTintMode="multiply"
         android:innerRadius="0dp"
         android:padding="0dp"
         android:shape="ring"
@@ -27,7 +28,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:backgroundTintMode="add">
 
             <ImageView
                 android:id="@+id/iconForItem"
