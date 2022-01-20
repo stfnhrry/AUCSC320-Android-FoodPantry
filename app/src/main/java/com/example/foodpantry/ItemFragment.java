@@ -1,5 +1,6 @@
 package com.example.foodpantry;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -9,7 +10,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +38,7 @@ public class ItemFragment extends Fragment {
   public TextView dateText;
   public String expiryDays;
   public TextView daysText;
+  public TextView daysTillExpiryText;
   public int size;
   public TextView sizeText;
 
@@ -114,7 +115,17 @@ public class ItemFragment extends Fragment {
     dateText = (TextView) getView().findViewById(R.id.expiryDateForItem);
     dateText.setText(expiryDate);
     daysText = (TextView) getView().findViewById(R.id.daysTillExpiryForItem);
-    daysText.setText(calculateDateDifference(dateText.getText().toString()));
+    daysTillExpiryText = (TextView) getView().findViewById(R.id.daysTillExpiryText);
+    if(calculateDateDifferenceAsLong(dateText.getText().toString()) < 1){
+      daysText.setText("Expired");
+      daysText.setTextColor(Color.parseColor("#FF0000"));
+      daysTillExpiryText.setText("");
+    }
+    else{
+      daysText.setText(calculateDateDifferenceAsString(dateText.getText().toString()));
+      daysText.setTextColor(Color.parseColor("#2196F3"));
+      daysTillExpiryText.setText("Days Till Expiry");
+    }
   }
 
   public void updateInfo(int iconUpdate, String titleUpdate, String categoryUpdate, int amountUpdate, int weightUpdate, String dateUpdate){
@@ -138,7 +149,7 @@ public class ItemFragment extends Fragment {
     dateText = (TextView) getView().findViewById(R.id.expiryDateForItem);
     dateText.setText(expiryDate);
     daysText = (TextView) getView().findViewById(R.id.daysTillExpiryForItem);
-    daysText.setText(calculateDateDifference(dateText.getText().toString()));
+    daysText.setText(calculateDateDifferenceAsString(dateText.getText().toString()));
   }
 
   public void showToast(String text){
@@ -151,26 +162,38 @@ public class ItemFragment extends Fragment {
     lastToast = toast;
   }
 
-  public String calculateDateDifference(String expiryDate){
+  public String calculateDateDifferenceAsString(String expiryDate){
     Date calendar = Calendar.getInstance().getTime();
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-    String currentDate = dateFormat.format(calendar);
 
     try{
-      Date date1;
       Date date2;
-      date1 = calendar;
-//              dateFormat.parse(currentDate);
       date2 = dateFormat.parse(expiryDate);
-      long difference = (date2.getTime() - date1.getTime());
+      long difference = (date2.getTime() - calendar.getTime());
       long differenceDates = difference / (24 * 60 * 60 * 1000);
       String dayDifference = Long.toString(differenceDates);
 
       return dayDifference;
 
     } catch (Exception exception){
-        //showToast("Cannot find day difference");
       return "null";
     }
   }
+
+  public long calculateDateDifferenceAsLong(String expiryDate){
+    Date calendar = Calendar.getInstance().getTime();
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+    try{
+      Date date2;
+      date2 = dateFormat.parse(expiryDate);
+      long difference = (date2.getTime() - calendar.getTime());
+
+      return difference / (24 * 60 * 60 * 1000);
+
+    } catch (Exception exception){
+      return 99999;
+    }
+  }
+
 }

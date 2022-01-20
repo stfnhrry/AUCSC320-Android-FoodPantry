@@ -271,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
       public void onClick(View v) {
         addToCart(card);
         addToShop.setEnabled(false);
-        showToast("Item added to cart");
+        showToast("Items has been added to cart");
       }
     });
   }
@@ -298,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
       public void onClick(View v) {
         addToCart(card);
         addToShop.setEnabled(false);
-        showToast("Item added to cart");
+        showToast("Items has added to cart");
       }
     });
   }
@@ -317,7 +317,13 @@ public class MainActivity extends AppCompatActivity {
     currentAmount.setText(amount.getText());
     currentSize.setText(size.getText());
     currentExpDate.setText(expDate.getText());
-    currentDaysTillExpiry.setText(getDateDifferenceAsString(currentExpDate.getText().toString()));
+    if(getDateDifferenceAsLong(currentExpDate.getText().toString()) < 1){
+      currentDaysTillExpiry.setText("Expired");
+    }
+    else{
+      currentDaysTillExpiry.setText(getDateDifferenceAsString(currentExpDate.getText().toString()));
+    }
+    //currentDaysTillExpiry.setText(getDateDifferenceAsString(currentExpDate.getText().toString()));
     currentCategory.setText(category.getSelectedItem().toString());
 
     int index = cardLayout.indexOfChild(view);
