@@ -310,6 +310,7 @@ public class MainActivity extends AppCompatActivity {
     TextView currentSize = view.findViewById(R.id.sizeForItem);
     TextView currentExpDate = view.findViewById(R.id.expiryDateForItem);
     TextView currentDaysTillExpiry = view.findViewById(R.id.daysTillExpiryForItem);
+    TextView daysTillExpiry = view.findViewById(R.id.daysTillExpiryText);
     TextView currentCategory = view.findViewById(R.id.categoryNameForItem);
 
     currentIcon.setImageResource(setIconFromCategory(category));
@@ -317,14 +318,18 @@ public class MainActivity extends AppCompatActivity {
     currentAmount.setText(amount.getText());
     currentSize.setText(size.getText());
     currentExpDate.setText(expDate.getText());
+    //currentDaysTillExpiry.setText(getDateDifferenceAsString(currentExpDate.getText().toString()));
+    currentCategory.setText(category.getSelectedItem().toString());
     if(getDateDifferenceAsLong(currentExpDate.getText().toString()) < 1){
       currentDaysTillExpiry.setText("Expired");
+      currentDaysTillExpiry.setTextColor(Color.parseColor("#FF0000"));
+      daysTillExpiry.setText("");
     }
     else{
       currentDaysTillExpiry.setText(getDateDifferenceAsString(currentExpDate.getText().toString()));
+      currentDaysTillExpiry.setTextColor(Color.parseColor("#2196F3"));
+      daysTillExpiry.setText("Days Till Expiry");
     }
-    //currentDaysTillExpiry.setText(getDateDifferenceAsString(currentExpDate.getText().toString()));
-    currentCategory.setText(category.getSelectedItem().toString());
 
     int index = cardLayout.indexOfChild(view);
 
