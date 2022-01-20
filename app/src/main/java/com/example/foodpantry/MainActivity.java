@@ -52,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
   SaveInfo hashMap = new SaveInfo();
 
   ArrayList<String> itemNames = new ArrayList<>();
-  ArrayList<String> pantryItemNames = new ArrayList<>();
-
   ArrayList<Integer> sizes = new ArrayList<>();
 
   @Override
@@ -80,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     pantryFragment.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        setIcon();
         showAll();
         enableAllButtons();
         clearAllHighlights();
@@ -89,9 +88,21 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
+    removeItem.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        for (int i = 0; i < cardLayout.getChildCount(); i++) {
+          cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.GONE);
+          cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.VISIBLE);
+        }
+      }
+    });
+
     addItem.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        //addNewItem();
+        setIcon();
         showAddItemDialog();
         enableAllButtons();
         clearAllHighlights();
@@ -102,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
     lowInStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        setIcon();
         showLowInStock();
         enableAllButtons();
         clearAllHighlights();
@@ -113,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
     outOfStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        setIcon();
         showOutOfStock();
         enableAllButtons();
         clearAllHighlights();
@@ -124,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
     expiringSoon.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        setIcon();
         showExpiringSoon();
         enableAllButtons();
         clearAllHighlights();
@@ -135,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
     expired.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        setIcon();
         showExpired();
         enableAllButtons();
         clearAllHighlights();
@@ -146,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
     shoppingList.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-       // replaceFragment(new ShoppingListFragment());
         toShoppingList();
       }
     });
@@ -182,8 +196,8 @@ public class MainActivity extends AppCompatActivity {
 
   public void handleSearch() {
     SearchView searchView = (SearchView) findViewById(R.id.searchView);
-    System.out.println(pantryItemNames.size());
-    if (pantryItemNames.size() == 0) {
+    System.out.println(itemNames.size());
+    if (itemNames.size() == 0) {
       searchView.setQueryHint("No items are currently in the pantry.");
       return;
     } else {
@@ -206,9 +220,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
           char currentCharacter = newText.charAt(trackerForCurrentLetterInSearchBar - 1);
           System.out.println("Current character: " + currentCharacter);
-          System.out.println(pantryItemNames.size());
+          System.out.println(itemNames.size());
           for (int currentNameInArray = 0; currentNameInArray < pantryItemNames.size(); currentNameInArray++) {
-            if (currentCharacter != pantryItemNames.get(currentNameInArray).charAt(0)) {
+            if (currentCharacter != itemNames.get(currentNameInArray).charAt(0)) {
               cardLayout.getChildAt(currentNameInArray).setVisibility(View.GONE);
             }
           }
@@ -237,14 +251,9 @@ public class MainActivity extends AppCompatActivity {
     lastToast = toast;
   } // showToast
 
-  private void replaceFragment(Fragment fragment) {
-    activeFragment = fragment;
-    FragmentManager fragmentManager = getSupportFragmentManager();
-    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-    fragmentTransaction.replace(R.id.FrameLayout, fragment);
-    fragmentTransaction.commit();
-  }
-
+  /**
+   * Removes all the fragments on the screen
+   */
   private void removeAllFragmentsFromScreen() {
     if (activeFragment == null) {
       return;
@@ -258,6 +267,15 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
+  /**
+   * Adding new item to pantry.
+   * @param icon - image of the category
+   * @param name - name of the item
+   * @param category - which category it is in (like cans, jars, cookies, grains, other)
+   * @param amount - the amount in stock for a specific item
+   * @param weight - size of the item
+   * @param expDate - the date the item expires
+   */
   public void addNewItem(int icon, String name, String category, int amount, int weight, String expDate){
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
     transaction.add(cardLayout.getId(), ItemFragment.newInstance(icon, name, category, amount, weight, expDate));
@@ -266,8 +284,12 @@ public class MainActivity extends AppCompatActivity {
     numItems = cardLayout.getChildCount();
 
     View card = cardLayout.getChildAt(numItems - 1);
-    ImageButton editButton = card.findViewById(R.id.editButtonForItem);
+
+    ImageButton removeTest = cardLayout.getChildAt(numItems -1).findViewById(R.id.removeIcon);
+    TextView cardText = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
+    ImageButton editButton = cardLayout.getChildAt(numItems - 1).findViewById(R.id.editButtonForItem);
     ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
+    removeTest.setVisibility(View.GONE);
 
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -284,8 +306,38 @@ public class MainActivity extends AppCompatActivity {
         showToast("Item added to cart");
       }
     });
+    removeTest.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        int i = cardLayout.indexOfChild(card);
+        cardLayout.removeViewAt(i);
+      }
+    });
   }
 
+  public void removing(View view){
+
+  }
+
+  /**
+   * Sets the icon to the correct image
+   */
+  public void setIcon(){
+    for (int i = 0; i < cardLayout.getChildCount(); i++) {
+      cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.GONE);
+      cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.VISIBLE);
+    }
+  }
+
+  /**
+   * Edits an item already in the pantry.
+   * @param view - the edit button
+   * @param name - name of the item
+   * @param category - category of the item (can, jar, cookies,...)
+   * @param amount - the amount in stock of the item
+   * @param size - size of the item
+   * @param expDate - expiry date of the item
+   */
   public void editItem(View view, EditText name, Spinner category, EditText amount, EditText size, EditText expDate){
     ImageView currentIcon = view.findViewById(R.id.iconForItem);
     TextView currentName = view.findViewById(R.id.titleForItem);
@@ -452,7 +504,6 @@ public class MainActivity extends AppCompatActivity {
         int amountInteger = Integer.parseInt(amount.getText().toString());
         int sizeInteger = Integer.parseInt(size.getText().toString());
         String expDateString = expDate.getText().toString();
-        pantryItemNames.add(nameString);
         // Need to disable the user from clicking anywhere because if the user clicks on the buttons on
         // the side, then the dialog closes
         addNewItem(image, nameString, categoryString, amountInteger, sizeInteger, expDateString);

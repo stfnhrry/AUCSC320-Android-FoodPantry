@@ -32,7 +32,7 @@ public class ShoppingListActivity extends AppCompatActivity {
     for(int i= 0;i < foodNames.size(); i++){
       TextView t = new TextView(this);
       t.setTextSize(35);
-      t.setText(foodNames.get(i) + "  -" + weight.get(i) + "kg per" + " " + foodNames.get(i));
+      t.setText(foodNames.get(i) + "  -  " + weight.get(i) + "kg");
       linearLayout.addView(t);
     }
     clear = (Button) findViewById(R.id.ClearAll);

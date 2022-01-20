@@ -172,15 +172,25 @@
                 android:id="@+id/addToShoppingCartButtonForItem"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="72dp"
                 android:adjustViewBounds="true"
                 android:background="@android:color/transparent"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_baseline_add_shopping_cart_24"
-                app:layout_constraintEnd_toStartOf="@+id/editButtonForItem"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/removeIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/editButtonForItem"
+                app:srcCompat="@drawable/ic_baseline_remove_24" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
