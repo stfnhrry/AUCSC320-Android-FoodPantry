@@ -49,8 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
   SaveInfo hashMap = new SaveInfo();
 
-  ArrayList<String> itemNames = new ArrayList<>();
+  public ArrayList<String> itemNames = new ArrayList<>();
   ArrayList<Integer> sizes = new ArrayList<>();
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
       public void onClick(View view) {
        // replaceFragment(new ShoppingListFragment());
         toShoppingList();
+        itemNames.clear();
       }
     });
   }

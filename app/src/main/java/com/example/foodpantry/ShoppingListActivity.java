@@ -16,13 +16,13 @@ import java.util.ArrayList;
 public class ShoppingListActivity extends AppCompatActivity {
 
   Button clear;
-
   ArrayList<String> foodNames;
   ArrayList<Integer> weight;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_shopping_list);
+
     //get arraylist from main activity
     foodNames = (ArrayList<String>) getIntent().getStringArrayListExtra("names");
     weight = (ArrayList<Integer>) getIntent().getIntegerArrayListExtra("sizes");
@@ -48,7 +48,7 @@ public class ShoppingListActivity extends AppCompatActivity {
 
   /**
    * Back to overview page
-   * @param aView
+   * @param
    */
   @Override
   public void onBackPressed(){
@@ -57,7 +57,6 @@ public class ShoppingListActivity extends AppCompatActivity {
   public void backToPantry(View aView) {
     onBackPressed();
   } // backToPantry
-
 
 
 
