@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     removeItem.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        for (int i = 0; i < cardLayout.getChildCount(); i++) {
+        for (int i = 1; i < cardLayout.getChildCount(); i++) {
           cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.GONE);
           cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.VISIBLE);
         }
@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
           char currentCharacter = newText.charAt(trackerForCurrentLetterInSearchBar - 1);
           System.out.println("Current character: " + currentCharacter);
           System.out.println(itemNames.size());
-          for (int currentNameInArray = 0; currentNameInArray < pantryItemNames.size(); currentNameInArray++) {
+          for (int currentNameInArray = 0; currentNameInArray < itemNames.size(); currentNameInArray++) {
             if (currentCharacter != itemNames.get(currentNameInArray).charAt(0)) {
               cardLayout.getChildAt(currentNameInArray).setVisibility(View.GONE);
             }
@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
   } // handleSearch
 
 
-  public void showToast(String text){
+  public void showToast(String text) {
     if(lastToast != null){
       lastToast.cancel();
     }
@@ -322,8 +322,8 @@ public class MainActivity extends AppCompatActivity {
   /**
    * Sets the icon to the correct image
    */
-  public void setIcon(){
-    for (int i = 0; i < cardLayout.getChildCount(); i++) {
+  public void setIcon() {
+    for (int i = 1; i < cardLayout.getChildCount(); i++) {
       cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.GONE);
       cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.VISIBLE);
     }
