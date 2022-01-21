@@ -1,9 +1,6 @@
 package com.example.foodpantry;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
@@ -32,15 +29,15 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -622,7 +619,34 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void removeItemFromPantry(int index){
+    Log.i("SAVE", "Remove item from hashmap at index " + index);
+    Log.i("SAVE", "Hashmap is currently " + map);
     cardLayout.removeViewAt(index);
+    map.remove(index);
+    Log.i("SAVE", "Hashmap is now " + map);
+
+    int id = 0;
+    HashMap<Integer, String[]> tempMap = new HashMap<Integer, String[]>();
+
+    Set<Map.Entry<Integer, String[]>> entries = map.entrySet();
+
+    Iterator<Map.Entry<Integer, String[]>> iterator =
+            entries.iterator();
+
+    while(iterator.hasNext()) {
+      Map.Entry<Integer, String[]> entry = iterator.next();
+      Integer key   = entry.getKey();
+      String[] value = entry.getValue();
+
+      Log.i("SAVE", "Hashmap index " + key + " is " + value);
+
+      tempMap.put(id, value);
+      id++;
+    }
+
+    map = tempMap;
+
+    saveHashmapToPreferences();
   }
 
   public void saveToArray(int icon, String name, String category, int amount, int weight, String expDate, int index){
@@ -640,7 +664,7 @@ public class MainActivity extends AppCompatActivity {
     temp[4] = weightString;
     temp[5] = expDate;
 
-    saveToHashmapNew(temp, index);
+    saveToHashMap(index, temp);
   }
 
   public void loadFromArray(){
@@ -649,29 +673,33 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
-  public void saveToHashmapNew(String[] array, int index){
-    map.put(index, array);
+  public void saveToHashMap(int index, String[] ItemInfo){
+    map.put(index, ItemInfo);
 
+    saveHashmapToPreferences();
+  }
+
+  public void saveHashmapToPreferences(){
     //convert to string using gson
     Gson gson = new Gson();
     String hashMapString = gson.toJson(map);
 
     //save in shared prefs
-    SharedPreferences sharedPref2 = getPreferences(Context.MODE_PRIVATE);
-    SharedPreferences.Editor editor = sharedPref2.edit();
+    SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
+    SharedPreferences.Editor editor = preferences.edit();
     editor.clear();
     editor.putString("hashString", hashMapString).apply();
   }
 
   public void loadFromHashmap(){
     Log.i("SAVE", "Load from hashmap");
-    //get from shared prefs
-    SharedPreferences sharedPref2 = getPreferences(Context.MODE_PRIVATE);
-    SharedPreferences.Editor editor = sharedPref2.edit();
+    //get shared prefs
+    SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
 
     Gson gson = new Gson();
 
-    String storedHashMapString = sharedPref2.getString("hashString", "Empty");
+    //get HashMap as string from preferences
+    String storedHashMapString = preferences.getString("hashString", "Empty");
 
     if(storedHashMapString.equals("Empty")){
       return;
