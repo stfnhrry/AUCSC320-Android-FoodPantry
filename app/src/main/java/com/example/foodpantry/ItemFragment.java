@@ -41,7 +41,7 @@ public class ItemFragment extends Fragment {
   public String expiryDays;
   public TextView daysText;
   public TextView daysTillExpiryText;
-  public int size;
+  public String size;
   public TextView sizeText;
 
   Toast lastToast;
@@ -53,7 +53,7 @@ public class ItemFragment extends Fragment {
   private static final String ARG_CATEGORY = "category";
   public static String ARG_AMOUNT = "1";
   public static String ARG_DATE = "23/04/2022";
-  public static String ARG_SIZE = "5";
+  public static String ARG_SIZE = "5kg";
 
   public ItemFragment() {
     // Required empty public constructor
@@ -68,14 +68,14 @@ public class ItemFragment extends Fragment {
    * @return A new instance of fragment ItemFragment.
    */
   // TODO: Rename and change types and number of parameters
-  public static ItemFragment newInstance(int icon, String title, String category, int number, int weight, String date) {
+  public static ItemFragment newInstance(int icon, String title, String category, int number, String weight, String date) {
     ItemFragment fragment = new ItemFragment();
     Bundle args = new Bundle();
     args.putInt(ARG_ICON, icon);
     args.putString(ARG_TITLE, title);
     args.putString(ARG_CATEGORY, category);
     args.putInt(ARG_AMOUNT, number);
-    args.putInt(ARG_SIZE, weight);
+    args.putString(ARG_SIZE, weight);
     args.putString(ARG_DATE, date);
     fragment.setArguments(args);
     return fragment;
@@ -89,7 +89,7 @@ public class ItemFragment extends Fragment {
       title = getArguments().getString(ARG_TITLE);
       category = getArguments().getString(ARG_CATEGORY);
       amount = getArguments().getInt(ARG_AMOUNT);
-      size = getArguments().getInt(ARG_SIZE);
+      size = getArguments().getString(ARG_SIZE);
       expiryDate = getArguments().getString(ARG_DATE);
     }
   }
@@ -152,7 +152,7 @@ public class ItemFragment extends Fragment {
     }
   }
 
-  public void updateInfo(int iconUpdate, String titleUpdate, String categoryUpdate, int amountUpdate, int weightUpdate, String dateUpdate){
+  public void updateInfo(int iconUpdate, String titleUpdate, String categoryUpdate, int amountUpdate, String weightUpdate, String dateUpdate){
     iconInt = iconUpdate;
     title = titleUpdate;
     category = categoryUpdate;

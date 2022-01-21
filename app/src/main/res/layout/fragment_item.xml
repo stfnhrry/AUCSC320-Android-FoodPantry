@@ -96,26 +96,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="64dp"
-                android:layout_marginEnd="48dp"
+                android:layout_marginEnd="24dp"
                 android:fontFamily="sans-serif-condensed-medium"
-                android:text="50"
+                android:text="50kg"
                 android:textColor="#A8A8A8"
                 android:textSize="34sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/kgText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="64dp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="kg"
-                android:textColor="#A8A8A8"
-                android:textSize="34sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/sizeForItem"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -193,6 +179,7 @@
                 android:paddingEnd="5dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_baseline_remove_24"
+                android:backgroundTint="@color/red_alert"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
