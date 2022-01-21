@@ -1,5 +1,7 @@
 package com.example.foodpantry;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -11,6 +13,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -275,13 +278,25 @@ public class MainActivity extends AppCompatActivity {
         showEditItemDialog(card);
       }
     });
+
     addToShop.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         addToCart(card);
         showToast("Item has been added to shopping list");
-      }
+
+        addToShop.setEnabled(false);
+        addToShop.postDelayed(new Runnable() {
+          @Override
+          public void run() {
+            addToShop.setEnabled(true);
+            Log.d(TAG, "disabled button");
+          }
+          },500);
+        }
+
     });
+
     removeTest.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
