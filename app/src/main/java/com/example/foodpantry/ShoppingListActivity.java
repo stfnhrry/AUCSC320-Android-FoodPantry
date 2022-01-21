@@ -19,7 +19,7 @@ public class ShoppingListActivity extends AppCompatActivity {
 
   Button clear;
   ArrayList<String> foodNames;
-  ArrayList<Integer> weight;
+  ArrayList<String> weight;
   Boolean isCleared = false;
   Toast lastToast;
   @Override
@@ -29,13 +29,13 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     //get arraylist from main activity
     foodNames = (ArrayList<String>) getIntent().getStringArrayListExtra("names");
-    weight = (ArrayList<Integer>) getIntent().getIntegerArrayListExtra("sizes");
+    weight = (ArrayList<String>) getIntent().getStringArrayListExtra("sizes");
 
     LinearLayout linearLayout = (LinearLayout) findViewById(R.id.THISONEJAMES);
     for(int i= 0;i < foodNames.size(); i++){
       TextView t = new TextView(this);
       t.setTextSize(35);
-      t.setText(foodNames.get(i) + "  -" + weight.get(i) + "kg");
+      t.setText(foodNames.get(i) + "  -  " + weight.get(i));
       linearLayout.addView(t);
       //a bug
     }

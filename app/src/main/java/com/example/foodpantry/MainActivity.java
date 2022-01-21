@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
   SaveFile hashMapFile = new SaveFile();
   Map<Integer, String[]> map = hashMapFile.pantry;
   public static ArrayList<String> itemNames = new ArrayList<>();
-  ArrayList<Integer> sizes = new ArrayList<>();
+  ArrayList<String> sizes = new ArrayList<>();
   Boolean inRemovingMode = false;
 
   @Override
@@ -614,7 +614,7 @@ public class MainActivity extends AppCompatActivity {
     TextView size = card.findViewById(R.id.sizeForItem);
 
     String name = itemName.getText().toString();
-    int sze = Integer.parseInt(size.getText().toString());
+    String sze = size.getText().toString();
 
     itemNames.add(name);
     sizes.add(sze);
@@ -723,7 +723,7 @@ public class MainActivity extends AppCompatActivity {
   public void toShoppingList(){
     Intent switchActivityIntent = new Intent(this, ShoppingListActivity.class);
     switchActivityIntent.putStringArrayListExtra("names", itemNames);
-    switchActivityIntent.putIntegerArrayListExtra("sizes", sizes);
+    switchActivityIntent.putStringArrayListExtra("sizes", sizes);
     startActivity(switchActivityIntent);
 
   }
