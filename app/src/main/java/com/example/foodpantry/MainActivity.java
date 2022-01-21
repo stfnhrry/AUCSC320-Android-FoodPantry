@@ -236,15 +236,13 @@ public class MainActivity extends AppCompatActivity {
     Log.i("SAVE", "increment num items");
 
     View card = cardLayout.getChildAt(numItems - 1);
-    ImageButton removeTest = cardLayout.getChildAt(numItems -1).findViewById(R.id.removeIcon);
+    ImageButton removeItemButton = cardLayout.getChildAt(numItems -1).findViewById(R.id.removeIcon);
     TextView cardText = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
     ImageButton editButton = card.findViewById(R.id.editButtonForItem);
-    ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
-    removeTest.setVisibility(View.GONE);
+    ImageButton addToShopButton = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
+    removeItemButton.setVisibility(View.GONE);
 
     int id = numItems - 1;
-    Log.i("SAVE", "set id index number to" + id);
-    Log.i("SAVE", "Call save to array next with parameters icon: " + icon + " , name: "+ name + " , id: " + id);
     saveToArray(icon, name, category, amount, weight, expDate, id);
 
     editButton.setOnClickListener(new View.OnClickListener() {
@@ -254,11 +252,17 @@ public class MainActivity extends AppCompatActivity {
       }
 
     });
-    addToShop.setOnClickListener(new View.OnClickListener() {
+    addToShopButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         addToCart(card);
         showToast("Items has been added to cart");
+      }
+    });
+    removeItemButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        removeItemFromPantry(id);
       }
     });
   }
@@ -276,6 +280,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton editButton = card.findViewById(R.id.editButtonForItem);
     ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
     removeTest.setVisibility(View.GONE);
+    int id = numItems - 1;
 
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -294,8 +299,7 @@ public class MainActivity extends AppCompatActivity {
     removeTest.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        int i = cardLayout.indexOfChild(card);
-        cardLayout.removeViewAt(i);
+        removeItemFromPantry(id);
       }
     });
   }
@@ -615,6 +619,10 @@ public class MainActivity extends AppCompatActivity {
 
     itemNames.add(name);
     sizes.add(sze);
+  }
+
+  public void removeItemFromPantry(int index){
+    cardLayout.removeViewAt(index);
   }
 
   public void saveToArray(int icon, String name, String category, int amount, int weight, String expDate, int index){
