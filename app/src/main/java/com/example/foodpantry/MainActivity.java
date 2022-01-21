@@ -31,6 +31,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -637,20 +639,17 @@ public class MainActivity extends AppCompatActivity {
 
     Gson gson = new Gson();
 
-    String storedHashMapString = sharedPref2.getString("hashString", "oopsDidntWork");
-    java.lang.reflect.Type type = new TypeToken<HashMap<Integer, String[]>>(){}.getType();
-    HashMap<Integer, String[]> testHashMap2 = gson.fromJson(storedHashMapString, type);
+    String storedHashMapString = sharedPref2.getString("hashString", "Empty");
 
-    if (testHashMap2 == null){
-      Log.i("SAVE", "Loaded hashmap is null");
-    }else{
-      Log.i("SAVE", "Loaded hashmap is valid");
+    if(storedHashMapString.equals("Empty")){
+      return;
     }
-
-    map = testHashMap2;
-
-    Log.i("SAVE", "Load from array called");
-    loadFromArray();
+    else{
+      java.lang.reflect.Type type = new TypeToken<HashMap<Integer, String[]>>(){}.getType();
+      HashMap<Integer, String[]> testHashMap2 = gson.fromJson(storedHashMapString, type);
+      map = testHashMap2;
+      loadFromArray();
+    }
   }
 
   public void toShoppingList(){
