@@ -31,6 +31,8 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -342,6 +344,16 @@ public class MainActivity extends AppCompatActivity {
       currentDaysTillExpiry.setTextColor(Color.parseColor("#2196F3"));
       daysTillExpiry.setText("Days Till Expiry");
     }
+
+    if(Integer.parseInt(amount.getText().toString()) > 0 && Integer.parseInt(amount.getText().toString()) < 6){
+      currentAmount.setTextColor(Color.parseColor("#882200"));
+    }
+    else if(Integer.parseInt(amount.getText().toString()) < 1){
+      currentAmount.setTextColor(Color.parseColor("#FF0000"));
+    }
+    else{
+      currentAmount.setTextColor(Color.parseColor("#2196F3"));
+    }
     int index = cardLayout.indexOfChild(view);
 
     saveToArray(setIconFromCategory(category), name.getText().toString(), category.getSelectedItem().toString(), Integer.parseInt(amount.getText().toString()), Integer.parseInt(size.getText().toString()), expDate.getText().toString(), index);
@@ -637,22 +649,17 @@ public class MainActivity extends AppCompatActivity {
 
     Gson gson = new Gson();
 
-    String storedHashMapString = sharedPref2.getString("hashString", "oopsDidntWork");
-    java.lang.reflect.Type type = new TypeToken<HashMap<Integer, String[]>>(){}.getType();
+    String storedHashMapString = sharedPref2.getString("hashString", "Empty");
 
-
-    //HashMap<Integer, String[]> testHashMap2 = gson.fromJson(storedHashMapString, type);
-
-//    if (gson.fromJson(storedHashMapString, type) == null){
-//      Log.i("SAVE", "Loaded hashmap is null");
-//    }else{
-//      Log.i("SAVE", "Loaded hashmap is valid");
-//    }
-
-    //map = testHashMap2;
-
-    Log.i("SAVE", "Load from array called");
-    //loadFromArray();
+    if(storedHashMapString.equals("Empty")){
+      return;
+    }
+    else{
+      java.lang.reflect.Type type = new TypeToken<HashMap<Integer, String[]>>(){}.getType();
+      HashMap<Integer, String[]> testHashMap2 = gson.fromJson(storedHashMapString, type);
+      map = testHashMap2;
+      loadFromArray();
+    }
   }
 
   public void toShoppingList(){
