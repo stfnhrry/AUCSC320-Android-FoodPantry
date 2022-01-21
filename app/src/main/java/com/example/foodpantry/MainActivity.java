@@ -639,18 +639,20 @@ public class MainActivity extends AppCompatActivity {
 
     String storedHashMapString = sharedPref2.getString("hashString", "oopsDidntWork");
     java.lang.reflect.Type type = new TypeToken<HashMap<Integer, String[]>>(){}.getType();
-    HashMap<Integer, String[]> testHashMap2 = gson.fromJson(storedHashMapString, type);
 
-    if (testHashMap2 == null){
-      Log.i("SAVE", "Loaded hashmap is null");
-    }else{
-      Log.i("SAVE", "Loaded hashmap is valid");
-    }
 
-    map = testHashMap2;
+    //HashMap<Integer, String[]> testHashMap2 = gson.fromJson(storedHashMapString, type);
+
+//    if (gson.fromJson(storedHashMapString, type) == null){
+//      Log.i("SAVE", "Loaded hashmap is null");
+//    }else{
+//      Log.i("SAVE", "Loaded hashmap is valid");
+//    }
+
+    //map = testHashMap2;
 
     Log.i("SAVE", "Load from array called");
-    loadFromArray();
+    //loadFromArray();
   }
 
   public void toShoppingList(){

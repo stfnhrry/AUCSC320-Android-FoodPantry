@@ -73,6 +73,16 @@ public class ShoppingListActivity extends AppCompatActivity {
     toast.show();
     lastToast = toast;
   }
+/*
+  public void shareShoppingList(View view) {
+    Intent sendIntent = new Intent();
+    sendIntent.setAction(Intent.ACTION_SEND);
+    sendIntent.putExtra(Intent.EXTRA_TEXT, "printing function");
+    sendIntent.setType("text/plain");
+    startActivity(sendIntent);
+*/
+
+
 
 
 
