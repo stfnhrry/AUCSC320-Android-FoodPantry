@@ -1,8 +1,6 @@
 package com.example.foodpantry;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
@@ -31,34 +29,27 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
   Button pantryButton, addItem, removeItem, lowInStock, outOfStock, expiringSoon, expired, shoppingList;
-
   Toast lastToast;
-
   LinearLayout cardLayout;
-
   int numItems;
-
   SaveFile hashMapFile = new SaveFile();
-
-  //use firebase for data streaming
-
   Map<Integer, String[]> map = hashMapFile.pantry;
-
   public static ArrayList<String> itemNames = new ArrayList<>();
-  ArrayList<Integer> sizes = new ArrayList<>();
+  ArrayList<String> sizes = new ArrayList<>();
+  Boolean inRemovingMode = false;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     pantryButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        setIcon();
+        setRemoveModeInactive();
         showAll();
         enableAllButtons();
         clearAllHighlights();
@@ -95,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     addItem.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        setIcon();
+        setRemoveModeInactive();
         showAddItemDialog();
         enableAllButtons();
         clearAllHighlights();
@@ -106,10 +97,7 @@ public class MainActivity extends AppCompatActivity {
     removeItem.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        for (int i = 0; i < cardLayout.getChildCount(); i++) {
-          cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.GONE);
-          cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.VISIBLE);
-        }
+        setRemoveModeActive();
         enableAllButtons();
         clearAllHighlights();
         removeItem.setBackgroundColor(Color.LTGRAY);
@@ -119,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     lowInStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        setIcon();
+        setRemoveModeInactive();
         showLowInStock();
         enableAllButtons();
         clearAllHighlights();
@@ -130,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     outOfStock.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        setIcon();
+        setRemoveModeInactive();
         showOutOfStock();
         enableAllButtons();
         clearAllHighlights();
@@ -141,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
     expiringSoon.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        setIcon();
+        setRemoveModeInactive();
         showExpiringSoon();
         enableAllButtons();
         clearAllHighlights();
@@ -152,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
     expired.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        setIcon();
+        setRemoveModeInactive();
         showExpired();
         enableAllButtons();
         clearAllHighlights();
@@ -223,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
    * @param weight - size of the item
    * @param expDate - the date the item expires
    */
-  public void addNewItem(int icon, String name, String category, int amount, int weight, String expDate){
+  public void addNewItem(int icon, String name, String category, int amount, String weight, String expDate){
     Log.i("SAVE", "add new item");
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
     transaction.add(cardLayout.getId(), ItemFragment.newInstance(icon, name, category, amount, weight, expDate));
@@ -235,15 +223,13 @@ public class MainActivity extends AppCompatActivity {
     Log.i("SAVE", "increment num items");
 
     View card = cardLayout.getChildAt(numItems - 1);
-    ImageButton removeTest = cardLayout.getChildAt(numItems -1).findViewById(R.id.removeIcon);
+    ImageButton removeItemButton = cardLayout.getChildAt(numItems -1).findViewById(R.id.removeIcon);
     TextView cardText = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
     ImageButton editButton = card.findViewById(R.id.editButtonForItem);
-    ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
-    removeTest.setVisibility(View.GONE);
+    ImageButton addToShopButton = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
+    removeItemButton.setVisibility(View.GONE);
 
     int id = numItems - 1;
-    Log.i("SAVE", "set id index number to" + id);
-    Log.i("SAVE", "Call save to array next with parameters icon: " + icon + " , name: "+ name + " , id: " + id);
     saveToArray(icon, name, category, amount, weight, expDate, id);
 
     editButton.setOnClickListener(new View.OnClickListener() {
@@ -253,16 +239,22 @@ public class MainActivity extends AppCompatActivity {
       }
 
     });
-    addToShop.setOnClickListener(new View.OnClickListener() {
+    addToShopButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         addToCart(card);
-        showToast("Items has been added to cart");
+        showToast("Item has been added to shopping list");
+      }
+    });
+    removeItemButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        removeItemFromPantry(id);
       }
     });
   }
 
-  public void loadNewItem(int icon, String name, String category, int amount, int weight, String expDate){
+  public void loadNewItem(int icon, String name, String category, int amount, String weight, String expDate){
     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
     transaction.add(cardLayout.getId(), ItemFragment.newInstance(icon, name, category, amount, weight, expDate));
     transaction.commitNow();
@@ -275,6 +267,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton editButton = card.findViewById(R.id.editButtonForItem);
     ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
     removeTest.setVisibility(View.GONE);
+    int id = numItems - 1;
 
     editButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -286,27 +279,15 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         addToCart(card);
-        addToShop.setEnabled(false);
-        showToast("Item added to cart");
+        showToast("Item has been added to shopping list");
       }
     });
     removeTest.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        int i = cardLayout.indexOfChild(card);
-        cardLayout.removeViewAt(i);
+        removeItemFromPantry(id);
       }
     });
-  }
-
-  /**
-   * Sets the icon to the correct image.
-   */
-  public void setIcon(){
-    for (int i = 0; i < cardLayout.getChildCount(); i++) {
-      cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.GONE);
-      cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.VISIBLE);
-    }
   }
 
   /**
@@ -322,6 +303,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView currentIcon = view.findViewById(R.id.iconForItem);
     TextView currentName = view.findViewById(R.id.titleForItem);
     TextView currentAmount = view.findViewById(R.id.amountLeftInPantryForItem);
+    TextView leftInPantry = view.findViewById(R.id.leftInPantryText);
     TextView currentSize = view.findViewById(R.id.sizeForItem);
     TextView currentExpDate = view.findViewById(R.id.expiryDateForItem);
     TextView currentDaysTillExpiry = view.findViewById(R.id.daysTillExpiryForItem);
@@ -329,34 +311,68 @@ public class MainActivity extends AppCompatActivity {
     TextView currentCategory = view.findViewById(R.id.categoryNameForItem);
 
     currentIcon.setImageResource(setIconFromCategory(category));
-    currentName.setText(name.getText());
-    currentAmount.setText(amount.getText());
-    currentSize.setText(size.getText());
-    currentExpDate.setText(expDate.getText());
+    currentName.setText(name.getText().toString());
+    currentAmount.setText(amount.getText().toString());
+    currentSize.setText(size.getText().toString());
+    currentExpDate.setText(expDate.getText().toString());
     currentCategory.setText(category.getSelectedItem().toString());
-    if(getDateDifferenceAsLong(currentExpDate.getText().toString()) < 1){
+
+    if(getDateDifferenceAsLong(currentDaysTillExpiry.getText().toString()) < 30 && getDateDifferenceAsLong(currentDaysTillExpiry.getText().toString()) > 0){
+      currentDaysTillExpiry.setText(getDateDifferenceAsString(currentDaysTillExpiry.getText().toString()));
+      currentDaysTillExpiry.setTextColor(getResources().getColor(R.color.orange_warning, null));
+      daysTillExpiry.setTextColor(getResources().getColor(R.color.orange_warning, null));
+      daysTillExpiry.setText("Days Till Expiry");
+    }
+    else if(getDateDifferenceAsLong(currentExpDate.getText().toString()) < 1){
       currentDaysTillExpiry.setText("Expired");
-      currentDaysTillExpiry.setTextColor(Color.parseColor("#FF0000"));
+      currentDaysTillExpiry.setTextColor(getResources().getColor(R.color.red_alert, null));
+      daysTillExpiry.setTextColor(getResources().getColor(R.color.red_alert, null));
       daysTillExpiry.setText("");
     }
     else{
       currentDaysTillExpiry.setText(getDateDifferenceAsString(currentExpDate.getText().toString()));
-      currentDaysTillExpiry.setTextColor(Color.parseColor("#2196F3"));
+      currentDaysTillExpiry.setTextColor(getResources().getColor(R.color.blue_item, null));
+      daysTillExpiry.setTextColor(getResources().getColor(R.color.blue_item, null));
       daysTillExpiry.setText("Days Till Expiry");
     }
 
     if(Integer.parseInt(amount.getText().toString()) > 0 && Integer.parseInt(amount.getText().toString()) < 6){
-      currentAmount.setTextColor(Color.parseColor("#882200"));
+      currentAmount.setTextColor(getResources().getColor(R.color.orange_warning, null));
+      leftInPantry.setTextColor(getResources().getColor(R.color.orange_warning, null));
     }
     else if(Integer.parseInt(amount.getText().toString()) < 1){
-      currentAmount.setTextColor(Color.parseColor("#FF0000"));
+      currentAmount.setTextColor(getResources().getColor(R.color.red_alert, null));
+      leftInPantry.setTextColor(getResources().getColor(R.color.red_alert, null));
     }
     else{
-      currentAmount.setTextColor(Color.parseColor("#2196F3"));
+      currentAmount.setTextColor(getResources().getColor(R.color.blue_item, null));
+      leftInPantry.setTextColor(getResources().getColor(R.color.blue_item, null));
     }
     int index = cardLayout.indexOfChild(view);
 
-    saveToArray(setIconFromCategory(category), name.getText().toString(), category.getSelectedItem().toString(), Integer.parseInt(amount.getText().toString()), Integer.parseInt(size.getText().toString()), expDate.getText().toString(), index);
+    saveToArray(setIconFromCategory(category), name.getText().toString(), category.getSelectedItem().toString(), Integer.parseInt(amount.getText().toString()), size.getText().toString(), expDate.getText().toString(), index);
+  }
+
+  /**
+   * Sets the icon on item cards back to the edit symbol and sets boolean for removing items to false.
+   */
+  public void setRemoveModeInactive(){
+    for (int i = 0; i < cardLayout.getChildCount(); i++) {
+      cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.GONE);
+      cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.VISIBLE);
+    }
+    inRemovingMode = false;
+  }
+
+  /**
+   * Sets the icon on item cards to the remove symbol and sets boolean for removing items to true.
+   */
+  public void setRemoveModeActive(){
+    for (int i = 0; i < cardLayout.getChildCount(); i++) {
+      cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.GONE);
+      cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.VISIBLE);
+    }
+    inRemovingMode = true;
   }
 
   /**
@@ -492,16 +508,16 @@ public class MainActivity extends AppCompatActivity {
     Button closeButton = addDialog.findViewById(R.id.cancelButton);
     EditText name = addDialog.findViewById(R.id.editName);
     name.setText("Bread");
-//    String nameString = name.getText().toString();
+
     EditText amount = addDialog.findViewById(R.id.editAmount);
     amount.setText("2");
-//    int amountInteger = Integer.parseInt(amount.getText().toString());
-    EditText size = addDialog.findViewById(R.id.editSize);
-    size.setText("3");
-//    int sizeInteger = Integer.parseInt(size.getText().toString());
+
+    EditText weight = addDialog.findViewById(R.id.editSize);
+    weight.setText("10kg");
+
     EditText expDate = addDialog.findViewById(R.id.editDate);
     expDate.setText("21/02/2022");
-//    String expDateString = expDate.getText().toString();
+
     Spinner categorySpinner = addDialog.findViewById(R.id.spinner);
     ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_item);
     categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -514,9 +530,9 @@ public class MainActivity extends AppCompatActivity {
         String nameString = name.getText().toString();
         String categoryString = categorySpinner.getSelectedItem().toString();
         int amountInteger = Integer.parseInt(amount.getText().toString());
-        int sizeInteger = Integer.parseInt(size.getText().toString());
+        String weightString = weight.getText().toString();
         String expDateString = expDate.getText().toString();
-        addNewItem(image, nameString, categoryString, amountInteger, sizeInteger, expDateString);
+        addNewItem(image, nameString, categoryString, amountInteger, weightString, expDateString);
       }
     });
 
@@ -597,17 +613,54 @@ public class MainActivity extends AppCompatActivity {
     TextView size = card.findViewById(R.id.sizeForItem);
 
     String name = itemName.getText().toString();
-    int sze = Integer.parseInt(size.getText().toString());
+    String sze = size.getText().toString();
 
     itemNames.add(name);
     sizes.add(sze);
   }
 
-  public void saveToArray(int icon, String name, String category, int amount, int weight, String expDate, int index){
+  public void removeItemFromPantry(int index){
+    Log.i("SAVE", "Remove item from hashmap at index " + index);
+    Log.i("SAVE", "Hashmap is currently " + map);
+    cardLayout.removeViewAt(index);
+    map.remove(index);
+    Log.i("SAVE", "Hashmap is now " + map);
+
+    int id = 0;
+    HashMap<Integer, String[]> tempMap = new HashMap<Integer, String[]>();
+
+    Set<Map.Entry<Integer, String[]>> entries = map.entrySet();
+
+    Iterator<Map.Entry<Integer, String[]>> iterator =
+            entries.iterator();
+
+    while(iterator.hasNext()) {
+      Map.Entry<Integer, String[]> entry = iterator.next();
+      Integer key   = entry.getKey();
+      String[] value = entry.getValue();
+
+      Log.i("SAVE", "Hashmap index " + key + " is " + value);
+
+      tempMap.put(id, value);
+      id++;
+    }
+
+    map = tempMap;
+
+    saveHashmapToPreferences();
+    refreshAllItems();
+    if (inRemovingMode == true){
+      setRemoveModeActive();
+    }
+    else{
+      setRemoveModeInactive();
+    }
+  }
+
+  public void saveToArray(int icon, String name, String category, int amount, String weight, String expDate, int index){
     Log.i("SAVE", "saveToArray");
     String iconString = icon + "";
     String amountString = amount + "";
-    String weightString = weight + "";
 
     String[] temp = new String[6];
 
@@ -615,41 +668,45 @@ public class MainActivity extends AppCompatActivity {
     temp[1] = name;
     temp[2] = category;
     temp[3] = amountString;
-    temp[4] = weightString;
+    temp[4] = weight;
     temp[5] = expDate;
 
-    saveToHashmapNew(temp, index);
+    saveToHashMap(index, temp);
   }
 
   public void loadFromArray(){
     for (int i = 0; i < map.size(); i++) {
-      loadNewItem(Integer.parseInt(map.get(i)[0]), map.get(i)[1], map.get(i)[2], Integer.parseInt(map.get(i)[3]), Integer.parseInt(map.get(i)[4]), map.get(i)[5]);
+      loadNewItem(Integer.parseInt(map.get(i)[0]), map.get(i)[1], map.get(i)[2], Integer.parseInt(map.get(i)[3]), map.get(i)[4], map.get(i)[5]);
     }
   }
 
-  public void saveToHashmapNew(String[] array, int index){
-    map.put(index, array);
+  public void saveToHashMap(int index, String[] ItemInfo){
+    map.put(index, ItemInfo);
 
+    saveHashmapToPreferences();
+  }
+
+  public void saveHashmapToPreferences(){
     //convert to string using gson
     Gson gson = new Gson();
     String hashMapString = gson.toJson(map);
 
     //save in shared prefs
-    SharedPreferences sharedPref2 = getPreferences(Context.MODE_PRIVATE);
-    SharedPreferences.Editor editor = sharedPref2.edit();
+    SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
+    SharedPreferences.Editor editor = preferences.edit();
     editor.clear();
     editor.putString("hashString", hashMapString).apply();
   }
 
   public void loadFromHashmap(){
     Log.i("SAVE", "Load from hashmap");
-    //get from shared prefs
-    SharedPreferences sharedPref2 = getPreferences(Context.MODE_PRIVATE);
-    SharedPreferences.Editor editor = sharedPref2.edit();
+    //get shared prefs
+    SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
 
     Gson gson = new Gson();
 
-    String storedHashMapString = sharedPref2.getString("hashString", "Empty");
+    //get HashMap as string from preferences
+    String storedHashMapString = preferences.getString("hashString", "Empty");
 
     if(storedHashMapString.equals("Empty")){
       return;
@@ -665,7 +722,7 @@ public class MainActivity extends AppCompatActivity {
   public void toShoppingList(){
     Intent switchActivityIntent = new Intent(this, ShoppingListActivity.class);
     switchActivityIntent.putStringArrayListExtra("names", itemNames);
-    switchActivityIntent.putIntegerArrayListExtra("sizes", sizes);
+    switchActivityIntent.putStringArrayListExtra("sizes", sizes);
     startActivity(switchActivityIntent);
 
   }
