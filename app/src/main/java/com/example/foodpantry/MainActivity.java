@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         addToCart(card);
-        showToast("Items has been added to cart");
+        showToast("Item has been added to shopping list");
       }
     });
     removeItemButton.setOnClickListener(new View.OnClickListener() {
@@ -279,8 +279,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         addToCart(card);
-        addToShop.setEnabled(false);
-        showToast("Item added to cart");
+        showToast("Item has been added to shopping list");
       }
     });
     removeTest.setOnClickListener(new View.OnClickListener() {
