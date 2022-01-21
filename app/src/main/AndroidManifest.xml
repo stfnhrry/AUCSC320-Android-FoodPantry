@@ -17,7 +17,8 @@
         android:theme="@style/Theme.FoodPantry">
         <activity
             android:name=".ShoppingListActivity"
-            android:exported="true" />
+            android:theme="@style/Theme.FoodPantry.NoActionBar"
+        android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

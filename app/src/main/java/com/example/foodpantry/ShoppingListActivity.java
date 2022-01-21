@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 
 public class ShoppingListActivity extends AppCompatActivity {
 
-  Button clear;
+  ImageButton clear;
   ArrayList<String> foodNames;
   ArrayList<Integer> weight;
   Boolean isCleared = false;
@@ -39,7 +40,7 @@ public class ShoppingListActivity extends AppCompatActivity {
       linearLayout.addView(t);
       //a bug
     }
-    clear = (Button) findViewById(R.id.ClearAll);
+    clear = (ImageButton) findViewById(R.id.ClearAll);
     clear.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
