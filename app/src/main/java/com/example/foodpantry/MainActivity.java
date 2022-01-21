@@ -713,11 +713,11 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void hideKeyboard() {
-    Log.i("SAVE", "Hide keyboard");
-    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-    if(imm.isActive()){
-      imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-    }
+    Log.i("SAVE", "Hide keyboard is commented out");
+//    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+//    if(imm.isActive()){
+//      imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+//    }
     //imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
   }
 
