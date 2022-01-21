@@ -171,38 +171,7 @@ public class MainActivity extends AppCompatActivity {
   @Override
   protected void onStart(){
     super.onStart();
-    Log.i("ACTIVITY STATE", "On Start");
     refreshAllItems();
-  }
-
-  @Override
-  protected void onRestart(){
-    super.onRestart();
-    Log.i("ACTIVITY STATE", "On Restart");
-  }
-
-  @Override
-  protected void onResume(){
-    super.onResume();
-    Log.i("ACTIVITY STATE", "On Resume");
-  }
-
-  @Override
-  protected void onPause(){
-    super.onPause();
-    Log.i("ACTIVITY STATE", "On Pause");
-  }
-
-  @Override
-  protected void onStop(){
-    super.onStop();
-    Log.i("ACTIVITY STATE", "On Stop");
-  }
-
-  @Override
-  protected void onDestroy(){
-    super.onDestroy();
-    Log.i("ACTIVITY STATE", "On Destroy");
   }
 
   /**
@@ -286,7 +255,6 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         addToCart(card);
-        addToShop.setEnabled(false);
         showToast("Items has been added to cart");
       }
     });
@@ -374,11 +342,9 @@ public class MainActivity extends AppCompatActivity {
       currentDaysTillExpiry.setTextColor(Color.parseColor("#2196F3"));
       daysTillExpiry.setText("Days Till Expiry");
     }
-
     int index = cardLayout.indexOfChild(view);
 
     saveToArray(setIconFromCategory(category), name.getText().toString(), category.getSelectedItem().toString(), Integer.parseInt(amount.getText().toString()), Integer.parseInt(size.getText().toString()), expDate.getText().toString(), index);
-
   }
 
   /**
@@ -528,9 +494,6 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_item);
     categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     categorySpinner.setAdapter(categoryAdapter);
-//    showToast(categorySpinner.getSelectedItem().toString() + " is what the category returns");
-    // Need to disable the user from clicking anywhere because if the user clicks on the buttons on
-    // the side, then the dialog closes
 
     addButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -541,8 +504,6 @@ public class MainActivity extends AppCompatActivity {
         int amountInteger = Integer.parseInt(amount.getText().toString());
         int sizeInteger = Integer.parseInt(size.getText().toString());
         String expDateString = expDate.getText().toString();
-        // Need to disable the user from clicking anywhere because if the user clicks on the buttons on
-        // the side, then the dialog closes
         addNewItem(image, nameString, categoryString, amountInteger, sizeInteger, expDateString);
       }
     });
@@ -620,7 +581,6 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void addToCart(View card){
-
     TextView itemName = card.findViewById(R.id.titleForItem);
     TextView size = card.findViewById(R.id.sizeForItem);
 
@@ -629,7 +589,6 @@ public class MainActivity extends AppCompatActivity {
 
     itemNames.add(name);
     sizes.add(sze);
-
   }
 
   public void saveToArray(int icon, String name, String category, int amount, int weight, String expDate, int index){
@@ -647,36 +606,17 @@ public class MainActivity extends AppCompatActivity {
     temp[4] = weightString;
     temp[5] = expDate;
 
-    Log.i("SAVE", "Call save to hashmap with parameters icon: " + iconString + " , name: " + name + " , id: " + index);
     saveToHashmapNew(temp, index);
   }
 
   public void loadFromArray(){
-    Log.i("SAVE", "loadFromArray");
     for (int i = 0; i < map.size(); i++) {
       loadNewItem(Integer.parseInt(map.get(i)[0]), map.get(i)[1], map.get(i)[2], Integer.parseInt(map.get(i)[3]), Integer.parseInt(map.get(i)[4]), map.get(i)[5]);
     }
-    //addNewItem();
   }
 
   public void saveToHashmapNew(String[] array, int index){
-    Log.i("SAVE", "SaveToHashmapNew with index: " + index);
-    if (map != null) {
-      Log.i("SAVE", "Before saving the map is : " + map);
-    }
     map.put(index, array);
-    if (map != null) {
-      Log.i("SAVE", "After saving the map is : " + map);
-    }
-    if(map.get(0) != null){
-      Log.i("SAVE", "Saved to hashmap with 0: " + map.get(0) + " being " + map.get(0)[1].toString());
-    }
-    if(map.get(1) != null){
-      Log.i("SAVE", "Saved to hashmap with 1: " + map.get(1) + " being " + map.get(1)[1].toString());
-    }
-    if(map.get(2) != null){
-    Log.i("SAVE", "Saved to hashmap with 2: " + map.get(2) + " being " + map.get(2)[1].toString());
-    }
 
     //convert to string using gson
     Gson gson = new Gson();
@@ -704,16 +644,10 @@ public class MainActivity extends AppCompatActivity {
     if (testHashMap2 == null){
       Log.i("SAVE", "Loaded hashmap is null");
     }else{
-      Log.i("DATE", "Loaded hashmap is valid");
+      Log.i("SAVE", "Loaded hashmap is valid");
     }
 
-    Log.i("SAVE", "TestHashmap loaded with 0: " + testHashMap2.get(0) + " being " + testHashMap2.get(0)[1].toString());
-    Log.i("SAVE", "TestHashmap loaded with 1: " + testHashMap2.get(1) + " being " + testHashMap2.get(1)[1].toString());
-    Log.i("SAVE", "TestHashmap loaded with 2: " + testHashMap2.get(2) + " being " + testHashMap2.get(2)[1].toString());
     map = testHashMap2;
-    Log.i("SAVE", "map declared with 0: " + map.get(0) + " being " + map.get(0)[1].toString());
-    Log.i("SAVE", "map declared with 1: " + map.get(1) + " being " + map.get(1)[1].toString());
-    Log.i("SAVE", "map declared with 2: " + map.get(2) + " being " + map.get(2)[1].toString());
 
     Log.i("SAVE", "Load from array called");
     loadFromArray();
