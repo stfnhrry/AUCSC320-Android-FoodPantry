@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,7 @@ public class ItemFragment extends Fragment {
   public TextView categoryText;
   public int amount;
   public TextView amountText;
+  public TextView leftInPantryText;
   public String expiryDate;
   public TextView dateText;
   public String expiryDays;
@@ -46,8 +48,8 @@ public class ItemFragment extends Fragment {
 
   // TODO: Rename parameter arguments, choose names that match
   // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-  private static String ARG_ICON = "R.drawable.cookies";
-  private static String ARG_TITLE = "title";
+  private static final String ARG_ICON = "R.drawable.cookies";
+  private static final String ARG_TITLE = "title";
   private static final String ARG_CATEGORY = "category";
   public static String ARG_AMOUNT = "1";
   public static String ARG_DATE = "23/04/2022";
@@ -97,7 +99,6 @@ public class ItemFragment extends Fragment {
                            Bundle savedInstanceState) {
     // Inflate the layout for this fragment
     return inflater.inflate(R.layout.fragment_item, container, false);
-
   }
 
   @Override
@@ -110,21 +111,44 @@ public class ItemFragment extends Fragment {
     categoryText.setText(category);
     amountText = (TextView) getView().findViewById(R.id.amountLeftInPantryForItem);
     amountText.setText(amount + "");
+    leftInPantryText = (TextView) getView().findViewById(R.id.leftInPantryText);
     sizeText = (TextView) getView().findViewById(R.id.sizeForItem);
     sizeText.setText(size + "");
     dateText = (TextView) getView().findViewById(R.id.expiryDateForItem);
     dateText.setText(expiryDate);
     daysText = (TextView) getView().findViewById(R.id.daysTillExpiryForItem);
     daysTillExpiryText = (TextView) getView().findViewById(R.id.daysTillExpiryText);
-    if(calculateDateDifferenceAsLong(dateText.getText().toString()) < 1){
+
+    if(calculateDateDifferenceAsLong(dateText.getText().toString()) < 30 && calculateDateDifferenceAsLong(dateText.getText().toString()) > 0){
+      daysText.setText(calculateDateDifferenceAsString(dateText.getText().toString()));
+      daysText.setTextColor(getResources().getColor(R.color.orange_warning, null));
+      daysTillExpiryText.setTextColor(getResources().getColor(R.color.orange_warning, null));
+      daysTillExpiryText.setText("Days Till Expiry");
+    }
+    else if(calculateDateDifferenceAsLong(dateText.getText().toString()) < 1){
       daysText.setText("Expired");
-      daysText.setTextColor(Color.parseColor("#FF0000"));
+      daysText.setTextColor(getResources().getColor(R.color.red_alert, null));
+      daysTillExpiryText.setTextColor(getResources().getColor(R.color.red_alert, null));
       daysTillExpiryText.setText("");
     }
     else{
       daysText.setText(calculateDateDifferenceAsString(dateText.getText().toString()));
-      daysText.setTextColor(Color.parseColor("#2196F3"));
+      daysText.setTextColor(getResources().getColor(R.color.blue_item, null));
+      daysText.setTextColor(getResources().getColor(R.color.blue_item, null));
       daysTillExpiryText.setText("Days Till Expiry");
+    }
+
+    if(Integer.parseInt(amountText.getText().toString()) > 0 && Integer.parseInt(amountText.getText().toString()) < 6){
+      amountText.setTextColor(getResources().getColor(R.color.orange_warning, null));
+      leftInPantryText.setTextColor(getResources().getColor(R.color.orange_warning, null));
+    }
+    else if(Integer.parseInt(amountText.getText().toString()) < 1){
+      amountText.setTextColor(getResources().getColor(R.color.red_alert, null));
+      leftInPantryText.setTextColor(getResources().getColor(R.color.red_alert, null));
+    }
+    else{
+      amountText.setTextColor(getResources().getColor(R.color.blue_item, null));
+      leftInPantryText.setTextColor(getResources().getColor(R.color.blue_item, null));
     }
   }
 
@@ -171,9 +195,8 @@ public class ItemFragment extends Fragment {
       date2 = dateFormat.parse(expiryDate);
       long difference = (date2.getTime() - calendar.getTime());
       long differenceDates = difference / (24 * 60 * 60 * 1000);
-      String dayDifference = Long.toString(differenceDates);
 
-      return dayDifference;
+      return Long.toString(differenceDates);
 
     } catch (Exception exception){
       return "null";

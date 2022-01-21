@@ -14,4 +14,5 @@
     <color name="very_light_grey">#F1F1F1</color>
     <color name="orange_warning">#FF7900</color>
     <color name="red_alert">#FF0000</color>
+    <color name="blue_item">#2196F3</color>
 </resources>

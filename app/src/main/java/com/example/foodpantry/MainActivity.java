@@ -1,6 +1,7 @@
 package com.example.foodpantry;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -322,6 +323,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView currentIcon = view.findViewById(R.id.iconForItem);
     TextView currentName = view.findViewById(R.id.titleForItem);
     TextView currentAmount = view.findViewById(R.id.amountLeftInPantryForItem);
+    TextView leftInPantry = view.findViewById(R.id.leftInPantryText);
     TextView currentSize = view.findViewById(R.id.sizeForItem);
     TextView currentExpDate = view.findViewById(R.id.expiryDateForItem);
     TextView currentDaysTillExpiry = view.findViewById(R.id.daysTillExpiryForItem);
@@ -334,25 +336,37 @@ public class MainActivity extends AppCompatActivity {
     currentSize.setText(size.getText());
     currentExpDate.setText(expDate.getText());
     currentCategory.setText(category.getSelectedItem().toString());
-    if(getDateDifferenceAsLong(currentExpDate.getText().toString()) < 1){
+
+    if(getDateDifferenceAsLong(currentDaysTillExpiry.getText().toString()) < 30 && getDateDifferenceAsLong(currentDaysTillExpiry.getText().toString()) > 0){
+      currentDaysTillExpiry.setText(getDateDifferenceAsString(currentDaysTillExpiry.getText().toString()));
+      currentDaysTillExpiry.setTextColor(getResources().getColor(R.color.orange_warning, null));
+      daysTillExpiry.setTextColor(getResources().getColor(R.color.orange_warning, null));
+      daysTillExpiry.setText("Days Till Expiry");
+    }
+    else if(getDateDifferenceAsLong(currentExpDate.getText().toString()) < 1){
       currentDaysTillExpiry.setText("Expired");
-      currentDaysTillExpiry.setTextColor(Color.parseColor("#FF0000"));
+      currentDaysTillExpiry.setTextColor(getResources().getColor(R.color.red_alert, null));
+      daysTillExpiry.setTextColor(getResources().getColor(R.color.red_alert, null));
       daysTillExpiry.setText("");
     }
     else{
       currentDaysTillExpiry.setText(getDateDifferenceAsString(currentExpDate.getText().toString()));
-      currentDaysTillExpiry.setTextColor(Color.parseColor("#2196F3"));
+      currentDaysTillExpiry.setTextColor(getResources().getColor(R.color.blue_item, null));
+      daysTillExpiry.setTextColor(getResources().getColor(R.color.blue_item, null));
       daysTillExpiry.setText("Days Till Expiry");
     }
 
     if(Integer.parseInt(amount.getText().toString()) > 0 && Integer.parseInt(amount.getText().toString()) < 6){
-      currentAmount.setTextColor(Color.parseColor("#882200"));
+      currentAmount.setTextColor(getResources().getColor(R.color.orange_warning, null));
+      leftInPantry.setTextColor(getResources().getColor(R.color.orange_warning, null));
     }
     else if(Integer.parseInt(amount.getText().toString()) < 1){
-      currentAmount.setTextColor(Color.parseColor("#FF0000"));
+      currentAmount.setTextColor(getResources().getColor(R.color.red_alert, null));
+      leftInPantry.setTextColor(getResources().getColor(R.color.red_alert, null));
     }
     else{
-      currentAmount.setTextColor(Color.parseColor("#2196F3"));
+      currentAmount.setTextColor(getResources().getColor(R.color.blue_item, null));
+      leftInPantry.setTextColor(getResources().getColor(R.color.blue_item, null));
     }
     int index = cardLayout.indexOfChild(view);
 
