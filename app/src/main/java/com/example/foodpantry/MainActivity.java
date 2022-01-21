@@ -539,6 +539,9 @@ public class MainActivity extends AppCompatActivity {
     closeButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+//        InputMethodManager imm = (InputMethodManager)getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
+//        imm.hideSoftInputFromWindow(name.getWindowToken(), 0);
+        hideKeyboard(name);
         addDialog.dismiss();
       }
     });
@@ -546,8 +549,10 @@ public class MainActivity extends AppCompatActivity {
     addDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
       @Override
       public void onDismiss(DialogInterface dialogInterface) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
         addItem.setBackgroundColor(Color.TRANSPARENT);
-        hideKeyboard();
+        //hideKeyboard(name);
       }
     });
     addDialog.show();
@@ -602,7 +607,7 @@ public class MainActivity extends AppCompatActivity {
     editDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
       @Override
       public void onDismiss(DialogInterface dialogInterface) {
-        hideKeyboard();
+        //hideKeyboard();
       }
     });
     editDialog.show();
@@ -727,13 +732,15 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
-  public void hideKeyboard() {
+  public void hideKeyboard(EditText text) {
     Log.i("SAVE", "Hide keyboard is commented out");
-//    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-//    if(imm.isActive()){
-//      imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-//    }
+    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+    if(imm.isActive()){
+      imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+    }
     //imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+//    InputMethodManager imm = (InputMethodManager)getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
+//    imm.hideSoftInputFromWindow(text.getWindowToken(), 0);
   }
 
   public int setIconFromCategory(Spinner category){
