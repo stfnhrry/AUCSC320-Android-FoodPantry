@@ -42,19 +42,11 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity {
 
   Button pantryButton, addItem, removeItem, lowInStock, outOfStock, expiringSoon, expired, shoppingList;
-
   Toast lastToast;
-
   LinearLayout cardLayout;
-
   int numItems;
-
   SaveFile hashMapFile = new SaveFile();
-
-  //use firebase for data streaming
-
   Map<Integer, String[]> map = hashMapFile.pantry;
-
   public static ArrayList<String> itemNames = new ArrayList<>();
   ArrayList<Integer> sizes = new ArrayList<>();
 
