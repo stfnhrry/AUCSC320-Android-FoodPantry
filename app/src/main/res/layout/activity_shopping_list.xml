@@ -79,7 +79,7 @@
                 android:layout_width="115dp"
                 android:layout_height="56dp"
                 android:layout_marginBottom="184dp"
-                android:onClick="printShoppingList"
+                android:onClick="shareShoppingList"
                 android:text="Share"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
