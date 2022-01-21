@@ -53,7 +53,7 @@ public class ItemFragment extends Fragment {
   private static final String ARG_CATEGORY = "category";
   public static String ARG_AMOUNT = "1";
   public static String ARG_DATE = "23/04/2022";
-  public static String ARG_SIZE = "5";
+  public static String ARG_SIZE = "5kg";
 
   public ItemFragment() {
     // Required empty public constructor

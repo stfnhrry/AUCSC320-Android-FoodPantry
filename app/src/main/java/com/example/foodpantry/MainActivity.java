@@ -292,28 +292,6 @@ public class MainActivity extends AppCompatActivity {
   }
 
   /**
-   * Sets the icon on item cards back to the edit symbol and sets boolean for removing items to false.
-   */
-  public void setRemoveModeInactive(){
-    for (int i = 0; i < cardLayout.getChildCount(); i++) {
-      cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.GONE);
-      cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.VISIBLE);
-    }
-    inRemovingMode = false;
-  }
-
-  /**
-   * Sets the icon on item cards to the remove symbol and sets boolean for removing items to true.
-   */
-  public void setRemoveModeActive(){
-    for (int i = 0; i < cardLayout.getChildCount(); i++) {
-      cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.GONE);
-      cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.VISIBLE);
-    }
-    inRemovingMode = true;
-  }
-
-  /**
    * Edits an item already in the pantry.
    * @param view - the edit button
    * @param name - name of the item
@@ -334,10 +312,10 @@ public class MainActivity extends AppCompatActivity {
     TextView currentCategory = view.findViewById(R.id.categoryNameForItem);
 
     currentIcon.setImageResource(setIconFromCategory(category));
-    currentName.setText(name.getText());
-    currentAmount.setText(amount.getText());
-    currentSize.setText(size.getText());
-    currentExpDate.setText(expDate.getText());
+    currentName.setText(name.getText().toString());
+    currentAmount.setText(amount.getText().toString());
+    currentSize.setText(size.getText().toString());
+    currentExpDate.setText(expDate.getText().toString());
     currentCategory.setText(category.getSelectedItem().toString());
 
     if(getDateDifferenceAsLong(currentDaysTillExpiry.getText().toString()) < 30 && getDateDifferenceAsLong(currentDaysTillExpiry.getText().toString()) > 0){
@@ -374,6 +352,28 @@ public class MainActivity extends AppCompatActivity {
     int index = cardLayout.indexOfChild(view);
 
     saveToArray(setIconFromCategory(category), name.getText().toString(), category.getSelectedItem().toString(), Integer.parseInt(amount.getText().toString()), size.getText().toString(), expDate.getText().toString(), index);
+  }
+
+  /**
+   * Sets the icon on item cards back to the edit symbol and sets boolean for removing items to false.
+   */
+  public void setRemoveModeInactive(){
+    for (int i = 0; i < cardLayout.getChildCount(); i++) {
+      cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.GONE);
+      cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.VISIBLE);
+    }
+    inRemovingMode = false;
+  }
+
+  /**
+   * Sets the icon on item cards to the remove symbol and sets boolean for removing items to true.
+   */
+  public void setRemoveModeActive(){
+    for (int i = 0; i < cardLayout.getChildCount(); i++) {
+      cardLayout.getChildAt(i).findViewById(R.id.editButtonForItem).setVisibility(View.GONE);
+      cardLayout.getChildAt(i).findViewById(R.id.removeIcon).setVisibility(View.VISIBLE);
+    }
+    inRemovingMode = true;
   }
 
   /**
@@ -514,7 +514,7 @@ public class MainActivity extends AppCompatActivity {
     amount.setText("2");
 
     EditText weight = addDialog.findViewById(R.id.editSize);
-    weight.setText("3");
+    weight.setText("10kg");
 
     EditText expDate = addDialog.findViewById(R.id.editDate);
     expDate.setText("21/02/2022");
