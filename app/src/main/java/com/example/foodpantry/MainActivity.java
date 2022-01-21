@@ -344,6 +344,16 @@ public class MainActivity extends AppCompatActivity {
       currentDaysTillExpiry.setTextColor(Color.parseColor("#2196F3"));
       daysTillExpiry.setText("Days Till Expiry");
     }
+
+    if(Integer.parseInt(amount.getText().toString()) > 0 && Integer.parseInt(amount.getText().toString()) < 6){
+      currentAmount.setTextColor(Color.parseColor("#882200"));
+    }
+    else if(Integer.parseInt(amount.getText().toString()) < 1){
+      currentAmount.setTextColor(Color.parseColor("#FF0000"));
+    }
+    else{
+      currentAmount.setTextColor(Color.parseColor("#2196F3"));
+    }
     int index = cardLayout.indexOfChild(view);
 
     saveToArray(setIconFromCategory(category), name.getText().toString(), category.getSelectedItem().toString(), Integer.parseInt(amount.getText().toString()), Integer.parseInt(size.getText().toString()), expDate.getText().toString(), index);
