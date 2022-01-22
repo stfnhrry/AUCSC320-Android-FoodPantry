@@ -1,5 +1,7 @@
 package com.example.foodpantry;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -10,11 +12,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -39,7 +40,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
   Button pantryButton, addItem, removeItem, lowInStock, outOfStock, expiringSoon, expired, shoppingList;
   Toast lastToast;
   LinearLayout cardLayout;
-
   int numItems;
   SaveFile hashMapFile = new SaveFile();
   Map<Integer, String[]> map = hashMapFile.pantry;
@@ -55,24 +54,10 @@ public class MainActivity extends AppCompatActivity {
   ArrayList<String> sizes = new ArrayList<>();
   Boolean inRemovingMode = false;
 
-  Dialog addDialog;
-  Dialog editDialog;
-  boolean isEveryFieldChecked = false;
-  Button addButton;
-  Button closeButton;
-  EditText name;
-  EditText amount;
-  EditText weight;
-  EditText expDate;
-
-  View mRootView;
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
-    mRootView = findViewById(R.id.Root);
 
     cardLayout = findViewById(R.id.linearLayout);
 
@@ -280,11 +265,11 @@ public class MainActivity extends AppCompatActivity {
     numItems = cardLayout.getChildCount();
 
     View card = cardLayout.getChildAt(numItems - 1);
-    ImageButton removeItemButton = cardLayout.getChildAt(numItems -1).findViewById(R.id.removeIcon);
+    ImageButton removeTest = cardLayout.getChildAt(numItems -1).findViewById(R.id.removeIcon);
     TextView cardText = cardLayout.getChildAt(numItems - 1).findViewById(R.id.titleForItem);
     ImageButton editButton = card.findViewById(R.id.editButtonForItem);
-    ImageButton addToShopButton = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
-    removeItemButton.setVisibility(View.GONE);
+    ImageButton addToShop = cardLayout.getChildAt(numItems -1 ).findViewById(R.id.addToShoppingCartButtonForItem);
+    removeTest.setVisibility(View.GONE);
     int id = numItems - 1;
 
     editButton.setOnClickListener(new View.OnClickListener() {
@@ -293,14 +278,26 @@ public class MainActivity extends AppCompatActivity {
         showEditItemDialog(card);
       }
     });
-    addToShopButton.setOnClickListener(new View.OnClickListener() {
+
+    addToShop.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         addToCart(card);
         showToast("Item has been added to shopping list");
-      }
+
+        addToShop.setEnabled(false);
+        addToShop.postDelayed(new Runnable() {
+          @Override
+          public void run() {
+            addToShop.setEnabled(true);
+            Log.d(TAG, "disabled button");
+          }
+          },500);
+        }
+
     });
-    removeItemButton.setOnClickListener(new View.OnClickListener() {
+
+    removeTest.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         removeItemFromPantry(id);
@@ -520,16 +517,20 @@ public class MainActivity extends AppCompatActivity {
 
   public void showAddItemDialog(){
     Log.i("SAVE", "Show add item dialog");
-    addDialog = new Dialog(this);
+    Dialog addDialog = new Dialog(this);
     addDialog.setContentView(R.layout.add_item_dialog);
+    Button addButton = addDialog.findViewById(R.id.confirmButton);
+    Button closeButton = addDialog.findViewById(R.id.cancelButton);
+    EditText name = addDialog.findViewById(R.id.editName);
+    name.setText("Bread");
 
-    addButton = addDialog.findViewById(R.id.confirmButton);
-    closeButton = addDialog.findViewById(R.id.cancelButton);
-    name = addDialog.findViewById(R.id.editName);
-    amount = addDialog.findViewById(R.id.editAmount);
-    weight = addDialog.findViewById(R.id.editSize);
-    weight.setText("1kg");
-    expDate = addDialog.findViewById(R.id.editDate);
+    EditText amount = addDialog.findViewById(R.id.editAmount);
+    amount.setText("2");
+
+    EditText weight = addDialog.findViewById(R.id.editSize);
+    weight.setText("10kg");
+
+    EditText expDate = addDialog.findViewById(R.id.editDate);
     expDate.setText("21/02/2022");
 
     Spinner categorySpinner = addDialog.findViewById(R.id.spinner);
@@ -540,24 +541,22 @@ public class MainActivity extends AppCompatActivity {
     addButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        isEveryFieldChecked = checkAllFields();
-
-        if(isEveryFieldChecked){
-          int image = setIconFromCategory(categorySpinner);
-          String nameString = name.getText().toString();
-          String categoryString = categorySpinner.getSelectedItem().toString();
-          int amountInteger = Integer.parseInt(amount.getText().toString());
-          String weightString = weight.getText().toString();
-          String expDateString = expDate.getText().toString();
-          addNewItem(image, nameString, categoryString, amountInteger, weightString, expDateString);
-        }
+        int image = setIconFromCategory(categorySpinner);
+        String nameString = name.getText().toString();
+        String categoryString = categorySpinner.getSelectedItem().toString();
+        int amountInteger = Integer.parseInt(amount.getText().toString());
+        String weightString = weight.getText().toString();
+        String expDateString = expDate.getText().toString();
+        addNewItem(image, nameString, categoryString, amountInteger, weightString, expDateString);
       }
     });
 
     closeButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        hideKeyboard1(name);
+//        InputMethodManager imm = (InputMethodManager)getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
+//        imm.hideSoftInputFromWindow(name.getWindowToken(), 0);
+        hideKeyboard(name);
         addDialog.dismiss();
       }
     });
@@ -565,23 +564,24 @@ public class MainActivity extends AppCompatActivity {
     addDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
       @Override
       public void onDismiss(DialogInterface dialogInterface) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
         addItem.setBackgroundColor(Color.TRANSPARENT);
+        //hideKeyboard(name);
       }
     });
     addDialog.show();
   }
 
   public void showEditItemDialog(View card){
-    editDialog = new Dialog(this);
+    Dialog editDialog = new Dialog(this);
     editDialog.setContentView(R.layout.edit_item_dialog);
-
-    addButton = editDialog.findViewById(R.id.confirmButton);
-    closeButton = editDialog.findViewById(R.id.cancelButton);
-
-    name = editDialog.findViewById(R.id.editName);
-    amount = editDialog.findViewById(R.id.editAmount);
-    weight = editDialog.findViewById(R.id.editSize);
-    expDate = editDialog.findViewById(R.id.editDate);
+    Button edit = editDialog.findViewById(R.id.confirmButton);
+    Button closeButton = editDialog.findViewById(R.id.cancelButton);
+    EditText name = editDialog.findViewById(R.id.editName);
+    EditText amount = editDialog.findViewById(R.id.editAmount);
+    EditText size = editDialog.findViewById(R.id.editSize);
+    EditText expDate = editDialog.findViewById(R.id.editDate);
     Spinner categorySpinner = editDialog.findViewById(R.id.spinner);
     ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(this, R.array.categories, android.R.layout.simple_spinner_item);
     categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -594,7 +594,7 @@ public class MainActivity extends AppCompatActivity {
     TextView currentCategory = card.findViewById(R.id.categoryNameForItem);
 
     name.setText(currentName.getText());
-    weight.setText(currentSize.getText());
+    size.setText(currentSize.getText());
     amount.setText(currentAmount.getText());
     expDate.setText(currentExpDate.getText());
 
@@ -604,23 +604,17 @@ public class MainActivity extends AppCompatActivity {
       }
     }
 
-    addButton.setOnClickListener(new View.OnClickListener() {
+    edit.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        isEveryFieldChecked = checkAllFields();
-
-        if(isEveryFieldChecked){
-          editItem(card, name, categorySpinner, amount, weight, expDate);
-          hideKeyboard1(name);
-          editDialog.dismiss();
-        }
+        editItem(card, name, categorySpinner, amount, size, expDate);
+        editDialog.dismiss();
       }
     });
 
     closeButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        hideKeyboard1(name);
         editDialog.dismiss();
       }
     });
@@ -628,6 +622,7 @@ public class MainActivity extends AppCompatActivity {
     editDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
       @Override
       public void onDismiss(DialogInterface dialogInterface) {
+        //hideKeyboard();
       }
     });
     editDialog.show();
@@ -751,11 +746,16 @@ public class MainActivity extends AppCompatActivity {
     startActivity(switchActivityIntent);
 
   }
-//EditText text
-  public void hideKeyboard1(EditText input) {
-    Log.i("SAVE", "Hide keyboard run");
-    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-    imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
+
+  public void hideKeyboard(EditText text) {
+    Log.i("SAVE", "Hide keyboard is commented out");
+    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+    if(imm.isActive()){
+      imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+    }
+    //imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+//    InputMethodManager imm = (InputMethodManager)getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
+//    imm.hideSoftInputFromWindow(text.getWindowToken(), 0);
   }
 
   public int setIconFromCategory(Spinner category){
@@ -782,26 +782,6 @@ public class MainActivity extends AppCompatActivity {
   public void refreshAllItems(){
     cardLayout.removeAllViewsInLayout();
     loadFromHashmap();
-  }
-
-  public boolean checkAllFields(){
-    if (name.length() == 0) {
-      name.setError("This field is required");
-      return false;
-    }
-    if (amount.length() == 0) {
-      amount.setError("This field is required");
-      return false;
-    }
-    if (weight.length() == 0) {
-      weight.setError("This field is required");
-      return false;
-    }
-    if (expDate.length() == 0) {
-      expDate.setError("This field is required");
-      return false;
-    }
-    return true;
   }
 
 } // class
