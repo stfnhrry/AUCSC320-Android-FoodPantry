@@ -520,9 +520,7 @@ public class MainActivity extends AppCompatActivity {
     addButton = addDialog.findViewById(R.id.confirmButton);
     closeButton = addDialog.findViewById(R.id.cancelButton);
     name = addDialog.findViewById(R.id.editName);
-    name.setText("Bread");
     amount = addDialog.findViewById(R.id.editAmount);
-    amount.setText("2");
     weight = addDialog.findViewById(R.id.editSize);
     weight.setText("10kg");
     expDate = addDialog.findViewById(R.id.editDate);
