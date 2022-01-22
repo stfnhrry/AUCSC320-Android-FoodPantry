@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
   ArrayList<String> sizes = new ArrayList<>();
   Boolean inRemovingMode = false;
 
+  Dialog addDialog;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -517,7 +519,7 @@ public class MainActivity extends AppCompatActivity {
 
   public void showAddItemDialog(){
     Log.i("SAVE", "Show add item dialog");
-    Dialog addDialog = new Dialog(this);
+    addDialog = new Dialog(this);
     addDialog.setContentView(R.layout.add_item_dialog);
     Button addButton = addDialog.findViewById(R.id.confirmButton);
     Button closeButton = addDialog.findViewById(R.id.cancelButton);
