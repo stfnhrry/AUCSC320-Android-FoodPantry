@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -32,8 +33,12 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -177,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
   protected void onStart(){
     super.onStart();
     refreshAllItems();
+    refreshShoppingList();
   }
 
   /**
@@ -212,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
       lastToast.cancel();
     }
     Toast toast = Toast.makeText(this, text, Toast.LENGTH_LONG);
-    toast.setGravity(Gravity.BOTTOM, 0, 0);
+    toast.setGravity(Gravity.BOTTOM, 0, 20);
     toast.show();
     lastToast = toast;
   } // showToast
@@ -651,6 +657,8 @@ public class MainActivity extends AppCompatActivity {
 
     itemNames.add(name);
     sizes.add(sze);
+
+    storeShoppingListToPreference();
   }
 
   public void removeItemFromPantry(int index){
@@ -811,6 +819,55 @@ public class MainActivity extends AppCompatActivity {
       return false;
     }
     return true;
+  }
+
+  public static void setStringArrayPref(Context context, String key, ArrayList<String> values) {
+    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+    SharedPreferences.Editor editor = prefs.edit();
+    JSONArray a = new JSONArray();
+    for (int i = 0; i < values.size(); i++) {
+      a.put(values.get(i));
+    }
+    if (!values.isEmpty()) {
+      editor.putString(key, a.toString());
+    } else {
+      editor.putString(key, null);
+    }
+    editor.commit();
+  }
+
+  public static ArrayList<String> getStringArrayPref(Context context, String key) {
+    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+    String json = prefs.getString(key, null);
+    ArrayList<String> urls = new ArrayList<String>();
+    if (json != null) {
+      try {
+        JSONArray a = new JSONArray(json);
+        for (int i = 0; i < a.length(); i++) {
+          String url = a.optString(i);
+          urls.add(url);
+        }
+      } catch (JSONException e) {
+        e.printStackTrace();
+      }
+    }
+    return urls;
+  }
+
+  public void storeShoppingListToPreference(){
+    ArrayList<String> list = itemNames;
+    setStringArrayPref(this, "ShoppingList", list);
+  }
+
+  public void getShoppingListFromPreferences(){
+    ArrayList<String> list = new ArrayList<String>();
+    list = getStringArrayPref(this, "ShoppingList");
+    itemNames = list;
+  }
+
+  public void refreshShoppingList(){
+    itemNames.clear();
+    getShoppingListFromPreferences();
   }
 
 } // class
