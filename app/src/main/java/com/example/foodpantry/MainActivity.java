@@ -10,9 +10,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -37,6 +39,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
@@ -62,11 +65,14 @@ public class MainActivity extends AppCompatActivity {
   EditText weight;
   EditText expDate;
 
+  View mRootView;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+    mRootView = findViewById(R.id.Root);
 
     cardLayout = findViewById(R.id.linearLayout);
 
@@ -520,11 +526,9 @@ public class MainActivity extends AppCompatActivity {
     addButton = addDialog.findViewById(R.id.confirmButton);
     closeButton = addDialog.findViewById(R.id.cancelButton);
     name = addDialog.findViewById(R.id.editName);
-    name.setText("Bread");
     amount = addDialog.findViewById(R.id.editAmount);
-    amount.setText("2");
     weight = addDialog.findViewById(R.id.editSize);
-    weight.setText("10kg");
+    weight.setText("1kg");
     expDate = addDialog.findViewById(R.id.editDate);
     expDate.setText("21/02/2022");
 
@@ -553,9 +557,7 @@ public class MainActivity extends AppCompatActivity {
     closeButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-//        InputMethodManager imm = (InputMethodManager)getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
-//        imm.hideSoftInputFromWindow(name.getWindowToken(), 0);
-//        hideKeyboard(name);
+        hideKeyboard1(name);
         addDialog.dismiss();
       }
     });
@@ -563,10 +565,7 @@ public class MainActivity extends AppCompatActivity {
     addDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
       @Override
       public void onDismiss(DialogInterface dialogInterface) {
-//        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-//        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
         addItem.setBackgroundColor(Color.TRANSPARENT);
-        //hideKeyboard();
       }
     });
     addDialog.show();
@@ -612,6 +611,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(isEveryFieldChecked){
           editItem(card, name, categorySpinner, amount, weight, expDate);
+          hideKeyboard1(name);
           editDialog.dismiss();
         }
       }
@@ -620,6 +620,7 @@ public class MainActivity extends AppCompatActivity {
     closeButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        hideKeyboard1(name);
         editDialog.dismiss();
       }
     });
@@ -627,7 +628,6 @@ public class MainActivity extends AppCompatActivity {
     editDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
       @Override
       public void onDismiss(DialogInterface dialogInterface) {
-        //hideKeyboard(editDialog);
       }
     });
     editDialog.show();
@@ -752,16 +752,10 @@ public class MainActivity extends AppCompatActivity {
 
   }
 //EditText text
-  public void hideKeyboard(Dialog dialog) {
+  public void hideKeyboard1(EditText input) {
     Log.i("SAVE", "Hide keyboard run");
-    InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-    if(imm.isActive()){
-      imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-      Log.i("SAVE", "Hide keyboard was actually true");
-    }
-    //imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-//    InputMethodManager imm = (InputMethodManager)getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
-//    imm.hideSoftInputFromWindow(text.getWindowToken(), 0);
+    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+    imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
   }
 
   public int setIconFromCategory(Spinner category){
