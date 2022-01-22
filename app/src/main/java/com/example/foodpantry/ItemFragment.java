@@ -125,12 +125,18 @@ public class ItemFragment extends Fragment {
     if (Integer.parseInt(amountText.getText().toString()) > 0 && Integer.parseInt(amountText.getText().toString()) < 6) {
       amountText.setTextColor(getResources().getColor(R.color.orange_warning, null));
       leftInPantryText.setTextColor(getResources().getColor(R.color.orange_warning, null));
+      daysText.setVisibility(View.VISIBLE);
+      daysTillExpiryText.setVisibility(View.VISIBLE);
     } else if (Integer.parseInt(amountText.getText().toString()) < 1) {
       amountText.setTextColor(getResources().getColor(R.color.red_alert, null));
       leftInPantryText.setTextColor(getResources().getColor(R.color.red_alert, null));
+      daysText.setVisibility(View.INVISIBLE);
+      daysTillExpiryText.setVisibility(View.INVISIBLE);
     } else {
       amountText.setTextColor(getResources().getColor(R.color.blue_item, null));
       leftInPantryText.setTextColor(getResources().getColor(R.color.blue_item, null));
+      daysText.setVisibility(View.VISIBLE);
+      daysTillExpiryText.setVisibility(View.VISIBLE);
     }
   } // onViewCreated
 

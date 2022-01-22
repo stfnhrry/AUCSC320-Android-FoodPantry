@@ -373,12 +373,18 @@ public class MainActivity extends AppCompatActivity {
     if (Integer.parseInt(amount.getText().toString()) > 0 && Integer.parseInt(amount.getText().toString()) < 6) {
       currentAmount.setTextColor(getResources().getColor(R.color.orange_warning, null));
       leftInPantry.setTextColor(getResources().getColor(R.color.orange_warning, null));
+      currentDaysTillExpiry.setVisibility(View.VISIBLE);
+      daysTillExpiry.setVisibility(View.VISIBLE);
     } else if (Integer.parseInt(amount.getText().toString()) < 1) {
       currentAmount.setTextColor(getResources().getColor(R.color.red_alert, null));
       leftInPantry.setTextColor(getResources().getColor(R.color.red_alert, null));
+      currentDaysTillExpiry.setVisibility(View.INVISIBLE);
+      daysTillExpiry.setVisibility(View.INVISIBLE);
     } else {
       currentAmount.setTextColor(getResources().getColor(R.color.blue_item, null));
       leftInPantry.setTextColor(getResources().getColor(R.color.blue_item, null));
+      currentDaysTillExpiry.setVisibility(View.VISIBLE);
+      daysTillExpiry.setVisibility(View.VISIBLE);
     }
     int index = cardLayout.indexOfChild(view);
     saveToArray(setIconFromCategory(category), name.getText().toString(), category.getSelectedItem().toString(), Integer.parseInt(amount.getText().toString()), size.getText().toString(), expDate.getText().toString(), index);
