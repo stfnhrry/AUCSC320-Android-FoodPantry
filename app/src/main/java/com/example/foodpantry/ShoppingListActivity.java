@@ -1,28 +1,26 @@
 package com.example.foodpantry;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 
+/**
+ * Includes all the methods needed for the shopping list activity to function.
+ */
 public class ShoppingListActivity extends AppCompatActivity {
 
   ImageButton clear;
   ArrayList<String> foodNames;
-  //ArrayList<String> weight;
-  Boolean isCleared = false;
-  Toast lastToast;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -33,7 +31,7 @@ public class ShoppingListActivity extends AppCompatActivity {
     //weight = (ArrayList<String>) getIntent().getStringArrayListExtra("sizes");
 
     LinearLayout linearLayout = (LinearLayout) findViewById(R.id.THISONEJAMES);
-    for(int i= 0;i < foodNames.size(); i++){
+    for (int i = 0; i < foodNames.size(); i++) {
       TextView t = new TextView(this);
       t.setTextSize(35);
       t.setText(foodNames.get(i) + "  -  ");
@@ -49,40 +47,35 @@ public class ShoppingListActivity extends AppCompatActivity {
         MainActivity.itemNames.clear();
       }
     });
-
-
-
   } // onCreate
 
   /**
-   * Back to overview page
+   * Takes the user back to the pantry.
    * @param
    */
   @Override
-  public void onBackPressed(){
+  public void onBackPressed() {
     super.onBackPressed();
-  }
+  } // onBackPressed
+
+  /**
+   * Takes the user back to the pantry.
+   * @param aView the shopping list view
+   */
   public void backToPantry(View aView) {
     onBackPressed();
   } // backToPantry
 
-  public void showToast(String text){
-    if(lastToast != null){
-      lastToast.cancel();
-    }
-    Toast toast = Toast.makeText(this, text, Toast.LENGTH_LONG);
-    toast.setGravity(Gravity.BOTTOM, 0, 0);
-    toast.show();
-    lastToast = toast;
-  }
-
+  /**
+   * Shares the shopping list to the user.
+   * @param view the shopping list view
+   */
   public void shareShoppingList(View view) {
     Intent sendIntent = new Intent();
     sendIntent.setAction(Intent.ACTION_SEND);
     sendIntent.putExtra(Intent.EXTRA_TEXT, "printing function");
     sendIntent.setType("text/plain");
     startActivity(sendIntent);
-}
-
+  } // shareShoppingList
 
 } // class
