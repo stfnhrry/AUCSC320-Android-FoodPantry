@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 public class ShoppingListActivity extends AppCompatActivity {
@@ -23,6 +25,9 @@ public class ShoppingListActivity extends AppCompatActivity {
   //ArrayList<String> weight;
   Boolean isCleared = false;
   Toast lastToast;
+
+  static ArrayList<String> itemNames = ShoppingListFile.itemNames;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -36,7 +41,7 @@ public class ShoppingListActivity extends AppCompatActivity {
     for(int i= 0;i < foodNames.size(); i++){
       TextView t = new TextView(this);
       t.setTextSize(35);
-      t.setText(foodNames.get(i) + "  -  ");
+      t.setText(foodNames.get(i));
       // + weight.get(i)
       linearLayout.addView(t);
       //a bug
@@ -46,7 +51,8 @@ public class ShoppingListActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         linearLayout.removeAllViews();
-        MainActivity.itemNames.clear();
+        itemNames.clear();
+        storeShoppingListToPreference();
       }
     });
 
@@ -83,6 +89,26 @@ public class ShoppingListActivity extends AppCompatActivity {
     sendIntent.setType("text/plain");
     startActivity(sendIntent);
 }
+
+  public void setStringArrayPrefNotStatic(Context context, String key, ArrayList<String> values) {
+    SharedPreferences prefs = getSharedPreferences("LIST", 0);
+    SharedPreferences.Editor editor = prefs.edit();
+    JSONArray a = new JSONArray();
+    for (int i = 0; i < values.size(); i++) {
+      a.put(values.get(i));
+    }
+    if (!values.isEmpty()) {
+      editor.putString(key, a.toString());
+    } else {
+      editor.putString(key, null);
+    }
+    editor.commit();
+  }
+
+  public void storeShoppingListToPreference(){
+    ArrayList<String> list = itemNames;
+    setStringArrayPrefNotStatic(this, "ShoppingList", list);
+  }
 
 
 } // class

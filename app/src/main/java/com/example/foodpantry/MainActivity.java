@@ -56,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
   int numItems;
   SaveFile hashMapFile = new SaveFile();
   Map<Integer, String[]> map = hashMapFile.pantry;
-  public static ArrayList<String> itemNames = new ArrayList<>();
+  static ShoppingListFile staticShoppingList = new ShoppingListFile();
+  //static ArrayList<String> itemNames = staticShoppingList.itemNames;
+  static ArrayList<String> itemNames = ShoppingListFile.itemNames;
   ArrayList<String> sizes = new ArrayList<>();
   Boolean inRemovingMode = false;
 
@@ -821,8 +823,8 @@ public class MainActivity extends AppCompatActivity {
     return true;
   }
 
-  public static void setStringArrayPref(Context context, String key, ArrayList<String> values) {
-    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+  public void setStringArrayPrefNotStatic(Context context, String key, ArrayList<String> values) {
+    SharedPreferences prefs = getSharedPreferences("LIST", 0);
     SharedPreferences.Editor editor = prefs.edit();
     JSONArray a = new JSONArray();
     for (int i = 0; i < values.size(); i++) {
@@ -836,8 +838,8 @@ public class MainActivity extends AppCompatActivity {
     editor.commit();
   }
 
-  public static ArrayList<String> getStringArrayPref(Context context, String key) {
-    SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+  public ArrayList<String> getStringArrayPrefNotStatic(Context context, String key) {
+    SharedPreferences prefs = getSharedPreferences("LIST", 0);
     String json = prefs.getString(key, null);
     ArrayList<String> urls = new ArrayList<String>();
     if (json != null) {
@@ -856,12 +858,12 @@ public class MainActivity extends AppCompatActivity {
 
   public void storeShoppingListToPreference(){
     ArrayList<String> list = itemNames;
-    setStringArrayPref(this, "ShoppingList", list);
+    setStringArrayPrefNotStatic(this, "ShoppingList", list);
   }
 
   public void getShoppingListFromPreferences(){
     ArrayList<String> list = new ArrayList<String>();
-    list = getStringArrayPref(this, "ShoppingList");
+    list = getStringArrayPrefNotStatic(this, "ShoppingList");
     itemNames = list;
   }
 
